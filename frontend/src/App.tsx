@@ -75,7 +75,7 @@ function App() {
 
     <div className='contenedor-principal'>
 
-      <div className='Contenedor-de-scrol-de.imagenes'>
+      <div className='Contenedor-de-scrol-de-imagenes'>
 
         <ImagenDeScroll 
           imagen =''
