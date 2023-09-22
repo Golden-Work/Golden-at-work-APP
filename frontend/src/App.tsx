@@ -31,22 +31,22 @@ function App() {
         <nav className='barra-de-navegacion'>
 
           <BarraDeBusqueda 
-          default='' />
+          textoDefault='' />
 
           <Boton 
               texto = ''
-              esDeRedireccionamiento ={'#'}
-              manejarclick={redireccionar} />
+              esDeRedireccionamiento ={true}
+              manejarClick={redireccionar} />
 
             <Boton 
               texto = ''
-              esDeRedireccionamiento ={'#'}
-              manejarclick={redireccionar} />
+              esDeRedireccionamiento ={true}
+              manejarClick={redireccionar} />
 
             <Boton 
               texto = ''
-              esDeRedireccionamiento ={'#'}
-              manejarclick={redireccionar} />  
+              esDeRedireccionamiento ={true}
+              manejarClick={redireccionar} />  
 
         </nav>
 
@@ -56,18 +56,18 @@ function App() {
 
         <Boton 
           texto = ''
-          esDeRedireccionamiento ={'#'}
-          manejarclick={filtro} />
+          esDeRedireccionamiento ={false}
+          manejarClick={filtro} />
 
         <Boton 
           texto = ''
-          esDeRedireccionamiento ={'#'}
-          manejarclick={filtro} />
+          esDeRedireccionamiento ={false}
+          manejarClick={filtro} />
 
         <Boton 
           texto = ''
-          esDeRedireccionamiento ={'#'}
-          manejarclick={filtro} />
+          esDeRedireccionamiento ={false}
+          manejarClick={filtro} />
 
       </div>
 
