@@ -1,33 +1,109 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+//import { useState } from 'react'
 import './App.css'
+import logo from './Imagenes/test-1.jpg'
+import Boton from './Componentes/Boton'
+import BarraDeBusqueda from './Componentes/BarraDeBusqueda'
+import ImagenDeScroll from './Componentes/ImagenDeScroll'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  //const [count, setCount] = useState(0)
+
+  const redireccionar =()=>{
+    console.log('Redireccionar')
+  }
+  const filtro =()=>{
+    console.log('Redireccionar')
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='contenedor-encabezado'>
+
+      <header className='encabezado'>
+
+        <img 
+          className='Logo-encabezado' 
+          src={logo}
+          alt='Logo (descripcion del logo)'/>
+
+        <nav className='barra-de-navegacion'>
+
+          <BarraDeBusqueda 
+          default='' />
+
+          <Boton 
+              texto = ''
+              esDeRedireccionamiento ={'#'}
+              manejarclick={redireccionar} />
+
+            <Boton 
+              texto = ''
+              esDeRedireccionamiento ={'#'}
+              manejarclick={redireccionar} />
+
+            <Boton 
+              texto = ''
+              esDeRedireccionamiento ={'#'}
+              manejarclick={redireccionar} />  
+
+        </nav>
+
+      </header>
+
+      <div className='contenedor-de-filtros'>
+
+        <Boton 
+          texto = ''
+          esDeRedireccionamiento ={'#'}
+          manejarclick={filtro} />
+
+        <Boton 
+          texto = ''
+          esDeRedireccionamiento ={'#'}
+          manejarclick={filtro} />
+
+        <Boton 
+          texto = ''
+          esDeRedireccionamiento ={'#'}
+          manejarclick={filtro} />
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+    </div>
+
+    <div className='contenedor-principal'>
+
+      <div className='Contenedor-de-scrol-de.imagenes'>
+
+        <ImagenDeScroll 
+          imagen =''
+          texto ='' />
+        
+        <ImagenDeScroll 
+          imagen =''
+          texto ='' />
+        
+        <ImagenDeScroll 
+          imagen =''
+          texto ='' />
+        
+        <ImagenDeScroll 
+          imagen =''
+          texto ='' />
+        
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className='contenedor-de-parte-baja'>
+        <div className='tabla'>
+
+        </div>
+        <div className='seccion-de-noticias'>
+          <p className='encabezado-noticias'></p>
+
+        </div>
+      </div>
+    </div>
     </>
   )
 }
