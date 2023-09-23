@@ -20,6 +20,11 @@ or
 python -m venv myenv
 ```
 
+Activate the virtual environment, this will depend on the platform you use, for UNIX-based systems, use
+```bash
+source myenv/bin/activate
+```
+
 Install dependencies
 ```bash
 pip install -r requirements.txt
