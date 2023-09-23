@@ -1,4 +1,4 @@
-import '../Estilos/Boton.css'
+import '../Hojas-de-estilo/Boton.css'
 
 interface BotonProps {
   texto: string;

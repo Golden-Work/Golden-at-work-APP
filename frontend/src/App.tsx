@@ -1,6 +1,6 @@
 //import { useState } from 'react'
 import './App.css'
-import logo from './Imagenes/test-1.jpg'
+import logo from './assets/Imagenes/test-1.jpg'
 import Boton from './Componentes/Boton'
 import BarraDeBusqueda from './Componentes/BarraDeBusqueda'
 import ImagenDeScroll from './Componentes/ImagenDeScroll'
@@ -77,20 +77,24 @@ function App() {
 
       <div className='Contenedor-de-scrol-de-imagenes'>
 
-        <ImagenDeScroll 
-          imagen =''
+        <ImagenDeScroll
+          nombreDelObjeto='' 
+          imagen ={1}
           texto ='' />
         
-        <ImagenDeScroll 
-          imagen =''
+        <ImagenDeScroll
+          nombreDelObjeto='' 
+          imagen ={2}
           texto ='' />
         
-        <ImagenDeScroll 
-          imagen =''
+        <ImagenDeScroll
+          nombreDelObjeto='' 
+          imagen ={3}
           texto ='' />
         
-        <ImagenDeScroll 
-          imagen =''
+        <ImagenDeScroll
+          nombreDelObjeto='' 
+          imagen ={4}
           texto ='' />
         
       </div>

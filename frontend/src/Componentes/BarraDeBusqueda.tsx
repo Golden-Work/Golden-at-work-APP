@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../Estilos/BarraDeBusqueda.css'
+import '../Hojas-de-estilo/BarraDeBusqueda.css'
 
 interface BarraDeBusquedaProps {
   textoDefault: string;
