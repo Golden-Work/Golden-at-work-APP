@@ -31,7 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     password = models.CharField(max_length=128, blank=False, null=False)
-
+    career= models.CharField(max_length=128, blank=False, null=False) #preferiblemente que sea un depelgable con opciones 
     
     USERNAME_FIELD = 'email'
     
