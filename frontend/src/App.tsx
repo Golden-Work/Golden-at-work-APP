@@ -1,6 +1,6 @@
 //import { useState } from 'react'
 import './App.css'
-import logo from './assets/Imagenes/test-1.jpg'
+import logo from './assets/Imagenes/Logo-placejolder.png'
 import Boton from './Componentes/Boton'
 import BarraDeBusqueda from './Componentes/BarraDeBusqueda'
 import ImagenDeScroll from './Componentes/ImagenDeScroll'
@@ -14,7 +14,7 @@ function App() {
     console.log('Redireccionar')
   }
   const filtro =()=>{
-    console.log('Redireccionar')
+    console.log('Filtro')
   }
 
   return (
@@ -30,23 +30,29 @@ function App() {
 
         <nav className='barra-de-navegacion'>
 
-          <BarraDeBusqueda 
-          textoDefault='' />
+          <div className='contenedor-busqueda'>
 
-          <Boton 
-              texto = ''
+            <BarraDeBusqueda 
+            textoDefault='' />
+
+          </div>
+
+          <div className='contenedor-botones'>
+            <Boton 
+                texto = 'Boton 1'
+                esDeRedireccionamiento ={true}
+                manejarClick={redireccionar} />
+
+            <Boton 
+              texto = 'Boton 2'
               esDeRedireccionamiento ={true}
               manejarClick={redireccionar} />
 
             <Boton 
-              texto = ''
-              esDeRedireccionamiento ={true}
-              manejarClick={redireccionar} />
-
-            <Boton 
-              texto = ''
+              texto = 'Ingresar'
               esDeRedireccionamiento ={true}
               manejarClick={redireccionar} />  
+          </div>  
 
         </nav>
 
@@ -55,17 +61,17 @@ function App() {
       <div className='contenedor-de-filtros'>
 
         <Boton 
-          texto = ''
+          texto = 'Filtro 1'
           esDeRedireccionamiento ={false}
           manejarClick={filtro} />
 
         <Boton 
-          texto = ''
+          texto = 'Filtro 2'
           esDeRedireccionamiento ={false}
           manejarClick={filtro} />
 
         <Boton 
-          texto = ''
+          texto = 'Filtro 3'
           esDeRedireccionamiento ={false}
           manejarClick={filtro} />
 
