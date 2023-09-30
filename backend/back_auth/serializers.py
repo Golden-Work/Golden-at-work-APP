@@ -32,3 +32,9 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(errors)
 
         return value
+
+    def update(self, instance, validated_data):
+        # don't update password or email
+        validated_data.pop('password', None)
+        validated_data.pop('email', None)
+        return super().update(instance, validated_data)

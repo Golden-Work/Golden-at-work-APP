@@ -33,3 +33,31 @@ def logout(request):
         return Response({'message': e.args[0], 'code': 1000}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user(request):
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_user(request):
+    user = request.user
+    data = request.data
+
+    serializer = UserSerializer(user, data=data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_user(request):
+    request.user.delete()
+    return Response(status=status.HTTP_200_OK)
