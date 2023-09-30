@@ -57,12 +57,12 @@
 .Contenedor-de-scrol-de-imagenes{
   display: flex;
   gap: 3vw;
-  align-items: center;
+  align-content: center;
   height: 100%;
-  padding: 10px;
-  padding-inline: 20px ;
+  padding: 20px;
+  /* padding-inline: 20px ; */
   background-color: gray;
-  
+
 }
 .contenedor-de-parte-baja{
 
