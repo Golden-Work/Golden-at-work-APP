@@ -10,6 +10,11 @@ import "../Hojas-de-estilo/Home.css";
 function Home() {
   //const [count, setCount] = useState(0)
 
+  // const datos = [
+  //   ['Contenido 1', 'Contenido 2'],
+  //   ['Contenido 3', 'Contenido 4'],
+  // ];
+
   const redireccionar = () => {
     console.log("Redireccionar");
   };
@@ -117,7 +122,15 @@ function Home() {
 
         </div>
         <div className="contenedor-de-parte-baja">
-          <div className="tabla"></div>
+        <div className="tabla">
+        <table>
+            <tr>
+              <td>Tu contenido aquí</td>
+              <td>Más contenido aquí</td>
+            </tr>
+            {/* <!-- Más filas y celdas según sea necesario --> */}
+          </table>
+        </div>
           <div className="seccion-de-noticias">
             <p className="encabezado-noticias"></p>
           </div>
