@@ -34,9 +34,8 @@
   justify-content: space-between;
   width: 100%;
 }
-.contenedor-busqueda{
 
-}
+
 .contenedor-botones{
   display: flex;
   gap: 10px;
@@ -51,9 +50,7 @@
   margin-bottom: 20px;
   
 }
-.contenedor-principal{
 
-}
 .Contenedor-de-scrol-de-imagenes{
   display: flex;
   gap: 3vw;
@@ -64,12 +61,4 @@
   background-color: gray;
 
 }
-.contenedor-de-parte-baja{
 
-}
-.seccion-de-noticias{
-
-}
-.encabezado-noticias{
-  
-}
