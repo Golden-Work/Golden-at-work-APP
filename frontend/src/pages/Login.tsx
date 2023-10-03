@@ -1,8 +1,11 @@
+import Header from './Header';
 import '../styles/styleLogin.css'; 
 import { Link} from 'react-router-dom';
 
 function Login() {
     return (
+      <>
+      <Header />
       <section>
         <div className="form-box">
           <div className="form-value">
@@ -34,6 +37,7 @@ function Login() {
 
         </div>
       </section>
+      </>
     );
   }
   

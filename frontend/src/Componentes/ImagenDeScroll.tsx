@@ -11,7 +11,7 @@ function ImagenDeScroll ({ imagen, texto, nombreDelObjeto }:ImagenDeScrollProps)
   const [ImgSrc, setImgSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    import(`../assets/Imagenes/test-${imagen}.jpg`)
+    import(`../assets/Imagenes/Scroll/Scroll-${imagen}.png`)
       .then((image) => {
         setImgSrc(image.default);
       })
@@ -21,7 +21,7 @@ function ImagenDeScroll ({ imagen, texto, nombreDelObjeto }:ImagenDeScrollProps)
   }, [imagen]);
 
   return(
-    <div>
+    <div className='contenedor-principal-imagenes1'>
       {ImgSrc && <img 
         className='imagen-del-scroll'
         src={ImgSrc}
