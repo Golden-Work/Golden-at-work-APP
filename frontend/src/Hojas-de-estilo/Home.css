@@ -53,15 +53,16 @@
   
   .Contenedor-de-scrol-de-imagenes{
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 3vw;
-    height: 100%;
+    height: 90%;
     padding: 20px;
     /* padding-inline: 20px ; */
     background-color: rgb(174, 210, 255);
+    overflow-y: auto;
   }
   
   
