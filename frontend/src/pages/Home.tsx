@@ -49,14 +49,6 @@ function Home() {
                 esDeRedireccionamiento={true}
                 manejarClick={redireccionar}
               />
-
-              <Link to="/Login">
-                <Boton
-                  texto="Ingresar"
-                  esDeRedireccionamiento={true}
-                  manejarClick={redireccionar}
-                />
-              </Link>
             </div>
           </nav>
         </header>

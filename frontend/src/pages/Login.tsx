@@ -1,8 +1,17 @@
 import Header from './Header';
 import '../styles/styleLogin.css'; 
-import { Link} from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 
 function Login() {
+  const navigate=useNavigate();
+  const handleLogin=()=>{
+    const authSuccessful= true;
+    if(authSuccessful){
+      navigate('/Home');
+    }else{
+
+    }
+  }
     return (
       <>
       <Header />
@@ -29,7 +38,7 @@ function Login() {
             <div className="forget">
                 <Link to="/ResetPassword">¿Olvidaste tú contraseña?</Link>
             </div>
-            <button>Ingresar</button>
+            <button onClick={handleLogin}>Ingresar</button>
             <div className="register">
                 <p>¿No tienes una cuenta? <Link to="/Register">Registrar</Link></p>
             </div>

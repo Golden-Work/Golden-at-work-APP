@@ -13,14 +13,14 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/Login" element={<Login/>} />
+      <Routes>        
+      <Route path="/" element={<Login/>} />
       <Route path="/Register" element={<Register/>} />
       {/* <Route path="/Header" element={<Header/>} /> */}
       <Route path="/ResetPassword" element={<ResetPassword/>} />
       <Route path="/ResetPassword2" element={<ResetPassword2/>} />
         {/* Otras rutas de tu aplicación */}
+      <Route path="/Home" element={<Home />} />      
       </Routes>
 
       </BrowserRouter>
