@@ -1,0 +1,10 @@
+.tabla {
+  background-color: rgb(174, 210, 255);
+  margin: 15px 2vw;
+  /* justify-self: right; */
+}
+.tabla td {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #9400ff;
+}

@@ -28,3 +28,7 @@ myenv
 
 # sqlite
 db.sqlite3
+
+previo/
+
+.env
