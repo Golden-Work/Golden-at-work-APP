@@ -32,12 +32,3 @@ db.sqlite3
 previo/
 
 .env
-frontend/vite-project/tsconfig.json
-frontend/vite-project/src/vite-env.d.ts
-frontend/vite-project/src/typescript.svg
-frontend/vite-project/src/style.css
-frontend/vite-project/src/main.ts
-frontend/vite-project/src/counter.ts
-frontend/vite-project/public/vite.svg
-frontend/vite-project/package.json
-frontend/vite-project/index.html
