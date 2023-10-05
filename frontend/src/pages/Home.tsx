@@ -24,55 +24,63 @@ function Home() {
 
   return (
     <>
-      <div className="contenedor-encabezado">
-        <header className="encabezado">
+      <header className="encabezado">
+        <div className="contendedor-logo">
           <img
-            className="Logo-encabezado"
+            className="logo-encabezado"
             src={logo}
             alt="Logo (descripcion del logo)"
           />
-
-          <nav className="barra-de-navegacion">
+        </div>
+        <nav className="navegacion">
+          <div className="encabezado-superior">
             <div className="contenedor-busqueda">
               <BarraDeBusqueda textoDefault="" />
             </div>
 
             <div className="contenedor-botones">
               <Boton
-                texto="Boton 1"
+                texto="Pedir"
                 esDeRedireccionamiento={true}
                 manejarClick={redireccionar}
               />
 
               <Boton
-                texto="Boton 2"
+                texto="Traducir"
+                esDeRedireccionamiento={true}
+                manejarClick={redireccionar}
+              />
+
+              <Boton
+                texto="Ingresar"
                 esDeRedireccionamiento={true}
                 manejarClick={redireccionar}
               />
             </div>
-          </nav>
-        </header>
+          </div>
+          <div className="encabezado-inferior">
+            <div className="contenedor-de-filtros">
+              <Boton
+                texto="Filtro 1"
+                esDeRedireccionamiento={false}
+                manejarClick={filtro}
+              />
 
-        <div className="contenedor-de-filtros">
-          <Boton
-            texto="Filtro 1"
-            esDeRedireccionamiento={false}
-            manejarClick={filtro}
-          />
+              <Boton
+                texto="Filtro 2"
+                esDeRedireccionamiento={false}
+                manejarClick={filtro}
+              />
 
-          <Boton
-            texto="Filtro 2"
-            esDeRedireccionamiento={false}
-            manejarClick={filtro}
-          />
-
-          <Boton
-            texto="Filtro 3"
-            esDeRedireccionamiento={false}
-            manejarClick={filtro}
-          />
-        </div>
-      </div>
+              <Boton
+                texto="Filtro 3"
+                esDeRedireccionamiento={false}
+                manejarClick={filtro}
+              />
+            </div>
+          </div>
+        </nav>
+      </header>
 
       <div className="contenedor-principal">
         <div className="Contenedor-de-scrol-de-imagenes">
@@ -111,18 +119,17 @@ function Home() {
             imagen={6}
             texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
           />
-
         </div>
         <div className="contenedor-de-parte-baja">
-        <div className="tabla">
-        <table>
-            <tr>
-              <td>Tu contenido aquí</td>
-              <td>Más contenido aquí</td>
-            </tr>
-            {/* <!-- Más filas y celdas según sea necesario --> */}
-          </table>
-        </div>
+          <div className="tabla">
+            <table>
+              <tr>
+                <td>Tu contenido aquí</td>
+                <td>Más contenido aquí</td>
+              </tr>
+              {/* <!-- Más filas y celdas según sea necesario --> */}
+            </table>
+          </div>
           <div className="seccion-de-noticias">
             <p className="encabezado-noticias"></p>
           </div>
