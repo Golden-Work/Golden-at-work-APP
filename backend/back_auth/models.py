@@ -38,6 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=128, blank=False, null=False)
     # preferiblemente que sea un depelgable con opciones
     career = models.CharField(max_length=128, blank=False, null=False)
+    document = models.CharField(max_length=50)
 
     USERNAME_FIELD = 'email'
 

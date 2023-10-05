@@ -38,7 +38,7 @@ function Login() {
             <div className="forget">
                 <Link to="/ResetPassword">¿Olvidaste tú contraseña?</Link>
             </div>
-            <button onClick={handleLogin}>Ingresar</button>
+            <button className="button-login" onClick={handleLogin}>Ingresar</button>
             <div className="register">
                 <p>¿No tienes una cuenta? <Link to="/Register">Registrar</Link></p>
             </div>

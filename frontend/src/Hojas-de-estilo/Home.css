@@ -5,77 +5,106 @@
   text-align: center;
   background-color: white;
 } */
-.contenedor-encabezado{
-    background-color: #27005D;
-    padding: 20px 0;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  .encabezado{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  .Logo-encabezado{
-    /* filter: hue-rotate(270deg); */
-    width: 130px;
-    height: auto;
-    margin: 10px 7vw -5px 5vw;
-    border-radius: 80%; 
-    box-shadow: 0 0 10px rgba(153, 0, 255, 0.9);
-    border: 5px solid #9500ff;
-    
-    ;
-  }
-  
-  .barra-de-navegacion{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  
-  .contenedor-botones{
-    display: flex;
-    gap: 10px;
-    padding: 10px 5vw 10px 7vw;
-  }
-  .contenedor-de-filtros{
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 10px 15%;
-    background-color: #9400FF;
-    margin-bottom: 20px;
-    
-  }
-  
-  .Contenedor-de-scrol-de-imagenes{
-    display: flex;
-    /* flex-wrap: wrap; */
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 3vw;
-    height:auto;
-    width: 90vw;
-    padding: 20px;
-    margin: 0px 2vw;
-    /* padding-inline: 20px ; */
-    background-color: rgb(174, 210, 255);
-    overflow-y: auto;
-  }
-  .tabla{
-    background-color: rgb(174, 210, 255);
-    margin: 15px 2vw;
-    /* justify-self: right; */
-    
-  }
-  .tabla td {
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: #9400FF;
-  }
-  
-  
+.encabezado {
+  display: flex;
+  justify-content: space-around;
+  /* gap: 40px; */
+  background-color: #27005d;
+  padding: 40px 0px 0px 20px;
+  width: 100%;
+}
+
+.contendedor-logo{
+  position: relative;
+  padding: 0px 25px;
+  width: 150px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-encabezado {
+  position: absolute;
+  top: -15px;
+  right: 10px;
+  width: 100px;
+  height: auto;
+  border-radius: 80%;
+  box-shadow: 0 0 10px rgba(153, 0, 255, 0.9);
+  border: 5px solid #9500ff;
+}
+
+.navegacion {
+  padding: 0px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.encabezado-superior {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 40px;
+  align-items: center;
+  height: auto;
+}
+
+.contenedor-busqueda {
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor-botones {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* padding: 10px 5vw 10px 7vw; */
+}
+
+.encabezado-inferior {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.contenedor-de-filtros {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  /* background-color: #9400ff; */
+}
+
+.Contenedor-de-scrol-de-imagenes {
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3vw;
+  height: auto;
+  width: 90vw;
+  padding: 20px;
+  margin: 0px 2vw;
+  /* padding-inline: 20px ; */
+  background-color: rgb(174, 210, 255);
+  overflow-y: auto;
+}
+.tabla {
+  background-color: rgb(174, 210, 255);
+  margin: 15px 2vw;
+  /* justify-self: right; */
+}
+.tabla td {
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #9400ff;
+}

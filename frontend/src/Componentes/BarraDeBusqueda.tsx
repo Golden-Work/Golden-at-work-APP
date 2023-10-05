@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import '../Hojas-de-estilo/BarraDeBusqueda.css'
+import React, { useState } from "react";
+import "../Hojas-de-estilo/BarraDeBusqueda.css";
 
 interface BarraDeBusquedaProps {
   textoDefault: string;
 }
 
-function BarraDeBusqueda ({ textoDefault }: BarraDeBusquedaProps){
+function BarraDeBusqueda({ textoDefault }: BarraDeBusquedaProps) {
   const [texto, setTexto] = useState(textoDefault);
 
   const manejarCambio = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,15 +17,20 @@ function BarraDeBusqueda ({ textoDefault }: BarraDeBusquedaProps){
     console.log(texto);
   };
 
-  return(
-    <div className='buscador'>
+  return (
+    <div className="buscador">
       <form onSubmit={manejarEnvio}>
-        <input 
-          type="search" 
-          value={texto} 
-          onChange={manejarCambio} 
+        <input
+          className="busqueda-input"
+          placeholder="Buscar..."
+          type="text"
+          value={texto}
+          onChange={manejarCambio}
         />
-        <button type="submit">Buscar</button>
+        <button type="submit">
+          {/* Uso las clases de font awesome para mostrar la lupa */}
+          <i className="fa fa-search" aria-hidden="true"></i>
+        </button>
       </form>
     </div>
   );
