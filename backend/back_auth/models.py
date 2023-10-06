@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from uuid import uuid4
 
 # Administrador para gestionar usuarios y administradores
 
@@ -26,6 +27,7 @@ class CustomUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
+
 # Modelo usuarios y administradores
 
 
@@ -36,6 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     password = models.CharField(max_length=128, blank=False, null=False)
+    recovery_token = models.CharField(max_length=128, blank=True, null=True)
     # preferiblemente que sea un depelgable con opciones
     career = models.CharField(max_length=128, blank=False, null=False)
     document = models.CharField(max_length=50)
@@ -57,6 +60,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def has_module_perms(self, app_label):
         return self.is_superuser
+
+    def generate_password_reset_token(self):
+        token = uuid4()
+        self.recovery_token = token
+        self.save()
 
     # Modelo implementos
 

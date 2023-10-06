@@ -6,6 +6,11 @@ from .models import User
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework.decorators import permission_classes
+from django.core.mail import send_mail
+from decouple import config
+
+
+FRONTEND_URL = config('FRONTEND_URL')
 
 
 @api_view(['POST'])
@@ -16,6 +21,10 @@ def signup(request):
     if serializer.is_valid():
         user = User.objects.create_user(**data)
         serializer = UserSerializer(user)
+
+        # send email to user
+        ####################
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -61,4 +70,21 @@ def update_user(request):
 @permission_classes([IsAuthenticated])
 def delete_user(request):
     request.user.delete()
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def password_reset(request):
+    data = request.data
+    email = data['email']
+    user = User.objects.get(email=email)
+
+    # generate a random token and save it in the database
+    user.generate_password_reset_token()
+
+    send_mail(
+        'Recuperación de contraseña',
+        f'Hola {user.first_name} {user.last_name},\n\nPara recuperar tu contraseña ingresa al siguiente link: {FRONTEND_URL}/password-reset/{user.id}',
+    )
+
     return Response(status=status.HTTP_200_OK)
