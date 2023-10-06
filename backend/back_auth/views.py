@@ -11,6 +11,7 @@ from rest_framework.decorators import permission_classes
 @api_view(['POST'])
 def signup(request):
     data = request.data
+    data['is_active'] = False
     serializer = UserSerializer(data=data)
     if serializer.is_valid():
         user = User.objects.create_user(**data)
