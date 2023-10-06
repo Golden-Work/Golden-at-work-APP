@@ -77,6 +77,12 @@ function Home() {
                 esDeRedireccionamiento={false}
                 manejarClick={filtro}
               />
+
+              <Boton
+                texto="Filtro 4"
+                esDeRedireccionamiento={false}
+                manejarClick={filtro}
+              />
             </div>
           </div>
         </nav>
