@@ -8,6 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework.decorators import permission_classes
 from django.core.mail import send_mail
 from decouple import config
+from django.conf import settings
 
 
 FRONTEND_URL = config('FRONTEND_URL')
@@ -82,9 +83,11 @@ def password_reset(request):
     # generate a random token and save it in the database
     user.generate_password_reset_token()
 
-    send_mail(
-        'Recuperación de contraseña',
-        f'Hola {user.first_name} {user.last_name},\n\nPara recuperar tu contraseña ingresa al siguiente link: {FRONTEND_URL}/password-reset/{user.id}',
-    )
+    subject = 'Recuperación de contraseña'
+    message = f'Hola {user.first_name} {user.last_name},\n\nPara recuperar tu contraseña ingresa al siguiente link: {FRONTEND_URL}/password-reset/{user.recovery_token}'
+    from_email = settings.EMAIL_HOST_USER
+    to_email = [email]
+
+    send_mail(subject, message, from_email, to_email, fail_silently=False)
 
     return Response(status=status.HTTP_200_OK)
