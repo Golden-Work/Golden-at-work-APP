@@ -1,10 +1,21 @@
 .tabla {
-  background-color: rgb(174, 210, 255);
+  /* background-color: rgb(174, 210, 255); */
   margin: 15px 2vw;
-  /* justify-self: right; */
+  border-spacing: 5px;
+  text-align: center;
+  padding: 10px 0px;
 }
 .tabla td {
-  border: 2px solid black;
+  border: 1px solid #b700ff;
   border-radius: 10px;
-  background-color: #9400ff;
+  padding: 2px;
+  box-shadow: 0 0 3px rgba(148, 0, 255,0.9);
 }
+.ocupado{
+  background-color: #cc4cff;
+}
+.libre{
+  background-color: #8d00ce;
+}
+
+

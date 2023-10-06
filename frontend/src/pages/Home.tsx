@@ -1,19 +1,24 @@
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import logo from "../assets/Imagenes/Logo-placejolder.png";
 import Boton from "../Componentes/Boton";
 import BarraDeBusqueda from "../Componentes/BarraDeBusqueda";
 import ImagenDeScroll from "../Componentes/ImagenDeScroll";
 import "../Hojas-de-estilo/Home.css";
+import Tabla from "../Componentes/Tabla";
 
 // div>p.parrafo-*7>div*4
 
 function Home() {
   //const [count, setCount] = useState(0)
 
-  // const datos = [
-  //   ['Contenido 1', 'Contenido 2'],
-  //   ['Contenido 3', 'Contenido 4'],
-  // ];
+  const datos = [
+    ['Pelota', 'Ocupada', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
+    ['freesbie', 'Libre', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
+    ['Pelota', 'Ocupada', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
+    ['Ajedrez', 'Libre', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
+    ['uno', 'Libre', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
+    ['4 en raya', 'Ocupada', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
+  ];
 
   const redireccionar = () => {
     console.log("Redireccionar");
@@ -87,7 +92,7 @@ function Home() {
           </div>
         </nav>
       </header>
-
+      
       <div className="contenedor-principal">
         <div className="Contenedor-de-scrol-de-imagenes">
           <ImagenDeScroll
@@ -127,14 +132,11 @@ function Home() {
           />
         </div>
         <div className="contenedor-de-parte-baja">
-          <div className="tabla">
-            <table>
-              <tr>
-                <td>Tu contenido aquí</td>
-                <td>Más contenido aquí</td>
-              </tr>
-              {/* <!-- Más filas y celdas según sea necesario --> */}
-            </table>
+          <div className="contenedor-tabla">
+            <Tabla
+            datos={datos}
+            palabraClave="Libre"
+            />
           </div>
           <div className="seccion-de-noticias">
             <p className="encabezado-noticias"></p>
