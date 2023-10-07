@@ -2,7 +2,7 @@ import Header from './Header';
 import '../styles/styleLogin.css'; 
 import { useNavigate, Link} from 'react-router-dom';
 import { useState } from 'react';
-import MyModal from './MyModal';
+import MyModal from '../Componentes/PopupErrorLogin';
 
 
 function Login() {
@@ -11,7 +11,7 @@ function Login() {
   const handleOnClose = () => setShowMyModal(false)
   const handleLogin=()=>{
     const authSuccessful= true;
-    if(!authSuccessful){
+    if(authSuccessful){
       navigate('/Home');
     }else{
       setShowMyModal(true)
