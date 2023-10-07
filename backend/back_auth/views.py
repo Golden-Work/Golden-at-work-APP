@@ -9,36 +9,6 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
-def signup(request):
-    data = request.data
-
-    # Verificar si las contraseñas coinciden
-    password = data.get('password')
-    confirm_password = data.get('confirm_password')
-    if password != confirm_password:
-        return Response({"password": ["Las contraseñas no coinciden."]}, status=status.HTTP_400_BAD_REQUEST)
-    data['is_active'] = False
-
-    serializer = UserSerializer(data=data)
-
-        # Utilizar el método create_user 
-        user = User.objects.create_user(email=data['email'], password=data['password'])
-        user.first_name = data.get('first_name')
-        user.last_name = data.get('last_name')
-        user.document = data.get('document')
-        user.career = data.get('career')  
-        user.is_active = False  
-        user.save()
-
-        
-        
-        return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
-        else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['POST'])
 def signup(request):
     data = request.data
     data['is_active'] = False
@@ -53,7 +23,6 @@ def signup(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
