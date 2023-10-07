@@ -6,7 +6,7 @@ import Register from './pages/Register';
 //import Header from './pages/Header'; 
 import ResetPassword2 from './pages/ResetPassword2';
 import ResetPassword from './pages/ResetPassword';
-import EdicionDeDatos from './pages/EducionDeDatos'
+import EdicionDeDatos from './pages/EdicionDeDatos'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 

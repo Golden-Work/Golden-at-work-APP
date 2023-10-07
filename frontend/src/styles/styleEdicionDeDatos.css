@@ -1,3 +1,79 @@
 .contenerdor-Edicion-de-datos-contenido{
     display: flex;
 }
+
+.columna-izquierda{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: #91B8E6;
+    margin: 10px;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px ;
+    box-shadow: 0 2px 35px    rgba(255, 255, 255, 0.9);
+    width: 30vw;
+}
+
+.imgen-de-usuario{
+    width: 80%;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid white;
+    background-color: gainsboro;
+    box-shadow: 0 2px 35px    rgba(255, 255, 255, 0.5);
+    margin: 10px;
+}
+
+.imgen-de-usuario:hover{
+    filter: contrast(150%);
+}
+
+.contenedor-historial{
+    display: flex;
+    flex-direction: column;
+    /* background-color: #8cc2ff; */
+    width: 85%;
+    height: auto;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    /* box-shadow: 0 2px 35px    rgba(255, 255, 255, 0.5); */
+}
+
+.titulo-historial-usuaro {
+    text-align: center;
+    margin-bottom: 5px;
+    text-shadow: -2px 0 #176cd4, 0 2px #176cd4, 2px 0 #176cd4, 0 -2px #176cd4;
+    color: #fff;
+    font-weight: bold;
+    font-size: 2.3em;
+  }
+
+.prestamos-usuario{
+    display: flex;
+    margin-bottom: 5px;
+    color: #fff;
+    border-radius: 10px;
+    background-color: #529cf1;
+    border: 1px solid white;
+    padding-left: 5px;
+    height: 30px;
+    align-items: center;
+}
+
+.columa-derecha{
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    align-items:flex-start;
+    margin: 10px;
+    background-color: #9400FF;
+    padding: 40px 20vw 20px 20px;
+    width: 43vw;
+    border-radius: 10px;
+}
+.titulo-camio-informacion{
+    align-self: flex-start;
+}
