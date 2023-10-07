@@ -6,6 +6,7 @@ import Register from './pages/Register';
 //import Header from './pages/Header'; 
 import ResetPassword2 from './pages/ResetPassword2';
 import ResetPassword from './pages/ResetPassword';
+import EdicionDeDatos from './pages/EducionDeDatos'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -19,6 +20,7 @@ function App() {
       {/* <Route path="/Header" element={<Header/>} /> */}
       <Route path="/ResetPassword" element={<ResetPassword/>} />
       <Route path="/ResetPassword2" element={<ResetPassword2/>} />
+      <Route path="/EdicionDeDatos" element={<EdicionDeDatos/>} />
         {/* Otras rutas de tu aplicación */}
       <Route path="/Home" element={<Home />} />      
       </Routes>

@@ -33,7 +33,7 @@
       <header className="header">
         <div className="Column-Header">
           <div className="logo-header">
-            <Link id="UN" to="/"> Un</Link>
+            <Link id="UN" to="/Home"> Un</Link>
           </div>
           <div className="idiom-header">
             <div className={`idiom-button ${mostrarMenu ? 'open' : ''}`} ref={contenedorRef}>

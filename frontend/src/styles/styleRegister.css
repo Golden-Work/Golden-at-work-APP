@@ -20,6 +20,12 @@
     text-decoration: none;
 
 }
+
+#UN:hover{
+    color: #ffffff;
+    text-shadow: 0 0 15px #9400FF;
+}   
+
 .Column-Header {
     align-items: center;
     display: flex;
@@ -38,6 +44,8 @@
     
     background: none;
     font-weight:lighter;
+    border-radius: 10px;
+    background-color: #c9e1ff;
 
 }
 .idiom-button .menu a{
@@ -64,7 +72,11 @@
   text-decoration: none;
 }
      
-
+#idiom-button:hover{
+    background-color: #9400FF;
+    box-shadow: 0 0 5px rgba(148, 0, 255,0.5);
+    color: white;
+}
 
 
 
