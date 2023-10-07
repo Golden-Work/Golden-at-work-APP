@@ -83,7 +83,7 @@ def password_reset(request):
     user.generate_password_reset_token()
 
     subject = 'Recuperación de contraseña'
-    message = f'Hola {user.first_name} {user.last_name},\n\nPara recuperar tu contraseña ingresa al siguiente link: {settings.FRONTEND_URL}/password-reset/{user.recovery_token}'
+    message = f'Hola {user.first_name} {user.last_name},\n\nPara recuperar tu contraseña ingresa al siguiente link: {settings.FRONTEND_URL}/ResetPassword2/{user.recovery_token}'
     from_email = settings.EMAIL_HOST_USER
     to_email = [email]
 
