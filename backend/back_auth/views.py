@@ -6,6 +6,8 @@ from .models import User
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework.decorators import permission_classes
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 @api_view(['POST'])
@@ -16,6 +18,10 @@ def signup(request):
     if serializer.is_valid():
         user = User.objects.create_user(**data)
         serializer = UserSerializer(user)
+
+        # send email to user
+        ####################
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -61,4 +67,43 @@ def update_user(request):
 @permission_classes([IsAuthenticated])
 def delete_user(request):
     request.user.delete()
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def password_reset(request):
+    data = request.data
+    email = data['email']
+    user = User.objects.get(email=email)
+
+    if not user.is_active:
+        return Response({'message': 'Usuario no activo'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # generate a random token and save it in the database
+    user.generate_password_reset_token()
+
+    subject = 'Recuperación de contraseña'
+    message = f'Hola {user.first_name} {user.last_name},\n\nPara recuperar tu contraseña ingresa al siguiente link: {settings.FRONTEND_URL}/ResetPassword2/{user.recovery_token}'
+    from_email = settings.EMAIL_HOST_USER
+    to_email = [email]
+
+    send_mail(subject, message, from_email, to_email, fail_silently=False)
+
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def password_reset_confirm(request, token):
+    data = request.data
+    email = data['email']
+    password = data['password']
+    user = User.objects.get(email=email)
+
+    if user.recovery_token != token:
+        return Response({'message': 'Token inválido'}, status=status.HTTP_400_BAD_REQUEST)
+
+    user.set_password(password)
+    user.recovery_token = None
+    user.save()
+
     return Response(status=status.HTTP_200_OK)
