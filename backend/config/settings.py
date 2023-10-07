@@ -160,3 +160,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'goldemwork@gmail.com'
 EMAIL_HOST_PASSWORD = 'kwvrtsbqkfskqozq'
+
+FRONTEND_URL = config('FRONTEND_URL')
