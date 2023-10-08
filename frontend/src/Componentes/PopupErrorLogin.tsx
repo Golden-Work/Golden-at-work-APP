@@ -15,7 +15,7 @@ function MyModal({visible, onClose}: propsProps){
         <div onClick={handleOnClose} className="Popup">
             <div className="Ventana">
                 <div className='Form-ventana'>
-                    <p>{'Usuario y/o contraseña incorrecto por favor intente nuevamente.'}</p>
+                    <p className='text-error'>{'Usuario y/o contraseña incorrecto por favor intente nuevamente.'}</p>
                     <button className='button-MyModal' onClick={onClose}>Aceptar</button>
                 </div>
             </div>

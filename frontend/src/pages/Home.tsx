@@ -12,12 +12,36 @@ function Home() {
   //const [count, setCount] = useState(0)
 
   const datos = [
-    ['Pelota', 'Ocupada', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
-    ['freesbie', 'Libre', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
-    ['Pelota', 'Ocupada', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
-    ['Ajedrez', 'Libre', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
-    ['uno', 'Libre', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
-    ['4 en raya', 'Ocupada', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'],
+    [
+      "Pelota",
+      "Ocupada",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    ],
+    [
+      "freesbie",
+      "Libre",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    ],
+    [
+      "Pelota",
+      "Ocupada",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    ],
+    [
+      "Ajedrez",
+      "Libre",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    ],
+    [
+      "uno",
+      "Libre",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    ],
+    [
+      "4 en raya",
+      "Ocupada",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    ],
   ];
 
   const redireccionar = () => {
@@ -92,7 +116,7 @@ function Home() {
           </div>
         </nav>
       </header>
-      
+
       <div className="contenedor-principal">
         <div className="Contenedor-de-scrol-de-imagenes">
           <ImagenDeScroll
@@ -133,13 +157,42 @@ function Home() {
         </div>
         <div className="contenedor-de-parte-baja">
           <div className="contenedor-tabla">
-            <Tabla
-            datos={datos}
-            palabraClave="Libre"
-            />
+            <Tabla datos={datos} palabraClave="Libre" />
           </div>
-          <div className="seccion-de-noticias">
-            <p className="encabezado-noticias"></p>
+
+          <div className="news">
+            <ul className="cards">
+              <li className="cards_item">
+                <div className="card">
+                  <div className="card_image">
+                    <img src="https://picsum.photos/500/300/?image=10" />
+                  </div>
+                  <div className="card_content">
+                    <h2 className="card_title">Noticia 1</h2>
+                    <p className="card_text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Curabitur elit ligula, euismod eget ante in.
+                    </p>
+                    <button className="card_btn">Saber más</button>
+                  </div>
+                </div>
+              </li>
+              <li className="cards_item">
+                <div className="card">
+                  <div className="card_image">
+                    <img src="https://picsum.photos/500/300/?image=5" />
+                  </div>
+                  <div className="card_content">
+                    <h2 className="card_title">Noticia 2</h2>
+                    <p className="card_text">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Vestibulum nec enim et justo interdum finibus.
+                    </p>
+                    <button className="card_btn">Saber más</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

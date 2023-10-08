@@ -21,7 +21,7 @@
     width: 450px;
     height: 200px;
     background-color: #9400FF;
-    justify content : center;
+    justify-content : center;
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -35,7 +35,7 @@
     margin: 10%;
     flex-direction: column;
 }
-p{
+.text-error {
     position: relative;
     text-align : left;
     padding-bottom: 10%;
