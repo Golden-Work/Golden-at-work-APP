@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # BACK
     "back_auth",
+    "corsheaders"
 ]
 
 REST_FRAMEWORK = {
@@ -53,8 +54,12 @@ REST_FRAMEWORK = {
     )
 }
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
