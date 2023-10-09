@@ -17,7 +17,7 @@ function Login() {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_URL}auth/login`,
         {
-          username: email,
+          email,
           password,
         }
       )
