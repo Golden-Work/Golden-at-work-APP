@@ -30,7 +30,8 @@
   height: auto;
   border-radius: 80%;
   box-shadow: 0 0 10px rgba(153, 0, 255, 0.9);
-  border: 5px solid #9500ff;
+  border: 1px solid #9500ff;
+  background-color: rgba(153, 0, 255, 0.3);
 }
 
 .navegacion {

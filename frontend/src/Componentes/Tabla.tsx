@@ -26,17 +26,6 @@ function Tabla({ datos, palabraClave, tipo }: TablaProps) {
       );
       break;       
   }
-    return (
-      <table className="tabla">
-        {datos.map((fila, i) => (
-          <tr key={i} className={fila[1]==`${palabraClave}`? 'libre':'ocupado'}>
-            {fila.map((celda, j) => (
-              <td key={j}>{celda}</td>
-            ))}
-          </tr>
-        ))}
-      </table>
-    );
 }
 
 

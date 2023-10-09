@@ -1,4 +1,4 @@
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../assets/Imagenes/Logo-placejolder.png";
 import Boton from "../Componentes/Boton";
 import BarraDeBusqueda from "../Componentes/BarraDeBusqueda";
@@ -81,11 +81,13 @@ function Home() {
                 manejarClick={redireccionar}
               />
 
-              <Boton
-                texto="Ingresar"
-                esDeRedireccionamiento={true}
-                manejarClick={redireccionar}
-              />
+              <Link to="/">
+                <Boton
+                  texto="Ingresar"
+                  esDeRedireccionamiento={true}
+                  manejarClick={redireccionar}
+                />
+              </Link>
             </div>
           </div>
           <div className="encabezado-inferior">
@@ -158,7 +160,11 @@ function Home() {
         </div>
         <div className="contenedor-de-parte-baja">
           <div className="contenedor-tabla">
-            <Tabla datos={datos} palabraClave="Libre" />
+            <Tabla 
+            datos={datos} 
+            palabraClave="Libre" 
+            tipo={1}
+          />
           </div>
 
           <div className="news">

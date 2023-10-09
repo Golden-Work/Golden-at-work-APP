@@ -39,3 +39,9 @@
     color: white;
     cursor: pointer;
 }
+
+.boton-filtro.activo {
+    background-color: #9400FF;
+    box-shadow: 0 0 5px rgba(148, 0, 255,0.5);
+    color: white;
+}
