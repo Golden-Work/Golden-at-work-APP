@@ -5,6 +5,7 @@ import BarraDeBusqueda from "../Componentes/BarraDeBusqueda";
 import ImagenDeScroll from "../Componentes/ImagenDeScroll";
 import "../Hojas-de-estilo/Home.css";
 import Tabla from "../Componentes/Tabla";
+import Cards from "../Componentes/Cards";
 
 // div>p.parrafo-*7>div*4
 
@@ -161,38 +162,7 @@ function Home() {
           </div>
 
           <div className="news">
-            <ul className="cards">
-              <li className="cards_item">
-                <div className="card">
-                  <div className="card_image">
-                    <img src="https://picsum.photos/500/300/?image=10" />
-                  </div>
-                  <div className="card_content">
-                    <h2 className="card_title">Noticia 1</h2>
-                    <p className="card_text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Curabitur elit ligula, euismod eget ante in.
-                    </p>
-                    <button className="card_btn">Saber más</button>
-                  </div>
-                </div>
-              </li>
-              <li className="cards_item">
-                <div className="card">
-                  <div className="card_image">
-                    <img src="https://picsum.photos/500/300/?image=5" />
-                  </div>
-                  <div className="card_content">
-                    <h2 className="card_title">Noticia 2</h2>
-                    <p className="card_text">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Vestibulum nec enim et justo interdum finibus.
-                    </p>
-                    <button className="card_btn">Saber más</button>
-                  </div>
-                </div>
-              </li>
-            </ul>
+            <Cards />
           </div>
         </div>
       </div>
