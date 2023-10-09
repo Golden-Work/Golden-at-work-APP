@@ -43,9 +43,9 @@
               {mostrarMenu && (
                 <ul className="menu">
                   <li><a onClick={consoleLog}>Ingles</a></li>
-                  <li><a href="#">Japones</a></li>
-                  <li><a href="#">Mandarin</a></li>
-                  <li><a href="#">Ruso</a></li>
+                  <li><a href="#">Frances</a></li>
+                  <li><a href="#">Español</a></li>
+                  <li><a href="#">Portugues</a></li>
                 </ul>
               )}
             </div>
