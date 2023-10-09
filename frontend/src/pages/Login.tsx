@@ -25,11 +25,10 @@ function Login() {
         localStorage.setItem("token", response.data.access)
         localStorage.setItem("refresh", response.data.refresh)
         navigate("/Home")
-      } else {
-        setShowMyModal(true)
       }
     } catch (error) {
-      alert("An error occurred, please try again later")
+      console.error(error)
+      setShowMyModal(true)
     }
   }
 
