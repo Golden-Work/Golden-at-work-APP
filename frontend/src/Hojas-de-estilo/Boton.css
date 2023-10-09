@@ -1,0 +1,41 @@
+.boton-rediereccionamiento{
+    width: 100px;
+    height: 35px;
+    border-radius: 40px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0 20px 0 20px;
+    text-align: center;
+    background-color: #808080;
+    color: black;
+    box-shadow: 1px 2px 2px 1px black;
+    border-radius: 10px;
+}
+.boton-filtro{
+    width: 100px;
+    height: 25px;
+    border-radius: 40px;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0 1em 0;
+    background-color: #2a2a2a;
+    color: white;
+    box-shadow: 1px 1px 2px 1px black;
+    border-radius: 10px;
+    
+}
+.boton-filtro:hover{
+    background-color: #9400FF;
+    box-shadow: 0 0 5px rgba(148, 0, 255,0.5);
+    color: white;
+}
+.boton-rediereccionamiento:hover{
+    background-color: #da44ff;
+    box-shadow: 0 0 5px rgba(148, 0, 255,0.5);
+    color: white;
+    cursor: pointer;
+}

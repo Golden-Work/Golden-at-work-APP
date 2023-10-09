@@ -1,0 +1,129 @@
+
+/* AED2FF*/
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #E4F1FF;
+    font-size: 1em;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #E4F1FF;
+    background-position: center;
+    background-size: cover;
+}
+
+.form-box {
+    
+    position: relative;
+    width: 400px;
+    height: 420px;
+    background: transparent;
+    border: 3px solid;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9400FF   ;
+}
+
+h2 {
+    margin:  0 0 20px 0;
+
+    position: relative;
+    font-size: 1.8em;
+    color: #E4F1FF;
+    text-align: center;
+}
+.form-value {
+    font-size: 1.2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10%;
+}
+
+
+.inputbox {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    text-align: left;
+    border-bottom: 2px solid #AED2FF;
+    position: relative;
+    border-radius: 5%;
+    
+}
+
+.inputbox input {
+    width: 90%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 35px 0 5px;
+    
+}
+
+.inputbox label {
+    position: absolute;  
+    left: 5px;
+    font-size: 1em;
+    pointer-events: none;
+    transform: translateY(-20%);
+}
+
+.forget {
+    position: relative;
+    padding: 0 55px 0 5px;
+    margin: 10px 0;
+}
+  
+.forget a {
+    display: flex;
+    flex-direction:column;
+    text-align: left;
+    text-decoration: none; 
+  
+}
+
+.button-login{
+    width: 80%;
+    height: 40px;
+    border-radius: 40px;
+    background: #27005D;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.register {
+    position: relative;
+    padding: 5%;
+    text-align: center;
+
+}
+.register p{
+    font-size: 1rem;
+}
+.register p a{
+    text-decoration: none;
+    font-weight: 600;
+}
+.register a:hover{
+    text-decoration: underline;
+}
+.forget a:hover {
+    text-decoration: underline;
+    
+}   
