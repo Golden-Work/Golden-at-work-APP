@@ -8,10 +8,11 @@ from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from django.core.mail import send_mail
 from django.conf import settings
 
+
 @api_view(['POST'])
 def signup(request):
     data = request.data
-    data['is_active'] = False
+    data['is_active'] = True
     serializer = UserSerializer(data=data)
     if serializer.is_valid():
         user = User.objects.create_user(**data)
@@ -23,6 +24,7 @@ def signup(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
