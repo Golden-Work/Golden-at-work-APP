@@ -1,43 +1,48 @@
-import "../Hojas-de-estilo/Tabla.css";
+import "../Hojas-de-estilo/Tabla.css"
 
-interface TablaProps{
-  datos: string [][],
-  palabraClave: string,
-  tipo: number
+interface TablaProps {
+  datos: string[][]
+  palabraClave: string
+  tipo?: number
 }
 
-import "../Hojas-de-estilo/Tabla.css";
+import "../Hojas-de-estilo/Tabla.css"
 
 function Tabla({ datos, palabraClave, tipo }: TablaProps) {
-  switch(tipo){
+  switch (tipo) {
     case 0:
-      break;
+      break
     default:
       return (
         <table className="tabla">
           {datos.map((fila, i) => (
-            <tr key={i} className={fila[1]==`${palabraClave}`? 'libre':'ocupado'}>
+            <tr
+              key={i}
+              className={fila[1] == `${palabraClave}` ? "libre" : "ocupado"}
+            >
               {fila.map((celda, j) => (
                 <td key={j}>{celda}</td>
               ))}
             </tr>
           ))}
         </table>
-      );
-      break;       
+      )
+      break
   }
-    return (
-      <table className="tabla">
-        {datos.map((fila, i) => (
-          <tr key={i} className={fila[1]==`${palabraClave}`? 'libre':'ocupado'}>
-            {fila.map((celda, j) => (
-              <td key={j}>{celda}</td>
-            ))}
-          </tr>
-        ))}
-      </table>
-    );
+  return (
+    <table className="tabla">
+      {datos.map((fila, i) => (
+        <tr
+          key={i}
+          className={fila[1] == `${palabraClave}` ? "libre" : "ocupado"}
+        >
+          {fila.map((celda, j) => (
+            <td key={j}>{celda}</td>
+          ))}
+        </tr>
+      ))}
+    </table>
+  )
 }
 
-
-export default Tabla;
+export default Tabla

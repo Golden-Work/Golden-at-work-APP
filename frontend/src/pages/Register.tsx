@@ -5,7 +5,7 @@ import axios from "axios"
 
 function FormBox() {
   const [mostrarMenu, setMostrarMenu] = useState(false)
-  const contenedorRef = useRef(null)
+  const contenedorRef = useRef<HTMLDivElement | null>(null)
 
   const [formData, setFormData] = useState({
     email: "",
@@ -17,7 +17,7 @@ function FormBox() {
     career: "",
   })
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFormData((prevState) => ({
       ...prevState,
@@ -46,7 +46,7 @@ function FormBox() {
     }
   }
 
-  const handleCareerChoice = (career) => {
+  const handleCareerChoice = (career: string) => {
     setFormData((prevState) => ({
       ...prevState,
       career,
@@ -58,10 +58,10 @@ function FormBox() {
     setMostrarMenu(!mostrarMenu)
   }
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (
       contenedorRef.current &&
-      !contenedorRef.current.contains(event.target)
+      !contenedorRef.current.contains(event.target as Node)
     ) {
       setMostrarMenu(false)
     }
