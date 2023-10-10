@@ -2,7 +2,7 @@ import logo from "@/assets/Imagenes/Logo-placejolder.png"
 import SearchBar from "../../components/SearchBar/SearchBar"
 import ItemCard from "../../components/ItemCard/ItemCard"
 import classes from "./Home.module.css"
-import Table from "@/components/Table/Table"
+import Table, { ElementProps } from "@/components/Table/Table"
 import Cards from "@/components/Cards/Cards"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
@@ -12,40 +12,50 @@ import img3 from "@/assets/Imagenes/Scroll/Scroll-3.png"
 import img4 from "@/assets/Imagenes/Scroll/Scroll-4.png"
 import img5 from "@/assets/Imagenes/Scroll/Scroll-5.png"
 import img6 from "@/assets/Imagenes/Scroll/Scroll-6.png"
+import Boton from "@/components/Boton/Boton"
 
 function Home() {
-  const datos = [
-    [
-      "Pelota",
-      "Ocupada",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    ],
-    [
-      "freesbie",
-      "Libre",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    ],
-    [
-      "Pelota",
-      "Ocupada",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    ],
-    [
-      "Ajedrez",
-      "Libre",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    ],
-    [
-      "uno",
-      "Libre",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    ],
-    [
-      "4 en raya",
-      "Ocupada",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    ],
+  const data: ElementProps[] = [
+    {
+      id: 1,
+      name: "Pelota",
+      status: "reserved",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    },
+    {
+      id: 2,
+      name: "Freesbie",
+      status: "free",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    },
+    {
+      id: 3,
+      name: "Pelota",
+      status: "reserved",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    },
+    {
+      id: 4,
+      name: "Ajedrez",
+      status: "reserved",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    },
+    {
+      id: 5,
+      name: "UNO",
+      status: "free",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+    },
   ]
+
+  const redireccionar = () => {}
+
+  const filtro = () => {}
 
   const navigate = useNavigate()
 
@@ -68,10 +78,52 @@ function Home() {
               <SearchBar textoDefault="" />
             </div>
 
-            <div className={classes.contenedorBotones}></div>
+            <div className={classes.contenedorBotones}>
+              <Boton
+                texto="Pedir"
+                esDeRedireccionamiento={true}
+                manejarClick={redireccionar}
+              />
+
+              <Boton
+                texto="Traducir"
+                esDeRedireccionamiento={true}
+                manejarClick={redireccionar}
+              />
+
+              <Boton
+                texto="Ingresar"
+                esDeRedireccionamiento={true}
+                manejarClick={redireccionar}
+              />
+            </div>
           </div>
           <div className={classes.encabezadoInferior}>
-            <div className={classes.contenedorDeFiltros}></div>
+            <div className={classes.contenedorDeFiltros}>
+              <Boton
+                texto="Filtro 1"
+                esDeRedireccionamiento={false}
+                manejarClick={filtro}
+              />
+
+              <Boton
+                texto="Filtro 2"
+                esDeRedireccionamiento={false}
+                manejarClick={filtro}
+              />
+
+              <Boton
+                texto="Filtro 3"
+                esDeRedireccionamiento={false}
+                manejarClick={filtro}
+              />
+
+              <Boton
+                texto="Filtro 4"
+                esDeRedireccionamiento={false}
+                manejarClick={filtro}
+              />
+            </div>
           </div>
         </nav>
       </header>
@@ -116,7 +168,7 @@ function Home() {
         </div>
         <div className={classes.contenedorDeParteBaja}>
           <div className={classes.contenedorTabla}>
-            <Table datos={datos} palabraClave="Libre" />
+            <Table data={data} />
           </div>
 
           <div className={classes.news}>

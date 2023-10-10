@@ -1,48 +1,50 @@
 import classes from "./Table.module.css"
+import classNames from "classnames"
 
-interface TablaProps {
-  datos: string[][]
-  palabraClave: string
-  tipo?: number
+export interface ElementProps {
+  id: number
+  name: string
+  status: "free" | "not-available" | "reserved"
+  description: string
 }
 
-function Tabla({ datos, palabraClave, tipo }: TablaProps) {
-  switch (tipo) {
-    case 0:
-      break
-    default:
-      return (
-        <table className={classes.table}>
-          {datos.map((fila, i) => (
-            <tr
-              key={i}
-              className={
-                fila[1] == `${palabraClave}` ? classes.free : classes.busy
-              }
-            >
-              {fila.map((celda, j) => (
-                <td key={j}>{celda}</td>
-              ))}
-            </tr>
-          ))}
-        </table>
-      )
-      break
-  }
+function TableElement({ id, name, status, description }: ElementProps) {
+  const statusClass = classNames({
+    [classes.status]: true,
+    [classes.free]: status === "free",
+    [classes.notAvailable]: status === "not-available",
+    [classes.reserved]: status === "reserved",
+  })
+
   return (
-    <table className={classes.table}>
-      {datos.map((fila, i) => (
-        <tr
-          key={i}
-          className={fila[1] == `${palabraClave}` ? classes.free : classes.busy}
-        >
-          {fila.map((celda, j) => (
-            <td key={j}>{celda}</td>
-          ))}
-        </tr>
-      ))}
-    </table>
+    <tr>
+      <td>{id}</td>
+      <td>{name}</td>
+      <td>
+        <p className={statusClass}>{status}</p>
+      </td>
+      <td>{description}</td>
+    </tr>
   )
 }
 
-export default Tabla
+function Table({ data }: { data: ElementProps[] }) {
+  const elements = data.map((e, i) => <TableElement key={i} {...e} />)
+  return (
+    <div className={classes.table}>
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Elemento</th>
+            <th>status</th>
+            <th>Descripcion</th>
+          </tr>
+        </thead>
+        <tbody>{elements}</tbody>
+      </table>
+    </div>
+  )
+}
+
+export default Table

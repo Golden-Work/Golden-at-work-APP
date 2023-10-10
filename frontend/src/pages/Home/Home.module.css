@@ -109,10 +109,20 @@ element {
 }
 
 .contenedor-tabla {
-  background-color: rgb(174, 210, 255);
-  height: 100%;
+  background: linear-gradient(
+    to bottom left,
+    rgba(77, 1, 107, 1) 0%,
+    rgba(183, 0, 255, 1) 100%
+  );
+  height: auto;
   width: 50%;
   margin-left: 10%;
+  box-shadow: 0 0.4rem 0.8rem #0005;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .news {
@@ -123,4 +133,8 @@ element {
   font-weight: 400;
   letter-spacing: 0;
   margin: 0 auto;
+}
+
+body {
+  background-color: #c8e4ff;
 }
