@@ -1,6 +1,6 @@
 import classes from "./Login.module.css"
 import { useNavigate, Link } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin"
 import axios from "axios"
 import TextField from "@mui/material/TextField"

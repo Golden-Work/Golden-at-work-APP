@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import classes from "./Register.module.css"
 import { Box, Button, Paper, TextField, Typography } from "@mui/material"
-import { useNavigate } from "react-router"
 import GwMajorSelect from "@/components/GwMajorSelect/GwMajorSelect"
 import verifyPassword from "@/utils/verifyPassword"
 import useSignup from "@/hooks/useSignup"
 import { SignupBody } from "@/interfaces"
 
 function Register() {
-  const navigate = useNavigate()
   const [formData, setFormData] = useState<SignupBody>({
     email: "",
     password: "",
