@@ -15,17 +15,14 @@ const verifyPassword = (password: string, confirmPassword: string) => {
   // at least one number, one lowercase and one uppercase letter
   if (!/[a-z]/.test(password)) {
     errors.push("La contraseña debe tener al menos una letra minúscula")
-    return
   }
 
   if (!/[A-Z]/.test(password)) {
     errors.push("La contraseña debe tener al menos una letra mayúscula")
-    return
   }
 
   if (!/[0-9]/.test(password)) {
     errors.push("La contraseña debe tener al menos un número")
-    return
   }
 
   // show al errors (if any)
