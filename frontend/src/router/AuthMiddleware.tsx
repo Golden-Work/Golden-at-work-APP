@@ -13,7 +13,7 @@ const Authmiddleware = ({ children, requiresAuth }: AuthmiddlewareProps) => {
 
   useEffect(() => {
     if (requiresAuth && !sessionStorage.getItem("access")) {
-      navigate("/login")
+      return navigate("/login")
     }
 
     // special case for login page

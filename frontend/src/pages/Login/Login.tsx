@@ -23,7 +23,7 @@ function Login() {
         }
       )
       if (response.status === 200) {
-        localStorage.setItem("token", response.data.access)
+        localStorage.setItem("access", response.data.access)
         localStorage.setItem("refresh", response.data.refresh)
         navigate("/")
       }
