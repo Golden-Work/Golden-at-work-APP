@@ -1,4 +1,4 @@
-import "../Hojas-de-estilo/Tabla.css"
+import classes from "./Tabla.module.css"
 
 interface TablaProps {
   datos: string[][]
@@ -6,19 +6,19 @@ interface TablaProps {
   tipo?: number
 }
 
-import "../Hojas-de-estilo/Tabla.css"
-
 function Tabla({ datos, palabraClave, tipo }: TablaProps) {
   switch (tipo) {
     case 0:
       break
     default:
       return (
-        <table className="tabla">
+        <table className={classes.table}>
           {datos.map((fila, i) => (
             <tr
               key={i}
-              className={fila[1] == `${palabraClave}` ? "libre" : "ocupado"}
+              className={
+                fila[1] == `${palabraClave}` ? classes.free : classes.busy
+              }
             >
               {fila.map((celda, j) => (
                 <td key={j}>{celda}</td>
@@ -30,11 +30,11 @@ function Tabla({ datos, palabraClave, tipo }: TablaProps) {
       break
   }
   return (
-    <table className="tabla">
+    <table className={classes.table}>
       {datos.map((fila, i) => (
         <tr
           key={i}
-          className={fila[1] == `${palabraClave}` ? "libre" : "ocupado"}
+          className={fila[1] == `${palabraClave}` ? classes.free : classes.busy}
         >
           {fila.map((celda, j) => (
             <td key={j}>{celda}</td>

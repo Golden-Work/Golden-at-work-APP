@@ -1,19 +1,19 @@
-.tabla {
+.table {
   /* background-color: rgb(174, 210, 255); */
   margin: 15px 2vw;
   border-spacing: 5px;
   text-align: center;
   padding: 10px 0px;
 }
-.tabla td {
+.table td {
   border: 1px solid #b700ff;
   border-radius: 10px;
   padding: 2px;
   box-shadow: 0 0 3px rgba(148, 0, 255, 0.9);
 }
-.ocupado {
+.busy {
   background-color: #cc4cff;
 }
-.libre {
+.free {
   background-color: #8d00ce;
 }

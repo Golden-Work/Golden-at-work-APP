@@ -1,11 +1,17 @@
 import logo from "@/assets/Imagenes/Logo-placejolder.png"
 import SearchBar from "../../components/SearchBar/SearchBar"
-import ImagenDeScroll from "../../components/ImagenDeScroll"
+import ItemCard from "../../components/ItemCard/ItemCard"
 import classes from "./Home.module.css"
 import Tabla from "../../components/Tabla"
-import Cards from "../../components/Cards"
+import Cards from "@/components/Cards/Cards"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
+import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png"
+import img2 from "@/assets/Imagenes/Scroll/Scroll-2.png"
+import img3 from "@/assets/Imagenes/Scroll/Scroll-3.png"
+import img4 from "@/assets/Imagenes/Scroll/Scroll-4.png"
+import img5 from "@/assets/Imagenes/Scroll/Scroll-5.png"
+import img6 from "@/assets/Imagenes/Scroll/Scroll-6.png"
 
 function Home() {
   const datos = [
@@ -72,48 +78,48 @@ function Home() {
 
       <main>
         <div className={classes.itemsContainer}>
-          <ImagenDeScroll
-            nombreDelObjeto="mesa"
-            imagen={1}
-            texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          <ItemCard
+            name="mesa"
+            img={img1}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
           />
 
-          <ImagenDeScroll
-            nombreDelObjeto="Raqueta"
-            imagen={2}
-            texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          <ItemCard
+            name="Raqueta"
+            img={img2}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
           />
 
-          <ImagenDeScroll
-            nombreDelObjeto="Ajedrez"
-            imagen={3}
-            texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          <ItemCard
+            name="Ajedrez"
+            img={img3}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
           />
 
-          <ImagenDeScroll
-            nombreDelObjeto="futbolito"
-            imagen={4}
-            texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          <ItemCard
+            name="futbolito"
+            img={img4}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
           />
 
-          <ImagenDeScroll
-            nombreDelObjeto="Parques"
-            imagen={5}
-            texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          <ItemCard
+            name="Parques"
+            img={img5}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
           />
 
-          <ImagenDeScroll
-            nombreDelObjeto="Pelota"
-            imagen={6}
-            texto="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          <ItemCard
+            name="Pelota"
+            img={img6}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
           />
         </div>
-        <div className="contenedor-de-parte-baja">
-          <div className="contenedor-tabla">
+        <div className={classes.contenedorDeParteBaja}>
+          <div className={classes.contenedorTabla}>
             <Tabla datos={datos} palabraClave="Libre" />
           </div>
 
-          <div className="news">
+          <div className={classes.news}>
             <Cards />
           </div>
         </div>

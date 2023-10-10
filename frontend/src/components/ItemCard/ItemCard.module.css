@@ -1,4 +1,4 @@
-.contenedor-principal-imagenes1 {
+.container {
   display: flex;
   background-color: #ba7de6;
   width: 25vw;
@@ -10,19 +10,20 @@
   border-radius: 15px;
   padding: 15px 10px;
   box-shadow: 0 0 30px rgba(148, 0, 255, 0.5);
+  color: #e4f1ff;
 }
-.imagen-del-scroll {
+.img {
   width: 20vw;
   height: auto;
 }
-.nombre-objeto-scroll {
+.name {
   text-align: center;
   font-family: "Inter", sans-serif;
   font-weight: bold;
   font-size: 2.3em;
   text-shadow: -1px 0 violet, 0 1px violet, 1px 0 violet, 0 -1px violet;
 }
-.leyenda-scroll {
+.text {
   text-align: justify;
   font-family: "Inter", sans-serif;
   font-weight: Thin;
