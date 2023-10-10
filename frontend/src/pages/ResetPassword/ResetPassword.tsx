@@ -42,6 +42,7 @@ function ResetPassword() {
           }
           toast.error("Ha ocurrido un error al restablecer la contraseña")
         })
+      return
     }
 
     axios
