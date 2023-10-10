@@ -45,6 +45,11 @@ function Register() {
     if (!formData.email) {
       errors.push("Por favor ingrese su correo electrónico")
     }
+    // only allow unal.edu.co emails
+    if (!formData.email.endsWith("@unal.edu.co")) {
+      errors.push("Por favor ingrese un correo electrónico de la UNAL")
+    }
+
     if (errors.length) {
       return errors.forEach((error) => toast.error(error))
     }
