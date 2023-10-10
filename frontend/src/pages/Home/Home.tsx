@@ -2,7 +2,7 @@ import logo from "@/assets/Imagenes/Logo-placejolder.png"
 import SearchBar from "../../components/SearchBar/SearchBar"
 import ItemCard from "../../components/ItemCard/ItemCard"
 import classes from "./Home.module.css"
-import Tabla from "../../components/Tabla"
+import Table from "@/components/Table/Table"
 import Cards from "@/components/Cards/Cards"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
@@ -116,7 +116,7 @@ function Home() {
         </div>
         <div className={classes.contenedorDeParteBaja}>
           <div className={classes.contenedorTabla}>
-            <Tabla datos={datos} palabraClave="Libre" />
+            <Table datos={datos} palabraClave="Libre" />
           </div>
 
           <div className={classes.news}>

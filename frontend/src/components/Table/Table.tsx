@@ -1,4 +1,4 @@
-import classes from "./Tabla.module.css"
+import classes from "./Table.module.css"
 
 interface TablaProps {
   datos: string[][]
