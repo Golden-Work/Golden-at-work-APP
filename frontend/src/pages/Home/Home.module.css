@@ -1,11 +1,4 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  background-color: white;
-} */
-.encabezado {
+.header {
   display: flex;
   justify-content: space-around;
   background-color: #27005d;
@@ -13,7 +6,7 @@
   width: 100%;
 }
 
-.contendedor-logo{
+.logo-container {
   position: relative;
   padding: 0px 25px;
   width: 150px;
@@ -22,7 +15,7 @@
   align-items: center;
 }
 
-.logo-encabezado {
+.logo-container img {
   position: absolute;
   top: -15px;
   right: 10px;
@@ -33,7 +26,7 @@
   border: 5px solid #9500ff;
 }
 
-.navegacion {
+.nav {
   padding: 0px 5%;
   display: flex;
   flex-direction: column;
@@ -82,7 +75,7 @@
   /* background-color: #9400ff; */
 }
 
-.Contenedor-de-scrol-de-imagenes {
+.items-container {
   display: flex;
   /* flex-wrap: wrap; */
   flex-direction: row;
@@ -92,7 +85,7 @@
   gap: 3vw;
   height: auto;
   width: 90vw;
-  padding: 50px ;
+  padding: 50px;
   margin: 10px 2vw;
   background-color: rgb(174, 210, 255);
   overflow-y: auto;
@@ -100,13 +93,13 @@
 
 /* Para Chrome, Safari y Opera */
 ::-webkit-scrollbar {
-  width: 0px;  /* Remover scrollbar vertical */
+  width: 0px; /* Remover scrollbar vertical */
   height: 0px; /* Remover scrollbar horizontal */
 }
 
 /* Para Internet Explorer y Edge */
 element {
--ms-overflow-style: none;
+  -ms-overflow-style: none;
 }
 
 .contenedor-de-parte-baja {
@@ -131,7 +124,3 @@ element {
   letter-spacing: 0;
   margin: 0 auto;
 }
-
-
-
-

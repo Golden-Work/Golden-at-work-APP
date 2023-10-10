@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import "../Hojas-de-estilo/BarraDeBusqueda.css";
+import React, { useState } from "react"
+import classes from "./SearchBar.module.css"
 
-interface BarraDeBusquedaProps {
-  textoDefault: string;
+interface SearchBarProps {
+  textoDefault: string
 }
 
-function BarraDeBusqueda({ textoDefault }: BarraDeBusquedaProps) {
-  const [texto, setTexto] = useState(textoDefault);
+function SearchBar({ textoDefault }: SearchBarProps) {
+  const [texto, setTexto] = useState(textoDefault)
 
   const manejarCambio = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTexto(event.target.value);
-  };
+    setTexto(event.target.value)
+  }
 
   const manejarEnvio = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log(texto);
-  };
+    event.preventDefault()
+    console.log(texto)
+  }
 
   return (
-    <div className="buscador">
+    <div className={classes.buscador}>
       <form onSubmit={manejarEnvio}>
         <input
-          className="busqueda-input"
+          className={classes.input}
           placeholder="Buscar..."
           type="text"
           value={texto}
@@ -33,7 +33,7 @@ function BarraDeBusqueda({ textoDefault }: BarraDeBusquedaProps) {
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default BarraDeBusqueda;
+export default SearchBar

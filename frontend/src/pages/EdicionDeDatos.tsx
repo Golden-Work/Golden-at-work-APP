@@ -1,7 +1,6 @@
 import Header from "../components/Header"
 //import { Link } from 'react-router-dom';
 import "../styles/styleEdicionDeDatos.css"
-import CasillaEdicion from "../components/CasillaEdicion"
 import imagen from "../assets/Imagenes/UseriImage.png"
 
 function EdicionDeDatos() {
@@ -38,23 +37,23 @@ function EdicionDeDatos() {
         <div className="columa-derecha">
           <div>
             <p className="titulo-camio-informacion">cambiar tu ...</p>
-            <CasillaEdicion textoDefault="" />
+            <input />
           </div>
           <div>
             <p className="titulo-camio-informacion">cambiar tu ...</p>
-            <CasillaEdicion textoDefault="" />
+            <input />
           </div>
           <div>
             <p className="titulo-camio-informacion">cambiar tu ...</p>
-            <CasillaEdicion textoDefault="" />
+            <input />
           </div>
           <div>
             <p className="titulo-camio-informacion">cambiar tu ...</p>
-            <CasillaEdicion textoDefault="" />
+            <input />
           </div>
           <div>
             <p className="titulo-camio-informacion">cambiar tu ...</p>
-            <CasillaEdicion textoDefault="" />
+            <input />
           </div>
         </div>
       </div>

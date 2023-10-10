@@ -1,17 +1,13 @@
-//import { Link } from "react-router-dom";
-import logo from "../assets/Imagenes/Logo-placejolder.png"
-import Boton from "../components/Boton"
-import BarraDeBusqueda from "../components/BarraDeBusqueda"
-import ImagenDeScroll from "../components/ImagenDeScroll"
-import "../Hojas-de-estilo/Home.css"
-import Tabla from "../components/Tabla"
-import Cards from "../components/Cards"
-
-// div>p.parrafo-*7>div*4
+import logo from "@/assets/Imagenes/Logo-placejolder.png"
+import SearchBar from "../../components/SearchBar/SearchBar"
+import ImagenDeScroll from "../../components/ImagenDeScroll"
+import classes from "./Home.module.css"
+import Tabla from "../../components/Tabla"
+import Cards from "../../components/Cards"
+import { useEffect } from "react"
+import { useNavigate } from "react-router"
 
 function Home() {
-  //const [count, setCount] = useState(0)
-
   const datos = [
     [
       "Pelota",
@@ -45,81 +41,37 @@ function Home() {
     ],
   ]
 
-  const redireccionar = () => {
-    console.log("Redireccionar")
-  }
-  const filtro = () => {
-    console.log("Filtro")
-  }
+  const navigate = useNavigate()
 
+  useEffect(() => {
+    document.title = "Home"
+    // if there is no user logged in, redirect to login page
+    if (!sessionStorage.getItem("token")) {
+      navigate("/login")
+    }
+  }, [])
   return (
     <>
-      <header className="encabezado">
-        <div className="contendedor-logo">
-          <img
-            className="logo-encabezado"
-            src={logo}
-            alt="Logo (descripcion del logo)"
-          />
+      <header className={classes.header}>
+        <div className={classes.logoContainer}>
+          <img src={logo} alt="Logo" />
         </div>
-        <nav className="navegacion">
-          <div className="encabezado-superior">
-            <div className="contenedor-busqueda">
-              <BarraDeBusqueda textoDefault="" />
+        <nav className={classes.nav}>
+          <div className={classes.encabezadoSuperior}>
+            <div className={classes.contenedorBusqueda}>
+              <SearchBar textoDefault="" />
             </div>
 
-            <div className="contenedor-botones">
-              <Boton
-                texto="Pedir"
-                esDeRedireccionamiento={true}
-                manejarClick={redireccionar}
-              />
-
-              <Boton
-                texto="Traducir"
-                esDeRedireccionamiento={true}
-                manejarClick={redireccionar}
-              />
-
-              <Boton
-                texto="Ingresar"
-                esDeRedireccionamiento={true}
-                manejarClick={redireccionar}
-              />
-            </div>
+            <div className={classes.contenedorBotones}></div>
           </div>
-          <div className="encabezado-inferior">
-            <div className="contenedor-de-filtros">
-              <Boton
-                texto="Filtro 1"
-                esDeRedireccionamiento={false}
-                manejarClick={filtro}
-              />
-
-              <Boton
-                texto="Filtro 2"
-                esDeRedireccionamiento={false}
-                manejarClick={filtro}
-              />
-
-              <Boton
-                texto="Filtro 3"
-                esDeRedireccionamiento={false}
-                manejarClick={filtro}
-              />
-
-              <Boton
-                texto="Filtro 4"
-                esDeRedireccionamiento={false}
-                manejarClick={filtro}
-              />
-            </div>
+          <div className={classes.encabezadoInferior}>
+            <div className={classes.contenedorDeFiltros}></div>
           </div>
         </nav>
       </header>
 
-      <div className="contenedor-principal">
-        <div className="Contenedor-de-scrol-de-imagenes">
+      <main>
+        <div className={classes.itemsContainer}>
           <ImagenDeScroll
             nombreDelObjeto="mesa"
             imagen={1}
@@ -165,7 +117,7 @@ function Home() {
             <Cards />
           </div>
         </div>
-      </div>
+      </main>
     </>
   )
 }

@@ -1,9 +1,8 @@
 //import { useState } from 'react'
-import "./App.css"
 import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer } from "react-toastify"
-import Home from "./pages/Home"
-import Login from "./pages/Login"
+import Home from "./pages/Home/Home"
+import Login from "./pages/Login/Login"
 import Register from "./pages/Register"
 //import Header from './pages/Header';
 import ResetPassword2 from "./pages/ResetPassword2"
@@ -19,14 +18,14 @@ function App() {
         <ToastContainer />
 
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
           {/* <Route path="/Header" element={<Header/>} /> */}
-          <Route path="/ResetPassword" element={<ResetPassword />} />
-          <Route path="/ResetPassword2" element={<ResetPassword2 />} />
-          <Route path="/EdicionDeDatos" element={<EdicionDeDatos />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword2 />} />
+          <Route path="/edit" element={<EdicionDeDatos />} />
           {/* Otras rutas de tu aplicación */}
-          <Route path="/Home" element={<Home />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </>

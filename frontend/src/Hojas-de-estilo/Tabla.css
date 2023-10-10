@@ -9,13 +9,11 @@
   border: 1px solid #b700ff;
   border-radius: 10px;
   padding: 2px;
-  box-shadow: 0 0 3px rgba(148, 0, 255,0.9);
+  box-shadow: 0 0 3px rgba(148, 0, 255, 0.9);
 }
-.ocupado{
+.ocupado {
   background-color: #cc4cff;
 }
-.libre{
+.libre {
   background-color: #8d00ce;
 }
-
-
