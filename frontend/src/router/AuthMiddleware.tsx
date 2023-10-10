@@ -12,12 +12,12 @@ const Authmiddleware = ({ children, requiresAuth }: AuthmiddlewareProps) => {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    if (requiresAuth && !sessionStorage.getItem("access")) {
+    if (requiresAuth && !localStorage.getItem("access")) {
       return navigate("/login")
     }
 
     // special case for login page
-    if (pathname === "/login" && sessionStorage.getItem("access")) {
+    if (pathname === "/login" && localStorage.getItem("access")) {
       navigate("/")
     }
   }, [requiresAuth])
