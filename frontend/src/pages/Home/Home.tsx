@@ -4,8 +4,6 @@ import ItemCard from "../../components/ItemCard/ItemCard"
 import classes from "./Home.module.css"
 import Table, { ElementProps } from "@/components/Table/Table"
 import Cards from "@/components/Cards/Cards"
-import { useEffect } from "react"
-import { useNavigate } from "react-router"
 import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png"
 import img2 from "@/assets/Imagenes/Scroll/Scroll-2.png"
 import img3 from "@/assets/Imagenes/Scroll/Scroll-3.png"
@@ -57,15 +55,6 @@ function Home() {
 
   const filtro = () => {}
 
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    document.title = "Home"
-    // if there is no user logged in, redirect to login page
-    if (!localStorage.getItem("token")) {
-      navigate("/login")
-    }
-  }, [])
   return (
     <>
       <header className={classes.header}>

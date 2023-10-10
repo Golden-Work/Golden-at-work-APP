@@ -32,13 +32,6 @@ function Login() {
     }
   }
 
-  useEffect(() => {
-    // if there is a user logged in, redirect to home page
-    if (localStorage.getItem("token")) {
-      navigate("/")
-    }
-  }, [])
-
   return (
     <section className={classes.container}>
       <PopupErrorLogin onClose={handleOnClose} visible={showMyModal} />

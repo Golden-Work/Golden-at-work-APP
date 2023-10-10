@@ -41,6 +41,7 @@ function CardItem({ titulo, texto, imagen }: CardsItemProps) {
 function Cards() {
   const listNews = datosNoticias.map((noticia) => (
     <CardItem
+      key={noticia.titulo}
       titulo={noticia.titulo}
       texto={noticia.texto}
       imagen={noticia.imagen}

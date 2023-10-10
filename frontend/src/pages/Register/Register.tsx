@@ -21,15 +21,6 @@ function Register() {
 
   const { signup } = useSignup()
 
-  useEffect(() => {
-    document.title = "Registro"
-
-    // if there is a user logged in, redirect to home page
-    if (localStorage.getItem("token")) {
-      navigate("/")
-    }
-  }, [])
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
     setFormData((prevState) => ({
