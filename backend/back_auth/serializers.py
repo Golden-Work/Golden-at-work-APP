@@ -33,6 +33,12 @@ class UserSerializer(serializers.ModelSerializer):
 
         return value
 
+    def validate_email(self, value):
+        # email must end with @unal.edu.co
+        if not value.endswith('@unal.edu.co'):
+            raise serializers.ValidationError(
+                'El correo electrónico debe terminar con @unal.edu.co')
+
     def update(self, instance, validated_data):
         # don't update password or email
         validated_data.pop('password', None)
