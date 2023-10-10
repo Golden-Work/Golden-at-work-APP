@@ -37,6 +37,7 @@ function ResetPassword() {
           if (response.status === 200) {
             toast.success("Se ha restablecido la contraseña")
             localStorage.removeItem("resetPasswordEmail")
+            navigate("/login")
           }
         })
         .catch((error) => {
@@ -45,7 +46,7 @@ function ResetPassword() {
           }
           toast.error("Ha ocurrido un error al restablecer la contraseña")
         })
-      return navigate("/login")
+      return
     }
 
     axios
