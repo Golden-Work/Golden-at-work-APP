@@ -4,6 +4,7 @@ import { useState } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useSearchParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function ResetPassword() {
   const [email, setEmail] = useState(
@@ -15,6 +16,8 @@ function ResetPassword() {
 
   const [searchParams, _] = useSearchParams()
   const token = searchParams.get("token")
+
+  const navigate = useNavigate()
 
   const handleResetPassword = () => {
     if (token) {
@@ -42,7 +45,7 @@ function ResetPassword() {
           }
           toast.error("Ha ocurrido un error al restablecer la contraseña")
         })
-      return
+      return navigate("/login")
     }
 
     axios
