@@ -1,11 +1,11 @@
 //import { Link } from "react-router-dom";
-import logo from "../assets/Imagenes/Logo-placejolder.png";
-import Boton from "../Componentes/Boton";
-import BarraDeBusqueda from "../Componentes/BarraDeBusqueda";
-import ImagenDeScroll from "../Componentes/ImagenDeScroll";
-import "../Hojas-de-estilo/Home.css";
-import Tabla from "../Componentes/Tabla";
-import Cards from "../Componentes/Cards";
+import logo from "../assets/Imagenes/Logo-placejolder.png"
+import Boton from "../components/Boton"
+import BarraDeBusqueda from "../components/BarraDeBusqueda"
+import ImagenDeScroll from "../components/ImagenDeScroll"
+import "../Hojas-de-estilo/Home.css"
+import Tabla from "../components/Tabla"
+import Cards from "../components/Cards"
 
 // div>p.parrafo-*7>div*4
 
@@ -43,14 +43,14 @@ function Home() {
       "Ocupada",
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
     ],
-  ];
+  ]
 
   const redireccionar = () => {
-    console.log("Redireccionar");
-  };
+    console.log("Redireccionar")
+  }
   const filtro = () => {
-    console.log("Filtro");
-  };
+    console.log("Filtro")
+  }
 
   return (
     <>
@@ -167,7 +167,7 @@ function Home() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

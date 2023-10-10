@@ -1,8 +1,8 @@
-import Header from "./Header"
+import Header from "../components/Header"
 import "../styles/styleLogin.css"
 import { useNavigate, Link } from "react-router-dom"
 import { useState } from "react"
-import MyModal from "../Componentes/PopupErrorLogin"
+import MyModal from "../components/PopupErrorLogin"
 import axios from "axios"
 
 function Login() {

@@ -1,13 +1,24 @@
 import { useState, useRef, useEffect } from "react"
 import "../styles/styleRegister.css"
-import Header from "./Header"
+import Header from "../components/Header"
 import axios from "axios"
+import { toast } from "react-toastify"
+
+type FormDataType = {
+  email: string
+  password: string
+  confirm_password?: string
+  first_name: string
+  last_name: string
+  document: string
+  career: string
+}
 
 function FormBox() {
   const [mostrarMenu, setMostrarMenu] = useState(false)
   const contenedorRef = useRef<HTMLDivElement | null>(null)
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormDataType>({
     email: "",
     password: "",
     confirm_password: "",
@@ -27,9 +38,10 @@ function FormBox() {
 
   const handleRegister = async () => {
     if (formData.password !== formData.confirm_password) {
-      console.error("Las contraseñas no coinciden")
+      toast.error("Las contraseñas no coinciden")
       return
     }
+    delete formData.confirm_password
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_URL}auth/signup`,
@@ -37,12 +49,16 @@ function FormBox() {
       )
 
       if (response.status === 201) {
-        alert("Usuario registrado correctamente")
+        toast.success("Usuario registrado")
       } else {
-        alert("Error al registrar al usuario")
+        toast.error("An error occurred, please try again later")
       }
-    } catch (error) {
-      alert("An error occurred, please try again later")
+    } catch (error: any) {
+      if (error?.response?.data) {
+        Object.keys(error.response.data).forEach((key) => {
+          toast.error(`${key}: ${error.response.data[key]}`)
+        })
+      }
     }
   }
 
