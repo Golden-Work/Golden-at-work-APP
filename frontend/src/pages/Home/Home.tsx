@@ -11,8 +11,14 @@ import img4 from "@/assets/Imagenes/Scroll/Scroll-4.png"
 import img5 from "@/assets/Imagenes/Scroll/Scroll-5.png"
 import img6 from "@/assets/Imagenes/Scroll/Scroll-6.png"
 import Boton from "@/components/Boton/Boton"
+import { Button } from "@mui/material"
+import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
+import { useState } from "react"
 
 function Home() {
+  const [showMyModal, setShowMyModal] = useState(false)
+  const handleOnClose = () => setShowMyModal(false)
+  const toggleModal = () => setShowMyModal(true)
   const data: ElementProps[] = [
     {
       id: 1,
@@ -57,6 +63,7 @@ function Home() {
 
   return (
     <>
+    <PopupConfirmarEliminacion onClose={handleOnClose} visible={showMyModal} />
       <header className={classes.header}>
         <div className={classes.logoContainer}>
           <img src={logo} alt="Logo" />
@@ -85,7 +92,14 @@ function Home() {
                 esDeRedireccionamiento={true}
                 manejarClick={redireccionar}
               />
-            </div>
+           </div>
+           <div className={classes.contenedorBotones2}>
+
+           <Button className={classes.eliminar} onClick={toggleModal} variant="contained">
+            Eliminar
+          </Button>
+
+           </div>
           </div>
           <div className={classes.encabezadoInferior}>
             <div className={classes.contenedorDeFiltros}>

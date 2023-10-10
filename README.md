@@ -110,7 +110,7 @@ Apreciamos tu comprensión y te invitamos a revisar nuestro código y utilizarlo
 - [Omar guerrero]( https://github.com/camisabo)
 - [Stephan](https://github.com/Gylg4m3sh) 
 - [Camilo](https://github.com/CamiloLM)
-- Jonathan
+- [Jonathan](https://github.com/Jsochoac)
 - [Fabio](https://github.com/Gorenpop)
 - [Santiago Nova](https://github.com/snova1)
 
