@@ -1,34 +1,15 @@
 import { useEffect, useState } from "react"
 import classes from "./Register.module.css"
-import axios from "axios"
-import { toast } from "react-toastify"
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material"
+import { Box, Button, Paper, TextField, Typography } from "@mui/material"
 import { useNavigate } from "react-router"
-import useMajors from "@/hooks/useMajors"
-
-type FormDataType = {
-  email: string
-  password: string
-  confirm_password?: string
-  first_name: string
-  last_name: string
-  document: string
-  major: number
-}
+import GwMajorSelect from "@/components/GwMajorSelect/GwMajorSelect"
+import verifyPassword from "@/utils/verifyPassword"
+import useSignup from "@/hooks/useSignup"
+import { SignupBody } from "@/interfaces"
 
 function Register() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState<FormDataType>({
+  const [formData, setFormData] = useState<SignupBody>({
     email: "",
     password: "",
     confirm_password: "",
@@ -38,7 +19,7 @@ function Register() {
     major: -1,
   })
 
-  const { majorOptions } = useMajors()
+  const { signup } = useSignup()
 
   useEffect(() => {
     document.title = "Registro"
@@ -58,51 +39,8 @@ function Register() {
   }
 
   const handleRegister = async () => {
-    if (formData.password !== formData.confirm_password) {
-      toast.error("Las contraseñas no coinciden")
-      return
-    }
-
-    if (formData.password.length < 8) {
-      toast.error("La contraseña debe tener al menos 8 caracteres")
-      return
-    }
-
-    // at least one number, one lowercase and one uppercase letter
-    if (!/[a-z]/.test(formData.password)) {
-      toast.error("La contraseña debe tener al menos una letra minúscula")
-      return
-    }
-
-    if (!/[A-Z]/.test(formData.password)) {
-      toast.error("La contraseña debe tener al menos una letra mayúscula")
-      return
-    }
-
-    if (!/[0-9]/.test(formData.password)) {
-      toast.error("La contraseña debe tener al menos un número")
-      return
-    }
-
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_APP_BASE_URL}auth/signup`,
-        formData
-      )
-
-      if (response.status === 201) {
-        toast.success("Usuario registrado")
-        navigate("/login")
-      } else {
-        toast.error("An error occurred, please try again later")
-      }
-    } catch (error: any) {
-      if (error?.response?.data) {
-        Object.keys(error.response.data).forEach((key) => {
-          toast.error(`${key}: ${error.response.data[key]}`)
-        })
-      }
-    }
+    if (!verifyPassword(formData.password, formData.confirm_password)) return
+    signup(formData)
   }
 
   return (
@@ -176,27 +114,15 @@ function Register() {
             />
           </div>
         </div>
-        <FormControl fullWidth size="small">
-          <InputLabel id="major">Carrera</InputLabel>
-          <Select
-            labelId="major"
-            value={formData.major}
-            label="Carrera"
-            name="career"
-            onChange={(e) =>
-              setFormData((prevState) => ({
-                ...prevState,
-                major: e.target.value as number,
-              }))
-            }
-          >
-            {majorOptions.map((major) => (
-              <MenuItem value={major.value} key={major.value}>
-                {major.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <GwMajorSelect
+          value={formData.major}
+          onChange={(e) =>
+            setFormData((prevState) => ({
+              ...prevState,
+              major: e.target.value as number,
+            }))
+          }
+        />
         <Box mt={3}>
           <Button onClick={handleRegister} variant="contained" fullWidth>
             Registrarse
