@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from uuid import uuid4
 
-# Administrador para gestionar usuarios y administradores
-
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -39,8 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     password = models.CharField(max_length=128, blank=False, null=False)
     recovery_token = models.CharField(max_length=128, blank=True, null=True)
-    # preferiblemente que sea un depelgable con opciones
-    career = models.CharField(max_length=128, blank=False, null=False)
+    major = models.ForeignKey('main.Major', on_delete=models.CASCADE)
     document = models.CharField(max_length=50)
 
     USERNAME_FIELD = 'email'
@@ -65,19 +62,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         token = uuid4()
         self.recovery_token = token
         self.save()
-
-    # Modelo implementos
-
-
-class Implement(models.Model):
-    name = models.CharField(max_length=255, blank=False, null=False)
-    description = models.TextField(blank=False, null=False)
-    available = models.BooleanField(default=True)
-    borrowed_by = models.ForeignKey(
-        'User', null=True, blank=True, on_delete=models.SET_NULL)
-    borrow_date = models.DateTimeField(null=True, blank=True)
-    return_date = models.DateTimeField(null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.name

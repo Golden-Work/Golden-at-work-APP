@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserSerializer
 from .models import User
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from django.core.mail import send_mail
 from django.conf import settings
@@ -15,7 +15,20 @@ def signup(request):
     data['is_active'] = True
     serializer = UserSerializer(data=data)
     if serializer.is_valid():
-        user = User.objects.create_user(**data)
+        first_name = data['first_name']
+        last_name = data['last_name']
+        email = data['email']
+        password = data['password']
+        major = data['major']
+        document = data['document']
+        user = User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=password,
+            major_id=major,
+            document=document
+        )
         serializer = UserSerializer(user)
 
         # send email to user

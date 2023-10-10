@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # BACK
     "back_auth",
+    "main",
     "corsheaders"
 ]
 

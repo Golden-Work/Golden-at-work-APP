@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@mui/material"
 import { Major } from "@/interfaces"
+import { useNavigate } from "react-router"
 
 type FormDataType = {
   email: string
@@ -27,6 +28,7 @@ type FormDataType = {
 }
 
 function Register() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState<FormDataType>({
     email: "",
     password: "",
@@ -34,14 +36,21 @@ function Register() {
     first_name: "",
     last_name: "",
     document: "",
-    major: -1,
+    major: 1,
   })
   const [majors, setMajors] = useState<Major[]>([])
 
   useEffect(() => {
+    document.title = "Registro"
+
+    // if there is a user logged in, redirect to home page
+    if (localStorage.getItem("token")) {
+      navigate("/")
+    }
+
     const getMajors = async () => {
       const response = await axios.get(
-        `${import.meta.env.VITE_APP_BASE_URL}auth/majors`
+        `${import.meta.env.VITE_APP_BASE_URL}majors`
       )
       setMajors(response.data)
     }
@@ -69,7 +78,28 @@ function Register() {
       toast.error("Las contraseñas no coinciden")
       return
     }
-    delete formData.confirm_password
+
+    if (formData.password.length < 8) {
+      toast.error("La contraseña debe tener al menos 8 caracteres")
+      return
+    }
+
+    // at least one number, one lowercase and one uppercase letter
+    if (!/[a-z]/.test(formData.password)) {
+      toast.error("La contraseña debe tener al menos una letra minúscula")
+      return
+    }
+
+    if (!/[A-Z]/.test(formData.password)) {
+      toast.error("La contraseña debe tener al menos una letra mayúscula")
+      return
+    }
+
+    if (!/[0-9]/.test(formData.password)) {
+      toast.error("La contraseña debe tener al menos un número")
+      return
+    }
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_URL}auth/signup`,
@@ -78,6 +108,7 @@ function Register() {
 
       if (response.status === 201) {
         toast.success("Usuario registrado")
+        navigate("/login")
       } else {
         toast.error("An error occurred, please try again later")
       }
@@ -176,7 +207,9 @@ function Register() {
             }
           >
             {majorOptions.map((major) => (
-              <MenuItem value={major.value}>{major.label}</MenuItem>
+              <MenuItem value={major.value} key={major.value}>
+                {major.label}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

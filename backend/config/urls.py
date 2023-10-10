@@ -20,8 +20,8 @@ from django.urls import path
 from django import views
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('main.urls')),
     path('api/auth/', include('back_auth.urls')),
 ]
