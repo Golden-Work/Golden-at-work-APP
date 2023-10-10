@@ -12,7 +12,6 @@ from django.conf import settings
 @api_view(['POST'])
 def signup(request):
     data = request.data
-    data['is_active'] = True
     serializer = UserSerializer(data=data)
     if serializer.is_valid():
         first_name = data['first_name']
@@ -27,7 +26,8 @@ def signup(request):
             email=email,
             password=password,
             major_id=major,
-            document=document
+            document=document,
+            is_active=True
         )
         serializer = UserSerializer(user)
 
