@@ -46,7 +46,7 @@ function Home() {
   useEffect(() => {
     document.title = "Home"
     // if there is no user logged in, redirect to login page
-    if (!sessionStorage.getItem("token")) {
+    if (!localStorage.getItem("token")) {
       navigate("/login")
     }
   }, [])

@@ -1,6 +1,6 @@
 import classes from "./Login.module.css"
 import { useNavigate, Link } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin"
 import axios from "axios"
 import TextField from "@mui/material/TextField"
@@ -25,13 +25,19 @@ function Login() {
       if (response.status === 200) {
         localStorage.setItem("token", response.data.access)
         localStorage.setItem("refresh", response.data.refresh)
-        navigate("/Home")
+        navigate("/")
       }
     } catch (error) {
-      console.error(error)
       setShowMyModal(true)
     }
   }
+
+  useEffect(() => {
+    // if there is a user logged in, redirect to home page
+    if (localStorage.getItem("token")) {
+      navigate("/")
+    }
+  }, [])
 
   return (
     <section className={classes.container}>
