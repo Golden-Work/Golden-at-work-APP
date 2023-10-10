@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import classes from "./Register.module.css"
 import axios from "axios"
 import { toast } from "react-toastify"
@@ -13,8 +13,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material"
-import { Major } from "@/interfaces"
 import { useNavigate } from "react-router"
+import useMajors from "@/hooks/useMajors"
 
 type FormDataType = {
   email: string
@@ -35,9 +35,10 @@ function Register() {
     first_name: "",
     last_name: "",
     document: "",
-    major: 1,
+    major: -1,
   })
-  const [majors, setMajors] = useState<Major[]>([])
+
+  const { majorOptions } = useMajors()
 
   useEffect(() => {
     document.title = "Registro"
@@ -46,23 +47,7 @@ function Register() {
     if (localStorage.getItem("token")) {
       navigate("/")
     }
-
-    const getMajors = async () => {
-      const response = await axios.get(
-        `${import.meta.env.VITE_APP_BASE_URL}majors`
-      )
-      setMajors(response.data)
-    }
-
-    getMajors()
   }, [])
-
-  const majorOptions = useMemo(() => {
-    return majors.map((major) => ({
-      value: major.id,
-      label: major.name,
-    }))
-  }, [majors])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
