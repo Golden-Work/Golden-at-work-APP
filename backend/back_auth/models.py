@@ -38,7 +38,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     password = models.CharField(max_length=128, blank=False, null=False)
     recovery_token = models.CharField(max_length=128, blank=True, null=True)
-    major = models.ForeignKey('main.Major', on_delete=models.CASCADE)
+    major = models.ForeignKey(
+        'main.Major', on_delete=models.CASCADE, null=True)
     document = models.CharField(max_length=50)
 
     USERNAME_FIELD = 'email'
