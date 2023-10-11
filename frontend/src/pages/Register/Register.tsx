@@ -6,7 +6,7 @@ import verifyPassword from "@/utils/verifyPassword"
 import useSignup from "@/hooks/useSignup"
 import { SignupBody } from "@/interfaces"
 import { toast } from "react-toastify"
-import LoadingContainedButton from "@/components/LoadingButton/LoadingContainedButton"
+import LoadingButton from "@mui/lab/LoadingButton"
 
 function Register() {
   const [formData, setFormData] = useState<SignupBody>({
@@ -140,13 +140,14 @@ function Register() {
           }
         />
         <Box mt={3}>
-          <LoadingContainedButton
+          <LoadingButton
             onClick={handleRegister}
             fullWidth
             loading={isLoading}
+            variant="contained"
           >
             Registrarse
-          </LoadingContainedButton>
+          </LoadingButton>
         </Box>
       </Paper>
     </section>

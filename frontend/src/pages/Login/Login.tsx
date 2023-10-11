@@ -5,7 +5,7 @@ import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin"
 import axios from "axios"
 import TextField from "@mui/material/TextField"
 import { Paper, Typography } from "@mui/material"
-import LoadingContainedButton from "@/components/LoadingButton/LoadingContainedButton"
+import LoadingButton from "@mui/lab/LoadingButton"
 
 function Login() {
   const navigate = useNavigate()
@@ -64,13 +64,14 @@ function Login() {
         <div className={classes.forget}>
           <Link to="/reset-password">¿Olvidaste tú contraseña?</Link>
         </div>
-        <LoadingContainedButton
+        <LoadingButton
           onClick={handleLogin}
           fullWidth
           loading={isLoading}
+          variant="contained"
         >
           Ingresar
-        </LoadingContainedButton>
+        </LoadingButton>
         <div className={classes.register}>
           <p>
             ¿No tienes una cuenta? <Link to="/signup">Regístrate</Link>
