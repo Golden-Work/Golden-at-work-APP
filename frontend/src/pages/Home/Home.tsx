@@ -15,7 +15,26 @@ import { Button } from "@mui/material"
 import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
 import { useState } from "react"
 
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
+import IconButton from '@mui/material/IconButton';
+
+import Tooltip from '@mui/material/Tooltip';
+
+
 function Home() {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null); /*Borrar el token y refrescar página*/
+  };
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)
   const toggleModal = () => setShowMyModal(true)
@@ -82,24 +101,48 @@ function Home() {
               />
 
               <Boton
-                texto="Traducir"
+                texto="Idioma"
                 esDeRedireccionamiento={true}
                 manejarClick={redireccionar}
               />
+              
+              <React.Fragment>
+                <Box sx={{ display: 'flex'}}>
 
-              <Boton
-                texto="Ingresar"
-                esDeRedireccionamiento={true}
-                manejarClick={redireccionar}
-              />
+                  <Tooltip title="Account settings">
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2 }}
+                      aria-controls={open ? 'account-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                    >
+                      <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+                <Menu
+                  anchorEl={anchorEl}
+                  id="account-menu"
+                  open={open}
+                  onClose={handleClose}
+                  onClick={handleClose}
+
+                  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                >
+                  <MenuItem onClick={toggleModal}  >
+                    Delete Account
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    Logout
+                  </MenuItem>
+                </Menu>
+              </React.Fragment>
+
            </div>
-           <div className={classes.contenedorBotones2}>
 
-           <Button className={classes.eliminar} onClick={toggleModal} variant="contained">
-            Eliminar
-          </Button>
-
-           </div>
           </div>
           <div className={classes.encabezadoInferior}>
             <div className={classes.contenedorDeFiltros}>
