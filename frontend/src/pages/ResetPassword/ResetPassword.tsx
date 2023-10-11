@@ -1,7 +1,8 @@
 import classes from "./ResetPassword.module.css"
-import { Button, Paper, TextField, Typography } from "@mui/material"
+import { Box, Paper, TextField, Typography } from "@mui/material"
 import { useSearchParams } from "react-router-dom"
 import useResetPassword from "@/hooks/useResetPassword"
+import LoadingContainedButton from "@/components/LoadingButton/LoadingContainedButton"
 
 function ResetPassword() {
   const [searchParams, _] = useSearchParams()
@@ -15,6 +16,7 @@ function ResetPassword() {
     confirmPassword,
     setConfirmPassword,
     handleResetPassword,
+    isLoading,
   } = useResetPassword(token)
   return (
     <section className={classes.container}>
@@ -59,14 +61,15 @@ function ResetPassword() {
             />
           </>
         )}
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{ mt: 2 }}
-          onClick={handleResetPassword}
-        >
-          Enviar
-        </Button>
+        <Box mt={2}>
+          <LoadingContainedButton
+            fullWidth
+            onClick={handleResetPassword}
+            loading={isLoading}
+          >
+            Enviar
+          </LoadingContainedButton>
+        </Box>
       </Paper>
     </section>
   )

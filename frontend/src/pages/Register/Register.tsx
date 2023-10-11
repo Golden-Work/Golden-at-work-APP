@@ -1,11 +1,12 @@
 import { useState } from "react"
 import classes from "./Register.module.css"
-import { Box, Button, Paper, TextField, Typography } from "@mui/material"
+import { Box, Paper, TextField, Typography } from "@mui/material"
 import GwMajorSelect from "@/components/GwMajorSelect/GwMajorSelect"
 import verifyPassword from "@/utils/verifyPassword"
 import useSignup from "@/hooks/useSignup"
 import { SignupBody } from "@/interfaces"
 import { toast } from "react-toastify"
+import LoadingContainedButton from "@/components/LoadingButton/LoadingContainedButton"
 
 function Register() {
   const [formData, setFormData] = useState<SignupBody>({
@@ -15,10 +16,10 @@ function Register() {
     first_name: "",
     last_name: "",
     document: "",
-    major: -1,
+    major: "",
   })
 
-  const { signup } = useSignup()
+  const { signup, isLoading } = useSignup()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -139,9 +140,13 @@ function Register() {
           }
         />
         <Box mt={3}>
-          <Button onClick={handleRegister} variant="contained" fullWidth>
+          <LoadingContainedButton
+            onClick={handleRegister}
+            fullWidth
+            loading={isLoading}
+          >
             Registrarse
-          </Button>
+          </LoadingContainedButton>
         </Box>
       </Paper>
     </section>

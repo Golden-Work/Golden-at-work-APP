@@ -4,7 +4,8 @@ import { useState } from "react"
 import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin"
 import axios from "axios"
 import TextField from "@mui/material/TextField"
-import { Button, Paper, Typography } from "@mui/material"
+import { Paper, Typography } from "@mui/material"
+import LoadingContainedButton from "@/components/LoadingButton/LoadingContainedButton"
 
 function Login() {
   const navigate = useNavigate()
@@ -12,8 +13,10 @@ function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const handleOnClose = () => setShowMyModal(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleLogin = async () => {
+    setIsLoading(true)
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_URL}auth/login`,
@@ -30,6 +33,7 @@ function Login() {
     } catch (error) {
       setShowMyModal(true)
     }
+    setIsLoading(false)
   }
 
   return (
@@ -60,9 +64,13 @@ function Login() {
         <div className={classes.forget}>
           <Link to="/reset-password">¿Olvidaste tú contraseña?</Link>
         </div>
-        <Button onClick={handleLogin} variant="contained" fullWidth>
+        <LoadingContainedButton
+          onClick={handleLogin}
+          fullWidth
+          loading={isLoading}
+        >
           Ingresar
-        </Button>
+        </LoadingContainedButton>
         <div className={classes.register}>
           <p>
             ¿No tienes una cuenta? <Link to="/signup">Regístrate</Link>

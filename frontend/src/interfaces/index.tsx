@@ -10,5 +10,5 @@ export interface SignupBody {
   first_name: string
   last_name: string
   document: string
-  major: number
+  major: number | string
 }

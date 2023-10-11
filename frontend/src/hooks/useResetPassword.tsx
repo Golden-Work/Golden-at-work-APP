@@ -10,9 +10,11 @@ function useResetPassword(token: string | null) {
   )
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleResetPassword = async () => {
+    setIsLoading(true)
     try {
       if (token) {
         if (!verifyPassword(password, confirmPassword)) return
@@ -53,6 +55,7 @@ function useResetPassword(token: string | null) {
         toast.error("Ha ocurrido un error")
       }
     }
+    setIsLoading(false)
   }
 
   return {
@@ -63,6 +66,7 @@ function useResetPassword(token: string | null) {
     confirmPassword,
     setConfirmPassword,
     handleResetPassword,
+    isLoading,
   }
 }
 
