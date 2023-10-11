@@ -46,6 +46,9 @@ function Register() {
     if (!formData.email) {
       errors.push("Por favor ingrese su correo electrónico")
     }
+    if (formData.password != formData.confirm_password ) {
+      errors.push("Las contraseñas no coinciden.")
+    }
     // only allow unal.edu.co emails
     if (!formData.email.endsWith("@unal.edu.co")) {
       errors.push("Por favor ingrese un correo electrónico de la UNAL")
