@@ -11,30 +11,28 @@ import img4 from "@/assets/Imagenes/Scroll/Scroll-4.png"
 import img5 from "@/assets/Imagenes/Scroll/Scroll-5.png"
 import img6 from "@/assets/Imagenes/Scroll/Scroll-6.png"
 import Boton from "@/components/Boton/Boton"
-import { Button } from "@mui/material"
 import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
 import { useState } from "react"
 
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import * as React from "react"
+import Box from "@mui/material/Box"
+import Avatar from "@mui/material/Avatar"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
 
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton"
 
-import Tooltip from '@mui/material/Tooltip';
-
+import Tooltip from "@mui/material/Tooltip"
 
 function Home() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
   const handleClose = () => {
-    setAnchorEl(null); /*Borrar el token y refrescar página*/
-  };
+    setAnchorEl(null) /*Borrar el token y refrescar página*/
+  }
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)
   const toggleModal = () => setShowMyModal(true)
@@ -82,7 +80,10 @@ function Home() {
 
   return (
     <>
-    <PopupConfirmarEliminacion onClose={handleOnClose} visible={showMyModal} />
+      <PopupConfirmarEliminacion
+        onClose={handleOnClose}
+        visible={showMyModal}
+      />
       <header className={classes.header}>
         <div className={classes.logoContainer}>
           <img src={logo} alt="Logo" />
@@ -105,18 +106,17 @@ function Home() {
                 esDeRedireccionamiento={true}
                 manejarClick={redireccionar}
               />
-              
-              <React.Fragment>
-                <Box sx={{ display: 'flex'}}>
 
+              <React.Fragment>
+                <Box sx={{ display: "flex" }}>
                   <Tooltip title="Account settings">
                     <IconButton
                       onClick={handleClick}
                       size="small"
                       sx={{ ml: 2 }}
-                      aria-controls={open ? 'account-menu' : undefined}
+                      aria-controls={open ? "account-menu" : undefined}
                       aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
+                      aria-expanded={open ? "true" : undefined}
                     >
                       <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
                     </IconButton>
@@ -128,21 +128,14 @@ function Home() {
                   open={open}
                   onClose={handleClose}
                   onClick={handleClose}
-
-                  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                  transformOrigin={{ horizontal: "right", vertical: "top" }}
+                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
-                  <MenuItem onClick={toggleModal}  >
-                    Delete Account
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    Logout
-                  </MenuItem>
+                  <MenuItem onClick={toggleModal}>Delete Account</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
               </React.Fragment>
-
-           </div>
-
+            </div>
           </div>
           <div className={classes.encabezadoInferior}>
             <div className={classes.contenedorDeFiltros}>
