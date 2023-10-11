@@ -31,6 +31,8 @@ function Home() {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
+    localStorage.clear();
+    window.location.reload();
     setAnchorEl(null) /*Borrar el token y refrescar página*/
   }
   const [showMyModal, setShowMyModal] = useState(false)
@@ -118,7 +120,7 @@ function Home() {
                       aria-haspopup="true"
                       aria-expanded={open ? "true" : undefined}
                     >
-                      <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                       <Avatar sx={{ width: 40, height: 40, backgroundColor: '#808080', color: 'black',boxShadow: '1px 2px 2px 1px black' }}>M</Avatar>
                     </IconButton>
                   </Tooltip>
                 </Box>
@@ -126,13 +128,16 @@ function Home() {
                   anchorEl={anchorEl}
                   id="account-menu"
                   open={open}
-                  onClose={handleClose}
-                  onClick={handleClose}
-                  transformOrigin={{ horizontal: "right", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  
+                  transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                  anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
-                  <MenuItem onClick={toggleModal}>Delete Account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={toggleModal}>
+                    Delete Account
+                  </MenuItem>
+                  <MenuItem onClick={() => { handleClose(); }}>
+                    Logout
+                  </MenuItem>
                 </Menu>
               </React.Fragment>
             </div>
