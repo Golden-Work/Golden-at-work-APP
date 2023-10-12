@@ -107,6 +107,7 @@
   background-color: rgb(174, 210, 255);
   overflow-y: auto;
   overflow-x: auto;
+  scrollbar-width: none
 }
 
 /* Para Chrome, Safari y Opera */
