@@ -37,7 +37,12 @@ function Home() {
   }
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)
-  const toggleModal = () => setShowMyModal(true)
+  const toggleModal = () => {
+
+    setShowMyModal(true);
+    setAnchorEl(null);
+  };
+  
   const data: ElementProps[] = [
     {
       id: 1,
