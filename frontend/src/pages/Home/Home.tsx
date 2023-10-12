@@ -33,7 +33,7 @@ function Home() {
   const handleClose = () => {
     localStorage.clear();
     window.location.reload();
-    setAnchorEl(null) /*Borrar el token y refrescar página*/
+    setAnchorEl(null) 
   }
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)

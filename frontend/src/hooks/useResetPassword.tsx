@@ -18,7 +18,9 @@ function useResetPassword(token: string | null) {
     try {
       if (token) {
         if (!verifyPassword(password, confirmPassword)) return
-
+        if (!email.endsWith("@unal.edu.co")) {
+          toast.error("Por favor ingrese un correo electrónico de la UNAL")
+        }
         const response = await axios.post(
           `${import.meta.env.VITE_APP_BASE_URL}auth/reset-password/${token}`,
           {

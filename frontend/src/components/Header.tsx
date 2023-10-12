@@ -34,7 +34,7 @@ function Header() {
     <header className="header">
       <div className="Column-Header">
         <div className="logo-header">
-          <Link id="UN" to="/Home">
+          <Link id="UN" to="/">
             {" "}
             Un
           </Link>
