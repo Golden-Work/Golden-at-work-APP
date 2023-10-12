@@ -96,27 +96,38 @@
   display: flex;
   /* flex-wrap: wrap; */
   flex-direction: row;
-  align-items: center;
+  align-items: left;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 15px;
   gap: 3vw;
   height: auto;
-  width: 90vw;
+  width: 95vw;
   padding: 50px;
-  margin: 10px 2vw;
+  margin: 11px 2vw;
   background-color: rgb(174, 210, 255);
   overflow-y: auto;
+  overflow-x: auto;
 }
 
 /* Para Chrome, Safari y Opera */
 ::-webkit-scrollbar {
-  width: 0px; /* Remover scrollbar vertical */
+  width: 0px;  /* Remover scrollbar vertical */
   height: 0px; /* Remover scrollbar horizontal */
 }
 
 /* Para Internet Explorer y Edge */
 element {
   -ms-overflow-style: none;
+}
+
+/* Para Mozilla Firefox */
+::-moz-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+body {
+  scrollbar-width: none;
 }
 
 .contenedor-de-parte-baja {
