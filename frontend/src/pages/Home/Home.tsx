@@ -13,35 +13,69 @@ import img6 from "@/assets/Imagenes/Scroll/Scroll-6.png"
 import Boton from "@/components/Boton/Boton"
 import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
 import { useState } from "react"
-
 import * as React from "react"
+
 import Box from "@mui/material/Box"
 import Avatar from "@mui/material/Avatar"
 import Menu from "@mui/material/Menu"
 import MenuItem from "@mui/material/MenuItem"
-
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Logout from '@mui/icons-material/Logout';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import LanguageIcon from '@mui/icons-material/Language';
 import IconButton from "@mui/material/IconButton"
-
 import Tooltip from "@mui/material/Tooltip"
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
 
 function Home() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [anchorEl1, setAnchorEl1] = React.useState<null | HTMLElement>(null)
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const open = Boolean(anchorEl)
+  const open1 = Boolean(anchorEl1)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
+    setAnchorEl(event.currentTarget) 
   }
+  const handleClick1 = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl1(event.currentTarget)
+    
+  }
+  const closeMenu = () => {
+    setAnchorEl(null);
+    setAnchorEl1(null);
+  };
   const handleClose = () => {
     localStorage.clear();
     window.location.reload();
-    setAnchorEl(null) 
+    closeMenu()
+
   }
+  const toggleModal = () => {
+    setShowMyModal(true);
+    closeMenu()
+  };  
+  const options = [
+    'English',
+    'Español',
+    'Deutsch',
+    '日本語',
+  ];
+
+  const handleMenuItemClick = (
+    event: React.MouseEvent<HTMLElement>,
+    index: number,
+  ) => {
+    setSelectedIndex(index);
+    setAnchorEl1(null);
+  };
+
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)
-  const toggleModal = () => {
-
-    setShowMyModal(true);
-    setAnchorEl(null);
-  };
+  
+  
   
   const data: ElementProps[] = [
     {
@@ -108,15 +142,67 @@ function Home() {
                 manejarClick={redireccionar}
               />
 
-              <Boton
-                texto="Idioma"
-                esDeRedireccionamiento={true}
-                manejarClick={redireccionar}
-              />
-
+              <React.Fragment>
+              
+                    
+                  <List sx={{
+                        width: 'auto',
+                        height: '45px',
+                        borderRadius: '40px',
+                        fontSize: '17px',
+                        border: 'none',
+                        outline: 'none',
+                        cursor: 'pointer',
+                        padding: '0 20px',
+                        textAlign: 'center',
+                        backgroundColor: '#808080',
+                        color: 'black',
+                        boxShadow: '1px 2px 2px 1px black',
+                        
+                      }}
+                  >
+                    <ListItem
+                      id="lock-button"
+                      aria-haspopup="listbox"
+                      aria-controls="lock-menu"
+                      aria-label="when device is locked"
+                      onClick={handleClick1}
+                      
+                    >
+                      <ListItemText
+                        primary={options[selectedIndex]}
+                        
+                      />
+                      
+                    </ListItem>
+                  </List>
+                  <Menu
+                    id="lock-menu"
+                    anchorEl={anchorEl1}
+                    open={open1}
+                    onClose={closeMenu}
+                    MenuListProps={{
+                      'aria-labelledby': 'lock-button',
+                      role: 'listbox',
+                    }}
+                  >
+                    {options.map((option, index) => (
+                      <MenuItem
+                        key={option}
+                        selected={index === selectedIndex}
+                        onClick={(event) => handleMenuItemClick(event, index)}
+                        
+                      >
+                        
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+              </React.Fragment>
+              
               <React.Fragment>
                 <Box sx={{ display: "flex" }}>
-                  <Tooltip title="Account settings">
+                  <Tooltip title="Configuración de sesión">
                     <IconButton
                       onClick={handleClick}
                       size="small"
@@ -131,17 +217,25 @@ function Home() {
                 </Box>
                 <Menu
                   anchorEl={anchorEl}
-                  id="account-menu"
+                  onClose={closeMenu}
+
+                  id="account-menu" 
                   open={open}
                   
                   transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                   anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
                   <MenuItem onClick={toggleModal}>
-                    Delete Account
+                  <ListItemIcon>
+                      <PersonRemoveIcon fontSize="small" />
+                    </ListItemIcon>
+                    Eliminar cuenta
                   </MenuItem>
-                  <MenuItem onClick={() => { handleClose(); }}>
-                    Logout
+                  <MenuItem onClick={handleClose}>
+                    <ListItemIcon>
+                      <Logout fontSize="small" />
+                    </ListItemIcon>
+                    Cerrar sesión
                   </MenuItem>
                 </Menu>
               </React.Fragment>
