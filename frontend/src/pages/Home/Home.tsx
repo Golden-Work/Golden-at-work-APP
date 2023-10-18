@@ -61,7 +61,7 @@ function Home() {
     'English',
     'Español',
     'Deutsch',
-    '日本語',
+    'Português',
   ];
 
   const handleMenuItemClick = (
@@ -70,7 +70,7 @@ function Home() {
   ) => {
     setSelectedIndex(index);
     setlanguajeAnchorEl(null);
-   
+    console.log(event)
   };
 
   const [showMyModal, setShowMyModal] = useState(false)
@@ -170,7 +170,7 @@ function Home() {
                       onClick={handleClickLanguje}
                       
                     >
-                      <ListItemIcon    sx={{ marginRight: '-25px  ' }}>
+                      <ListItemIcon    sx={{ marginRight: '-25px ', fontSize: "small" }}>
                         <LanguageIcon fontSize="small"  />
                       </ListItemIcon>
                       <ListItemText
