@@ -32,20 +32,20 @@ import ListItemText from '@mui/material/ListItemText';
 
 function Home() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const [anchorEl1, setAnchorEl1] = React.useState<null | HTMLElement>(null)
+  const [languajeAnchorEl, setlanguajeAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const open = Boolean(anchorEl)
-  const open1 = Boolean(anchorEl1)
+  const openLanguaje = Boolean(languajeAnchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget) 
   }
-  const handleClick1 = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl1(event.currentTarget)
+  const handleClickLanguje = (event: React.MouseEvent<HTMLElement>) => {
+    setlanguajeAnchorEl(event.currentTarget)
     
   }
   const closeMenu = () => {
     setAnchorEl(null);
-    setAnchorEl1(null);
+    setlanguajeAnchorEl(null);
   };
   const handleClose = () => {
     localStorage.clear();
@@ -69,7 +69,8 @@ function Home() {
     index: number,
   ) => {
     setSelectedIndex(index);
-    setAnchorEl1(null);
+    setlanguajeAnchorEl(null);
+   
   };
 
   const [showMyModal, setShowMyModal] = useState(false)
@@ -148,13 +149,13 @@ function Home() {
                   <List sx={{
                         width: 'auto',
                         height: '45px',
-                        borderRadius: '40px',
+                        borderRadius: '20px',
                         fontSize: '17px',
                         border: 'none',
                         outline: 'none',
                         cursor: 'pointer',
-                        padding: '0 20px',
-                        textAlign: 'center',
+                        padding: '0 5px',
+                        
                         backgroundColor: '#808080',
                         color: 'black',
                         boxShadow: '1px 2px 2px 1px black',
@@ -166,9 +167,12 @@ function Home() {
                       aria-haspopup="listbox"
                       aria-controls="lock-menu"
                       aria-label="when device is locked"
-                      onClick={handleClick1}
+                      onClick={handleClickLanguje}
                       
                     >
+                      <ListItemIcon    sx={{ marginRight: '-25px  ' }}>
+                        <LanguageIcon fontSize="small"  />
+                      </ListItemIcon>
                       <ListItemText
                         primary={options[selectedIndex]}
                         
@@ -178,8 +182,8 @@ function Home() {
                   </List>
                   <Menu
                     id="lock-menu"
-                    anchorEl={anchorEl1}
-                    open={open1}
+                    anchorEl={languajeAnchorEl}
+                    open={openLanguaje}
                     onClose={closeMenu}
                     MenuListProps={{
                       'aria-labelledby': 'lock-button',
@@ -187,7 +191,7 @@ function Home() {
                     }}
                   >
                     {options.map((option, index) => (
-                      <MenuItem
+                      <MenuItem sx={{padding: '7px 25px'}}
                         key={option}
                         selected={index === selectedIndex}
                         onClick={(event) => handleMenuItemClick(event, index)}
