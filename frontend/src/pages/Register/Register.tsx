@@ -7,7 +7,8 @@ import useSignup from "@/hooks/useSignup"
 import { SignupBody } from "@/interfaces"
 import { toast } from "react-toastify"
 import LoadingButton from "@mui/lab/LoadingButton"
-
+import * as React from 'react';
+import Switch from '@mui/material/Switch';
 function Register() {
   const [formData, setFormData] = useState<SignupBody>({
     email: "",
@@ -61,6 +62,7 @@ function Register() {
     if (!verifyPassword(formData.password, formData.confirm_password)) return
     signup(formData)
   }
+  const label = { inputProps: { 'aria-label': 'Size switch demo' } };
 
   return (
     <section className={classes.container}>
@@ -133,6 +135,7 @@ function Register() {
             />
           </div>
         </div>
+        
         <GwMajorSelect
           value={formData.major}
           onChange={(e) =>
@@ -143,6 +146,11 @@ function Register() {
           }
         />
         <Box mt={3}>
+          
+            <div style={{ fontWeight: 300, textAlign: "left", padding: "3px " }}>
+            Al crear su cuenta, autoriza el uso y la recopilación<br/> de sus datos personales para esta aplicación.
+            <Switch {...label} defaultChecked />
+            </div>
           <LoadingButton
             onClick={handleRegister}
             fullWidth
@@ -152,6 +160,7 @@ function Register() {
             Registrarse
           </LoadingButton>
         </Box>
+        
       </Paper>
     </section>
   )

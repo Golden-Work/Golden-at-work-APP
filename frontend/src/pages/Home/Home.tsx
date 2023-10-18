@@ -149,7 +149,7 @@ function Home() {
                   <List sx={{
                         width: 'auto',
                         height: '45px',
-                        borderRadius: '20px',
+                        borderRadius: '10px',
                         fontSize: '17px',
                         border: 'none',
                         outline: 'none',
