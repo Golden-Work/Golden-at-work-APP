@@ -29,6 +29,7 @@ function Register() {
       [name]: value,
     }))
   }
+  const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   const handleRegister = async () => {
     const errors = []
@@ -50,11 +51,13 @@ function Register() {
     if (formData.password != formData.confirm_password ) {
       errors.push("Las contraseñas no coinciden.")
     }
-    // only allow unal.edu.co emails
+    
     if (!formData.email.endsWith("@unal.edu.co")) {
       errors.push("Por favor ingrese un correo electrónico de la UNAL")
     }
-
+    if (!isSwitchChecked) {
+      errors.push("Debe autorizar el uso y la recopilación de datos para continuar.");
+    }
     if (errors.length) {
       return errors.forEach((error) => toast.error(error))
     }
@@ -147,9 +150,13 @@ function Register() {
         />
         <Box mt={3}>
           
-            <div style={{ fontWeight: 300, textAlign: "left", padding: "3px " }}>
+            <div style={{ fontWeight: 300, textAlign: "left", padding: "5px 0 ", fontSize: 16 }}>
             Al crear su cuenta, autoriza el uso y la recopilación<br/> de sus datos personales para esta aplicación.
-            <Switch {...label} defaultChecked />
+            <Switch
+                {...label}
+                checked={isSwitchChecked}
+                onChange={(event) => setIsSwitchChecked(event.target.checked)}
+              />
             </div>
           <LoadingButton
             onClick={handleRegister}
