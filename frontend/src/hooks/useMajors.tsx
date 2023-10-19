@@ -1,6 +1,6 @@
 import { Major } from "@/interfaces"
 import { useEffect, useMemo, useState } from "react"
-import axios from "axios"
+import api from "@/api"
 
 const useMajors = () => {
   const [majors, setMajors] = useState<Major[]>([])
@@ -9,9 +9,7 @@ const useMajors = () => {
   useEffect(() => {
     const getMajors = async () => {
       setIsFetching(true)
-      const response = await axios.get(
-        `${import.meta.env.VITE_APP_BASE_URL}majors`
-      )
+      const response = await api.get(`majors`)
       setMajors(response.data)
       setIsFetching(false)
     }

@@ -14,6 +14,7 @@ def signup(request):
     data = request.data
     serializer = UserSerializer(data=data)
     if serializer.is_valid():
+
         first_name = data['first_name']
         last_name = data['last_name']
         email = data['email']

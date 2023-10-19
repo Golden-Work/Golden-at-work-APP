@@ -24,3 +24,7 @@ class Implement(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Dog(models.Model):
+    name = models.CharField(max_length=255, blank=False, null=False)

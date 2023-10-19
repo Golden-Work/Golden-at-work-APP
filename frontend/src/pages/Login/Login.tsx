@@ -2,10 +2,10 @@ import classes from "./Login.module.css"
 import { useNavigate, Link } from "react-router-dom"
 import { useState } from "react"
 import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin"
-import axios from "axios"
 import TextField from "@mui/material/TextField"
 import { Paper, Typography } from "@mui/material"
 import LoadingButton from "@mui/lab/LoadingButton"
+import api from "@/api"
 
 function Login() {
   const navigate = useNavigate()
@@ -18,16 +18,15 @@ function Login() {
   const handleLogin = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_APP_BASE_URL}auth/login`,
-        {
-          email,
-          password,
-        }
-      )
+      const response = await api.post(`auth/login`, {
+        email,
+        password,
+      })
       if (response.status === 200) {
         localStorage.setItem("access", response.data.access)
         localStorage.setItem("refresh", response.data.refresh)
+        api.defaults.headers.common["Authorization"] =
+          "Bearer " + response.data.access
         navigate("/")
       }
     } catch (error) {

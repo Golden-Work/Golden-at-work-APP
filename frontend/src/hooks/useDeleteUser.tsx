@@ -1,29 +1,18 @@
-
-import axios from "axios"
 import { useNavigate } from "react-router"
+import api from "@/api"
 
-function useDeleteUser(){
-    const navigate = useNavigate()
-    const deleteUser = async() => {
-        const access = localStorage.getItem("access");
-        let reqInstance = axios.create({
-            headers: {
-              Authorization : `Bearer ${access}`
-              }
-          })
-        const response = await reqInstance.delete(
-            `${import.meta.env.VITE_APP_BASE_URL}auth/delete`
-        )
-        if (response.status === 200) {
-        navigate("/login");
-        localStorage.clear();
-        }
-
+function useDeleteUser() {
+  const navigate = useNavigate()
+  const deleteUser = async () => {
+    const response = await api.delete(`auth/delete`)
+    if (response.status === 200) {
+      navigate("/login")
+      localStorage.clear()
     }
-    return {
-        deleteUser
-    }
-
+  }
+  return {
+    deleteUser,
+  }
 }
 
 export default useDeleteUser

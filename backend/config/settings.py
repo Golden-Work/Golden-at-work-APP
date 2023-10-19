@@ -171,8 +171,6 @@ EMAIL_HOST_PASSWORD = 'kwvrtsbqkfskqozq'
 FRONTEND_URL = config('FRONTEND_URL')
 
 
-
-
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
