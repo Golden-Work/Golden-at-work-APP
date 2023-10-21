@@ -60,7 +60,7 @@ function Home() {
   const options = [
     'English',
     'Español',
-    'Deutsch',
+    'Français',
     'Português',
   ];
 

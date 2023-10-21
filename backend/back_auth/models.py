@@ -48,6 +48,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
+    damaged_returns_count = models.PositiveIntegerField(default=0)
+
+    lost_count= models.PositiveIntegerField(default=0)
+
     def get_full_name(self):
         return f'{self.first_name} {self.last_name}'
 
@@ -64,3 +68,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         token = uuid4()
         self.recovery_token = token
         self.save()
+
+    def borrowed_implements(self):
+        return self.reservation_set.all()
