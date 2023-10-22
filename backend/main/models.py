@@ -44,7 +44,7 @@ class Reservation(models.Model):
     )
 
     STATUS_CHOICES = (
-        ('AVAILABLE', 'Disponible')
+        ('AVAILABLE', 'Disponible'),
         ('RESERVED', 'Reservado'),
         ('BORROWED', 'Prestado'),
         ('RETURNED', 'Devuelto'),
