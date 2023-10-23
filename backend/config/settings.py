@@ -153,6 +153,23 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
+if ENVIRONMENT != 'local':
+    STORAGE_BUCKET_NAME = config('STORAGE_BUCKET_NAME')
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.gcloud.GoogleCloudStorage",
+            "OPTIONS": {
+                "bucket_name": STORAGE_BUCKET_NAME,
+                "file_overwrite": False,
+                "querystring_auth": False,
+            },
+        },
+    }
+    MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(STORAGE_BUCKET_NAME)
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+    MEDIA_URL = '/media/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -175,3 +192,4 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
