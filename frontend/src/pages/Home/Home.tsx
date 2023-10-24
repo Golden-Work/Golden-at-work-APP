@@ -191,11 +191,11 @@ function Home() {
       </header>
 
       <main>
-        <div className={classes.itemsContainer}>
+        <div className={classes.itemsContainer} style={{margin:50 }}>
           <Box
             sx={{
               display: "flex",
-              overflow: "hidden",
+              padding: 2,
               width: "100%",
             }}
           >

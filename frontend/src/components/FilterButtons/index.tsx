@@ -1,16 +1,12 @@
-import * as React from "react"
-import { styled } from "@mui/material/styles"
-import Chip from "@mui/material/Chip"
-import { Box } from "@mui/material"
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Chip from "@mui/material/Chip";
+import { Box } from "@mui/material";
 
 interface ChipData {
-  key: number
-  label: string
+  key: number;
+  label: string;
 }
-
-const ListItem = styled("li")(({ theme }) => ({
-  margin: theme.spacing(0.5),
-}))
 
 export default function FilterButtons() {
   const [chipData, setChipData] = React.useState<readonly ChipData[]>([
@@ -19,13 +15,23 @@ export default function FilterButtons() {
     { key: 2, label: "Polymer" },
     { key: 3, label: "React" },
     { key: 4, label: "Vue.js" },
-  ])
+  ]);
 
   const handleDelete = (chipToDelete: ChipData) => () => {
     setChipData((chips) =>
       chips.filter((chip) => chip.key !== chipToDelete.key)
-    )
-  }
+    );
+  };
+
+  const handleFilter = (chipToFilter: ChipData) => () => {
+    const filteredItem = chipData.find((item) => item.key === chipToFilter.key);
+    console.log(filteredItem);
+  };
+  
+
+  const ListItem = styled("li")(({ theme }) => ({
+    margin: theme.spacing(0.5),
+  }));
 
   return (
     <Box
@@ -41,7 +47,7 @@ export default function FilterButtons() {
       component="ul"
     >
       {chipData.map((data) => {
-        let icon
+        let icon;
 
         return (
           <ListItem key={data.key}>
@@ -49,10 +55,11 @@ export default function FilterButtons() {
               icon={icon}
               label={data.label}
               onDelete={handleDelete(data)}
+              onClick={handleFilter(data)}
             />
           </ListItem>
-        )
+        );
       })}
     </Box>
-  )
+  );
 }
