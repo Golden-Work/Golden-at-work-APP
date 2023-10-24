@@ -1,40 +1,33 @@
-// Assets
-import logo from "@/assets/Imagenes/Logo-placejolder.png";
-import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png";
-import img2 from "@/assets/Imagenes/Scroll/Scroll-2.png";
-import img3 from "@/assets/Imagenes/Scroll/Scroll-3.png";
-import img4 from "@/assets/Imagenes/Scroll/Scroll-4.png";
-import img5 from "@/assets/Imagenes/Scroll/Scroll-5.png";
-import img6 from "@/assets/Imagenes/Scroll/Scroll-6.png";
+import logo from "@/assets/Imagenes/Logo-placejolder.png"
+import SearchBar from "../../components/SearchBar/SearchBar"
+import ItemCard from "../../components/ItemCard/ItemCard"
+import classes from "./Home.module.css"
+import Table, { ElementProps } from "@/components/Table/Table"
+import Cards from "@/components/Cards/Cards"
+import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png"
+import img2 from "@/assets/Imagenes/Scroll/Scroll-2.png"
+import img3 from "@/assets/Imagenes/Scroll/Scroll-3.png"
+import img4 from "@/assets/Imagenes/Scroll/Scroll-4.png"
+import img5 from "@/assets/Imagenes/Scroll/Scroll-5.png"
+import img6 from "@/assets/Imagenes/Scroll/Scroll-6.png"
+import Boton from "@/components/Boton/Boton"
+import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
+import { useState } from "react"
+import * as React from "react"
 
-// React and Components
-import React, { useState } from "react";
-import ItemList from '../../components/ItemCard/ItemList';
-import SearchBar from "../../components/SearchBar/SearchBar";
-import Table, { ElementProps } from "@/components/Table/Table";
-import Cards from "@/components/Cards/Cards";
-import Boton from "@/components/Boton/Boton";
-import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion";
-
-// Material-UI Components
-import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import Box from "@mui/material/Box"
+import Avatar from "@mui/material/Avatar"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
 import ListItemIcon from '@mui/material/ListItemIcon';
+import Logout from '@mui/icons-material/Logout';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import LanguageIcon from '@mui/icons-material/Language';
+import IconButton from "@mui/material/IconButton"
+import Tooltip from "@mui/material/Tooltip"
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-
-// Material-UI Icons
-import LogoutIcon from '@mui/icons-material/Logout';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import LanguageIcon from '@mui/icons-material/Language';
-
-// CSS Module
-import classes from "./Home.module.css";
 
 
 function Home() {
@@ -127,42 +120,6 @@ function Home() {
 
   const filtro = () => {}
 
-
-
-
-  const items= [
-    {
-      name: 'Parques',
-      img: img1,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
-    },
-    {
-      name: 'futbolito',
-      img: img2,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
-    },
-    {
-      name: 'Futbolito 2',
-      img: img3,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
-    },
-    {
-      name: "Mesa Ping-Pong",
-      img:img4,
-      description:"Lorem ipsum dolor  ",
-    },
-    {
-      name: "Cartas",
-      img:img5,
-      description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      name: "Ajedrez",
-      img:img6,
-      description:"Lorem ",
-    }
-  ];
-  
   return (
     <>
       <PopupConfirmarEliminacion
@@ -280,7 +237,7 @@ function Home() {
                   </MenuItem>
                   <MenuItem onClick={handleClose}>
                     <ListItemIcon>
-                      <LogoutIcon fontSize="small" />
+                      <Logout fontSize="small" />
                     </ListItemIcon>
                     Cerrar sesión
                   </MenuItem>
@@ -319,30 +276,53 @@ function Home() {
       </header>
 
       <main>
-      <div className={classes.itemsContainer} style={{ transform: 'translateX(40px)' }}>
-    <Box
-      sx={{
-        display: 'flex', 
-        overflow: 'hidden',
-        width: '100%',
-        transform: 'translateX(20px)'
-      }}
-    >
-      <ItemList items={items} />
-    </Box>
-  </div>
-  <div className={classes.contenedorDeParteBaja}>
-    <div className={classes.contenedorTabla}>
-      <Table data={data} />
-    </div>
+        <div className={classes.itemsContainer}>
+          <ItemCard
+            name="mesa"
+            img={img1}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          />
 
-    <div className={classes.news}>
-      <Cards />
-    </div>
-  </div>
-</main>
+          <ItemCard
+            name="Raqueta"
+            img={img2}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          />
 
+          <ItemCard
+            name="Ajedrez"
+            img={img3}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          />
 
+          <ItemCard
+            name="futbolito"
+            img={img4}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          />
+
+          <ItemCard
+            name="Parques"
+            img={img5}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          />
+
+          <ItemCard
+            name="Pelota"
+            img={img6}
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+          />
+        </div>
+        <div className={classes.contenedorDeParteBaja}>
+          <div className={classes.contenedorTabla}>
+            <Table data={data} />
+          </div>
+
+          <div className={classes.news}>
+            <Cards />
+          </div>
+        </div>
+      </main>
     </>
   )
 }

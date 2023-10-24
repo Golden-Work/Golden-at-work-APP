@@ -11,16 +11,17 @@
   padding: 15px 10px;
   box-shadow: 0 0 30px rgba(148, 0, 255, 0.5);
   color: #e4f1ff;
+  
 }
 .img {
-  width: 20vw;
+  width: 17vw;
   height: auto;
 }
 .name {
   text-align: center;
   font-family: "Inter", sans-serif;
   font-weight: bold;
-  font-size: 2.3em;
+  font-size: 1.7em;
   text-shadow: -1px 0 violet, 0 1px violet, 1px 0 violet, 0 -1px violet;
 }
 .text {
