@@ -17,7 +17,7 @@ class Implement(models.Model):
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='implements/', blank=True)
-
+    quantity = models.PositiveIntegerField(default=1)
     def __str__(self):
         return self.name
 
