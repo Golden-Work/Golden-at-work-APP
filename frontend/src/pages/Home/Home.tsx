@@ -191,16 +191,12 @@ function Home() {
       </header>
 
       <main>
-        <div
-          className={classes.itemsContainer}
-          style={{ transform: "translateX(40px)" }}
-        >
+        <div className={classes.itemsContainer}>
           <Box
             sx={{
               display: "flex",
               overflow: "hidden",
               width: "100%",
-              transform: "translateX(20px)",
             }}
           >
             <ItemList items={items} />
