@@ -20,12 +20,22 @@ const Authmiddleware = ({
     if (requiresAuth && !localStorage.getItem("access")) {
       return navigate("/login")
     }
+  }, [requiresAuth])
 
-    // special case for login page
+  useEffect(() => {
     if (pathname === "/login" && localStorage.getItem("access")) {
-      return navigate("/")
+      const user: JwtPayload & { is_staff: boolean } = jwtDecode(
+        localStorage.getItem("access")!
+      )
+      if (user.is_staff) {
+        return navigate("/admin")
+      } else {
+        return navigate("/")
+      }
     }
+  }, [pathname])
 
+  useEffect(() => {
     if (!requiresAuth) return
     const user: JwtPayload & { is_staff: boolean } = jwtDecode(
       localStorage.getItem("access")!
@@ -33,11 +43,18 @@ const Authmiddleware = ({
     if (isAdminRoute && !user.is_staff) {
       return navigate("/")
     }
+  }, [requiresAuth, isAdminRoute])
 
-    if (!isAdminRoute && requiresAuth && user.is_staff) {
-      return navigate("/admin")
+  useEffect(() => {
+    if (!isAdminRoute && requiresAuth) {
+      const user: JwtPayload & { is_staff: boolean } = jwtDecode(
+        localStorage.getItem("access")!
+      )
+      if (user.is_staff) {
+        return navigate("/admin")
+      }
     }
-  }, [requiresAuth])
+  }, [requiresAuth, isAdminRoute])
 
   return children
 }
