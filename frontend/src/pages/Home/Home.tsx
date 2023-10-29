@@ -1,6 +1,5 @@
 // Assets
-import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png"
-import img2 from "@/assets/Imagenes/Scroll/Scroll-2.png"
+
 import img3 from "@/assets/Imagenes/Scroll/Scroll-3.png"
 import img4 from "@/assets/Imagenes/Scroll/Scroll-4.png"
 import img5 from "@/assets/Imagenes/Scroll/Scroll-5.png"
@@ -74,7 +73,7 @@ function Home() {
     {
       id: 3,
       name: "Pelota 2",
-      img: img11,
+      img: img4,
       status: "reserved",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
