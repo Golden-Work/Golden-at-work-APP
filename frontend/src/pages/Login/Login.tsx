@@ -1,40 +1,22 @@
 import classes from "./Login.module.css"
-import { useNavigate, Link } from "react-router-dom"
-import { useState } from "react"
+import { Link } from "react-router-dom"
 import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin"
 import TextField from "@mui/material/TextField"
 import { Paper, Typography } from "@mui/material"
 import LoadingButton from "@mui/lab/LoadingButton"
-import api from "@/api"
+import useLogin from "@/hooks/useLogin"
 
 function Login() {
-  const navigate = useNavigate()
-  const [showMyModal, setShowMyModal] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const handleOnClose = () => setShowMyModal(false)
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleLogin = async () => {
-    setIsLoading(true)
-    try {
-      const response = await api.post(`auth/login`, {
-        email,
-        password,
-      })
-      if (response.status === 200) {
-        localStorage.setItem("access", response.data.access)
-        localStorage.setItem("refresh", response.data.refresh)
-        api.defaults.headers.common["Authorization"] =
-          "Bearer " + response.data.access
-        navigate("/")
-      }
-    } catch (error) {
-      setShowMyModal(true)
-    }
-    setIsLoading(false)
-  }
-
+  const {
+    handleLogin,
+    handleOnClose,
+    showMyModal,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    isLoading,
+  } = useLogin()
   return (
     <section className={classes.container}>
       <PopupErrorLogin onClose={handleOnClose} visible={showMyModal} />

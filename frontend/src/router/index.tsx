@@ -5,6 +5,7 @@ import Register from "@/pages/Register/Register"
 import ResetPassword from "@/pages/ResetPassword/ResetPassword"
 import { createBrowserRouter } from "react-router-dom"
 import Authmiddleware from "./AuthMiddleware"
+import AdminHome from "@/pages/AdminHome/AdminHome"
 
 const authRoutes = [
   {
@@ -32,6 +33,13 @@ const routes = [
   },
 ]
 
+const adminRoutes = [
+  {
+    path: "/admin",
+    component: AdminHome,
+  },
+]
+
 const router = createBrowserRouter([
   ...authRoutes.map((r) => {
     return {
@@ -46,6 +54,16 @@ const router = createBrowserRouter([
       path: r.path,
       element: (
         <Authmiddleware requiresAuth={true}>{<r.component />}</Authmiddleware>
+      ),
+    }
+  }),
+  ...adminRoutes.map((r) => {
+    return {
+      path: r.path,
+      element: (
+        <Authmiddleware requiresAuth={true} isAdminRoute={true}>
+          {<r.component />}
+        </Authmiddleware>
       ),
     }
   }),

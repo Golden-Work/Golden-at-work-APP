@@ -1,5 +1,5 @@
 from rest_framework import generics
-from .models import Major, Implement, Reservation, ReservationImplement
+from .models import Major, Implement, Reservation
 from .serializers import MajorSerializer, ImplementSerializer, ReservationSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -75,11 +75,9 @@ class ReservationsAPIView(APIView):
                     for j in range(0, 10):
                         start_date = monday + datetime.timedelta(days=i, hours=j)
                         end_date = start_date + datetime.timedelta(hours=1)
-                        reservation_implement = ReservationImplement.objects.create(
-                            implement=implement
-                        )
+                        
                         reservation = Reservation(
-                            implement=reservation_implement,
+                            implement=implement,
                             start_date=start_date,
                             end_date=end_date
                         )

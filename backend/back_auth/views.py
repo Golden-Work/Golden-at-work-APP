@@ -1,12 +1,13 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import UserSerializer
+from .serializers import UserSerializer, MyTokenObtainPairSerializer
 from .models import User
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from django.core.mail import send_mail
 from django.conf import settings
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 @api_view(['POST'])
@@ -120,3 +121,10 @@ def password_reset_confirm(request, token):
     user.save()
 
     return Response(status=status.HTTP_200_OK)
+    
+class MyTokenObtainPairView(TokenObtainPairView):
+    """
+    Makes JWT deliver the custom attributes
+    """
+
+    serializer_class = MyTokenObtainPairSerializer
