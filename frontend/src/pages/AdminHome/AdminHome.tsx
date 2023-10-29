@@ -2,8 +2,6 @@ import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png"
 // React and Components
 import React from "react"
 import Table, { ElementProps } from "@/components/Table/Table"
-import Cards from "@/components/Cards/Cards"
-
 
 // Material-UI Components
 import Box from "@mui/material/Box"
@@ -19,6 +17,7 @@ import Tooltip from "@mui/material/Tooltip"
 import classes from "./Admin.module.css"
 import { Logout, Search } from "@mui/icons-material"
 import FilterButtons from "@/components/FilterButtons"
+import Boton from "@/components/Boton/Boton"
 
 function AdminHome() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -26,6 +25,15 @@ function AdminHome() {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
+  const handleHistory = () => {
+
+  };
+  const handleAdd= () => {
+
+  };
+  const handleEliminate = () => {
+
+  };
 
   const closeMenu = () => {
     setAnchorEl(null)
@@ -99,6 +107,22 @@ function AdminHome() {
             <input className={classes.input} type="text" placeholder="Buscar" />
           </div>
 
+          <Boton
+          texto="Historial"
+          esDeRedireccionamiento={true}
+          manejarClick={handleHistory}
+          />
+          <Boton
+          texto="Añadir"
+          esDeRedireccionamiento={true}
+          manejarClick={handleAdd}
+          />
+          <Boton
+          texto="Eliminar"
+          esDeRedireccionamiento={true}
+          manejarClick={handleEliminate}
+          />
+
           <Box sx={{ position: "absolute", right: 0 }}>
             <Tooltip title="Configuración de sesión">
               <IconButton
@@ -144,17 +168,11 @@ function AdminHome() {
       </header>
 
       <main>
-        <div className={classes.itemsContainer} style={{margin:50 }}>
-          
-        </div>
+        
         <div className={classes.contenedorDeParteBaja}>
           <div className={classes.contenedorTabla}>
             <Table data={data} />
-          </div>
-
-          <div className={classes.news}>
-            <Cards />
-          </div>
+          </div>          
         </div>
       </main>
     </>

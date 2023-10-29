@@ -84,6 +84,8 @@
     width: 100%;
     display: flex;
     gap: 5%;
+    align-items: center;
+    justify-content: center;
   }
   
   .contenedor-tabla {
