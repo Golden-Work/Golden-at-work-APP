@@ -3,16 +3,14 @@ import { Box, IconButton } from "@mui/material"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import ItemCard from "./ItemCard"
+import { ElementProps } from "@/components/Table/Table"
 
-interface Item {
-  name: string
-  img: string
-  description: string
-}
+
 
 interface ItemListProps {
-  items: Item[]
+  items: ElementProps[]
 }
+
 
 const ItemList: React.FC<ItemListProps> = ({ items }) => {
   const containerRef = useRef<HTMLElement | null>(null)
@@ -62,12 +60,13 @@ const ItemList: React.FC<ItemListProps> = ({ items }) => {
         }}
         ref={containerRef}
       >
-        {items.map((item, index) => (
+        {items.map((item) => (
           <ItemCard
-            key={index}
+            key={item.id}
             name={item.name}
             img={item.img}
             description={item.description}
+            status={item.status}
           />
         ))}
       </Box>

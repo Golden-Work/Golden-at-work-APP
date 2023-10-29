@@ -5,6 +5,7 @@ export interface ElementProps {
   id: number
   name: string
   status: "free" | "not-available" | "reserved"
+  img: string
   description: string
 }
 

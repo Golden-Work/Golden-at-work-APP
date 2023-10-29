@@ -30,3 +30,25 @@
   font-weight: Thin;
   font-size: 1em;
 }
+.status {
+  font-family: "Inter", sans-serif;
+  margin-top: -46px;
+  font-size: 1.1em;
+  background-color: transparent;
+  text-align: left;
+  width: max-content;
+  height: 1px;
+
+}
+.status.free {
+
+  color: #006b21;
+}
+
+.status.not-available {
+  color: #e2c210;
+}
+
+.status.reserved {
+  color: #b30021;
+}
