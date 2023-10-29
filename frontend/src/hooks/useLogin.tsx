@@ -1,6 +1,7 @@
 import { useState } from "react"
 import api from "@/api"
 import { useNavigate } from "react-router-dom"
+import { JwtPayload, jwtDecode } from "jwt-decode"
 
 const useLogin = () => {
   const [email, setEmail] = useState("")
@@ -22,7 +23,14 @@ const useLogin = () => {
         localStorage.setItem("refresh", response.data.refresh)
         api.defaults.headers.common["Authorization"] =
           "Bearer " + response.data.access
-        navigate("/")
+        const user: JwtPayload & { is_staff: boolean } = jwtDecode(
+          response.data.access
+        )
+        if (user.is_staff) {
+          navigate("/admin")
+        } else {
+          navigate("/")
+        }
       }
     } catch (error) {
       setShowMyModal(true)

@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router"
-import { jwtDecode } from "jwt-decode"
+import { JwtPayload, jwtDecode } from "jwt-decode"
 
 interface AuthmiddlewareProps {
   requiresAuth: boolean
@@ -8,7 +8,11 @@ interface AuthmiddlewareProps {
   isAdminRoute?: boolean
 }
 
-const Authmiddleware = ({ children, requiresAuth }: AuthmiddlewareProps) => {
+const Authmiddleware = ({
+  children,
+  requiresAuth,
+  isAdminRoute,
+}: AuthmiddlewareProps) => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -23,8 +27,16 @@ const Authmiddleware = ({ children, requiresAuth }: AuthmiddlewareProps) => {
     }
 
     if (!requiresAuth) return
-    const user = jwtDecode(localStorage.getItem("access")!)
-    console.log(user)
+    const user: JwtPayload & { is_staff: boolean } = jwtDecode(
+      localStorage.getItem("access")!
+    )
+    if (isAdminRoute && !user.is_staff) {
+      return navigate("/")
+    }
+
+    if (!isAdminRoute && requiresAuth && user.is_staff) {
+      return navigate("/admin")
+    }
   }, [requiresAuth])
 
   return children
