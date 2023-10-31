@@ -8,6 +8,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from django.utils import timezone
 import datetime
+from django.core.mail import send_mail
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 class ReadOnly(BasePermission):
     def has_permission(self, request, view):
@@ -91,12 +95,39 @@ def reserve(request):
     user = request.user
     reservation_id = request.data['reservation_id']
     reservation = Reservation.objects.get(id=reservation_id)
-    
+
     if reservation.status != 'AVAILABLE':
         return Response({'message': 'El implemento ya no está disponible'}, status=status.HTTP_400_BAD_REQUEST)
     
     reservation.borrowed_by = user
     reservation.status = 'RESERVED'
+    reservation.generate_cancel_token()
+    reservation.save()
+    serializer = ReservationSerializer(reservation)
+    subject = 'Tu implemento ha sido reservado'
+    cancel_url = f'{settings.FRONTEND_URL}/reservation/{reservation_id}/cancel/?token={reservation.cancel_token}'
+    html_message = render_to_string('reservation-email.html', {'reservation': reservation, 'user': user, 'cancel_url': cancel_url})
+    plain_message = strip_tags(html_message)
+    from_email = settings.EMAIL_HOST_USER
+    to_email = [user.email]
+
+    # send email to user
+    send_mail(subject, plain_message, from_email, to_email, html_message=html_message)
+
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+def cancel(request, pk):
+    token = request.data['token']
+    reservation = Reservation.objects.get(pk=pk)
+    if str(reservation.cancel_token) != token:
+        return Response({'message': 'Token inválido'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if reservation.status != 'RESERVED':
+        return Response({'message': 'El implemento no está reservado'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    reservation.borrowed_by = None
+    reservation.status = 'AVAILABLE'
     reservation.save()
     serializer = ReservationSerializer(reservation)
     return Response(serializer.data, status=status.HTTP_200_OK)

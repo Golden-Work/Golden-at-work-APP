@@ -1,7 +1,6 @@
 from back_auth.models import User
 from django.db import models
-
-
+from uuid import uuid4
 # Create your models here.
 
 
@@ -29,6 +28,7 @@ class Reservation(models.Model):
     end_date = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     return_state_description = models.TextField(blank=True)
+    cancel_token = models.UUIDField(null=True, blank=True)
 
     RETURN_LABELS = (
         ('DAMAGED', 'Dañado'),
@@ -53,6 +53,11 @@ class Reservation(models.Model):
         choices=STATUS_CHOICES,
         default='AVAILABLE'
     )
+
+    def generate_cancel_token(self):
+        token = uuid4()
+        self.cancel_token = token
+        self.save()
 
     def __str__(self):
         return f"{self.implement.name} - {self.borrowed_by.get_username if self.borrowed_by else 'N/A'}"
