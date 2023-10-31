@@ -45,7 +45,7 @@ class ReservationsAPIView(APIView):
         Get week reservations (monday to friday)
         """
         # filter reservations by the current week (having in mind that this endpoint is called any day of the week) and with a status of AVAILABLE
-        reservations = Reservation.objects.filter(start_date__week=timezone.now().isocalendar()[1], status='AVAILABLE')
+        reservations = Reservation.objects.filter(start_date__week=timezone.now().isocalendar()[1], status='AVAILABLE').select_related('implement')
 
         serializer = ReservationSerializer(reservations, many=True)
         
@@ -68,28 +68,39 @@ class ReservationsAPIView(APIView):
         # set the initial time to monday 8:00 am (UTC-5)
         monday = monday.replace(hour=13, minute=0, second=0, microsecond=0)
         for implement in implements:
-            for _ in range(implement.quantity):
             # for every day of the week
-                for i in range(5):
-                    # for every hour of the day (from 8:00 to 18:00)
-                    for j in range(0, 10):
-                        start_date = monday + datetime.timedelta(days=i, hours=j)
-                        end_date = start_date + datetime.timedelta(hours=1)
-                        
-                        reservation = Reservation(
-                            implement=implement,
-                            start_date=start_date,
-                            end_date=end_date
-                        )
-                        reservations.append(reservation)
+            for i in range(5):
+                # for every hour of the day (from 8:00 to 18:00)
+                for j in range(0, 10):
+                    start_date = monday + datetime.timedelta(days=i, hours=j)
+                    end_date = start_date + datetime.timedelta(hours=1)
+                    
+                    reservation = Reservation(
+                        implement=implement,
+                        start_date=start_date,
+                        end_date=end_date
+                    )
+                    reservations.append(reservation)
         Reservation.objects.bulk_create(reservations)
         return Response(status=status.HTTP_201_CREATED)
     
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def reserve(request):
     user = request.user
+    reservation_id = request.data['reservation_id']
+    reservation = Reservation.objects.get(id=reservation_id)
+    
+    if reservation.status != 'AVAILABLE':
+        return Response({'message': 'El implemento ya no está disponible'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    reservation.borrowed_by = user
+    reservation.status = 'RESERVED'
+    reservation.save()
+    serializer = ReservationSerializer(reservation)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 
     
