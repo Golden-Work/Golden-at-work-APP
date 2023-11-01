@@ -6,6 +6,7 @@ import ResetPassword from "@/pages/ResetPassword/ResetPassword"
 import { createBrowserRouter } from "react-router-dom"
 import Authmiddleware from "./AuthMiddleware"
 import AdminHome from "@/pages/AdminHome/AdminHome"
+import AdminAdd from "@/pages/AdminHome/AdminAdd"
 import CancelReservation from "@/pages/CancelReservation"
 
 const authRoutes = [
@@ -42,6 +43,10 @@ const adminRoutes = [
   {
     path: "/admin",
     component: AdminHome,
+  },
+  {
+    path:"/adminAdd",
+    component: AdminAdd,
   },
 ]
 

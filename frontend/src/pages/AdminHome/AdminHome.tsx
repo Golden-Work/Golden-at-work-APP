@@ -2,6 +2,7 @@ import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png"
 // React and Components
 import React from "react"
 import Table, { ElementProps } from "@/components/Table/Table"
+import { useNavigate } from "react-router"
 
 // Material-UI Components
 import Box from "@mui/material/Box"
@@ -12,7 +13,6 @@ import ListItemIcon from "@mui/material/ListItemIcon"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
 
-
 // CSS Module
 import classes from "./Admin.module.css"
 import { Logout, Search } from "@mui/icons-material"
@@ -20,6 +20,7 @@ import FilterButtons from "@/components/FilterButtons"
 import Boton from "@/components/Boton/Boton"
 
 function AdminHome() {
+  const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -29,7 +30,7 @@ function AdminHome() {
 
   };
   const handleAdd= () => {
-
+    navigate("/adminAdd")
   };
   const handleEliminate = () => {
 

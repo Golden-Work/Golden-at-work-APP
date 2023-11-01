@@ -118,4 +118,11 @@
   body {
     background-color: #c8e4ff;
   }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+  }
   
