@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 import classes from "./SearchBar.module.css"
 
 interface SearchBarProps {
@@ -7,6 +8,14 @@ interface SearchBarProps {
 
 function SearchBar({ textoDefault }: SearchBarProps) {
   const [texto, setTexto] = useState(textoDefault)
+  const [implementNames, setImplementNames] = useState<string[]>([])
+
+  useEffect (() =>{
+    axios.get('/implement-names/')
+      .then( responce =>{
+        setImplementNames(responce.data)
+      })
+  }, [])
 
   const manejarCambio = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTexto(event.target.value)
@@ -32,6 +41,11 @@ function SearchBar({ textoDefault }: SearchBarProps) {
           <i className="fa fa-search" aria-hidden="true"></i>
         </button>
       </form>
+      <div>
+        {implementNames.filter(name => name.includes(texto)).map((name, index) => (
+          <p key={index}>{name}</p>
+        ))}
+      </div>
     </div>
   )
 }
