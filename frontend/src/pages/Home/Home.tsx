@@ -1,16 +1,6 @@
-// Assets
-
-import img3 from "@/assets/Imagenes/Scroll/Scroll-3.png"
-import img4 from "@/assets/Imagenes/Scroll/Scroll-4.png"
-import img5 from "@/assets/Imagenes/Scroll/Scroll-5.png"
-import img6 from "@/assets/Imagenes/Scroll/Scroll-6.png"
-import img11 from "@/assets/Imagenes/Scroll/Scroll-11.png"
-import img12 from "@/assets/Imagenes/Scroll/Scroll-12.png"
 // React and Components
 import React, { useState } from "react"
 import ItemList from "../../components/ItemCard/ItemList"
-import Table, { ElementProps } from "@/components/Table/Table"
-import Cards from "@/components/Cards/Cards"
 import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
 
 // Material-UI Components
@@ -52,59 +42,6 @@ function Home() {
 
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)
-
-  const data: ElementProps[] = [
-    {
-      id: 1,
-      name: "Pelota",
-      status: "reserved",
-      img: img11,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 2,
-      name: "Freesbie",
-      status: "free",
-      img: img12,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 3,
-      name: "Pelota 2",
-      img: img4,
-      status: "reserved",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 4,
-      name: "Ajedrez",
-      img: img6,
-      status: "reserved",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 5,
-      name: "UNO",
-      img: img5,
-      status: "free",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 6,
-      name: "Parques",
-      img: img3,
-      status: "free",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-  ]
-
-  
 
   return (
     <>
@@ -169,7 +106,7 @@ function Home() {
       </header>
 
       <main>
-        <div className={classes.itemsContainer} style={{margin:50 }}>
+        <div className={classes.itemsContainer} style={{ margin: 50 }}>
           <Box
             sx={{
               display: "flex",
@@ -177,17 +114,8 @@ function Home() {
               width: "100%",
             }}
           >
-            <ItemList items={data} />
+            <ItemList />
           </Box>
-        </div>
-        <div className={classes.contenedorDeParteBaja}>
-          <div className={classes.contenedorTabla}>
-            <Table data={data} />
-          </div>
-
-          <div className={classes.news}>
-            <Cards />
-          </div>
         </div>
       </main>
     </>
