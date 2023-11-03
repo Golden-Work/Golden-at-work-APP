@@ -49,7 +49,7 @@ class Reservation(models.Model):
         ('RETURNED', 'Devuelto'),
     )
     status = models.CharField(
-        max_length=20,
+        max_length=20, 
         choices=STATUS_CHOICES,
         default='AVAILABLE'
     )

@@ -8,6 +8,7 @@ import Authmiddleware from "./AuthMiddleware"
 import AdminHome from "@/pages/AdminHome/AdminHome"
 import AdminAdd from "@/pages/AdminHome/AdminAdd"
 import CancelReservation from "@/pages/CancelReservation"
+import Reserve from "@/pages/Reserve"
 
 const authRoutes = [
   {
@@ -25,6 +26,10 @@ const authRoutes = [
   {
     path: "/reservation/:id/cancel",
     component: CancelReservation,
+  },
+  {
+    path: "/reserve/:id",
+    component: Reserve,
   },
 ]
 
@@ -45,7 +50,7 @@ const adminRoutes = [
     component: AdminHome,
   },
   {
-    path:"/adminAdd",
+    path: "/adminAdd",
     component: AdminAdd,
   },
 ]
