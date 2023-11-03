@@ -1,30 +1,62 @@
-import classes from "./ItemCard.module.css";
-import classNames from "classnames"
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Chip,
+  Typography,
+} from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 interface ItemCardProps {
-  name: string;
-  description: string;
-  img: string;
-  status: "free" | "not-available" | "reserved";
+  id: number
+  description: string
+  img: string
+  quantity: number
+  name: string
 }
 
-function ItemCard({ img, description, name, status }: ItemCardProps) {
-  const statusClass = classNames({
-    [classes.status]: true,
-    [classes.free]: status === "free",
-    [classes.notAvailable]: status === "not-available",
-    [classes.reserved]: status === "reserved",
-  })
+function ItemCard({ img, description, quantity, name, id }: ItemCardProps) {
+  const navigate = useNavigate()
+
   return (
-    <div className={classes.container}>
-      <img className={classes.img} src={img} alt="img" />
-      <div>
-        <p className={classes.name}>{name}</p>
-        <p className={classes.text}>{description}</p>
-        <p className={statusClass}>{status}</p>
-      </div>
-    </div>
-  );
+    <Card
+      sx={{
+        width: 400,
+        bgcolor: "#f4f4f4",
+        boxShadow: "none",
+      }}
+    >
+      <CardActionArea onClick={() => navigate(`/reserve/${id}`)}>
+        <CardMedia
+          component="img"
+          height="300"
+          width="500"
+          image={img}
+          alt={description}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {name}
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Some description about the item{description}
+          </Typography>
+          <Box display="flex" justifyContent="flex-end">
+            <Chip
+              color={
+                quantity > 30 ? "success" : quantity > 10 ? "warning" : "error"
+              }
+              label={
+                quantity === 0 ? "Agotado" : `Reservas disponibles: ${quantity}`
+              }
+            ></Chip>
+          </Box>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  )
 }
 
-export default ItemCard;
+export default ItemCard
