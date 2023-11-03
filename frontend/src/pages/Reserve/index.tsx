@@ -47,6 +47,8 @@ const Reserve = () => {
     )
   }, [selectedItem, reservations])
 
+  console.log(reservationsOfSelectedItem)
+
   return <div></div>
 }
 
