@@ -88,11 +88,6 @@ class ReservationsAPIView(APIView):
         Reservation.objects.bulk_create(reservations)
         return Response(status=status.HTTP_201_CREATED)
     
-class ImplementNamesView(APIView):
-    def get(self, request):
-        implements = Implement.objects.all()
-        implement_names = [implement.name for implement in implements]
-        return Response(implement_names)
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])

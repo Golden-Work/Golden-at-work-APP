@@ -1,36 +1,20 @@
-import { useState, useRef, useMemo } from "react"
+import React, { useState, useRef } from "react"
 import { Box, IconButton } from "@mui/material"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import ItemCard from "./ItemCard"
-import { useQuery } from "@tanstack/react-query"
-import getReservations from "@/api/getReservations"
-import { Implement } from "@/interfaces/implement.interface"
+import { ElementProps } from "@/components/Table/Table"
 
-const ItemList = () => {
+
+
+interface ItemListProps {
+  items: ElementProps[]
+}
+
+
+const ItemList: React.FC<ItemListProps> = ({ items }) => {
   const containerRef = useRef<HTMLElement | null>(null)
   const [scrollLeft, setScrollLeft] = useState(0)
-
-  const { data: reservations = [] } = useQuery({
-    queryKey: ["reservations"],
-    queryFn: getReservations,
-  })
-
-  const items = useMemo(() => {
-    // We want to group by item id and sum the quantity
-    const grouped = reservations.reduce((acc, reservation) => {
-      const { implement } = reservation
-      const existing = acc.find((r) => r.id === implement.id)
-      if (existing) {
-        existing.quantity += 1
-      } else {
-        acc.push({ ...implement, quantity: 1 })
-      }
-      return acc
-    }, [] as (Implement & { quantity: number })[])
-
-    return grouped
-  }, [reservations])
 
   const handleLeftIconClick = () => {
     if (containerRef.current) {
@@ -80,8 +64,9 @@ const ItemList = () => {
           <ItemCard
             key={item.id}
             name={item.name}
-            img={item.image}
+            img={item.img}
             description={item.description}
+            status={item.status}
           />
         ))}
       </Box>
