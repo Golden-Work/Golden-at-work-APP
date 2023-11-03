@@ -45,8 +45,8 @@ const ItemList = () => {
       cycleNavigation
       duration={700}
     >
-      {items.map((grouped) => (
-        <div style={{ display: "flex", justifyContent: "center" }}>
+      {items.map((grouped, index) => (
+        <div style={{ display: "flex", justifyContent: "center" }} key={index}>
           {grouped.map((item) => (
             <ItemCard
               key={item.id}
