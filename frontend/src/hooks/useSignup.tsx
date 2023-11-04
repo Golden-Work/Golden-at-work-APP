@@ -21,7 +21,7 @@ const useSignup = () => {
         toast.success("Usuario registrado")
         navigate("/login")
       } else {
-        toast.error("An error occurred, please try again later")
+        toast.error("Error al registrar usuario, por favor intentelo de nuevo más tarde")
       }
     } catch (error: any) {
       showErrors(error)
