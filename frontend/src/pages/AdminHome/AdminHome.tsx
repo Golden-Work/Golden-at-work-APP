@@ -207,12 +207,7 @@ function AdminHome() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={handleDownloadExcel}>
-             <ListItemIcon>
-             
-             </ListItemIcon>
-             Descargar Excel
-             </MenuItem>
+            
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Logout fontSize="small" />
