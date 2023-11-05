@@ -30,6 +30,28 @@ function AdminHome() {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
+
+/*
+function AdminHome() {
+  const navigate = useNavigate();
+  const [data, setData] = useState<ElementProps[]>([]);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Aquí debes reemplazar con la URL de tu API
+        const response = await axios.get('https://golden-back.sebitas.dev/api/');
+        setData(response.data); // Actualiza el estado con los datos de la API
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+*/
   const handleHistory = async () => {
     try {
       const implementsData = await getImplements();
@@ -185,7 +207,12 @@ function AdminHome() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            
+            <MenuItem onClick={handleDownloadExcel}>
+             <ListItemIcon>
+             
+             </ListItemIcon>
+             Descargar Excel
+             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Logout fontSize="small" />
