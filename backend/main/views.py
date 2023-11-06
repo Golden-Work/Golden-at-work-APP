@@ -49,7 +49,7 @@ class ReservationsAPIView(APIView):
         Get week reservations (monday to friday)
         """
         # filter reservations by the current week (having in mind that this endpoint is called any day of the week) and with a status of AVAILABLE
-        reservations = Reservation.objects.filter(start_date__week=timezone.now().isocalendar()[1], status='AVAILABLE').select_related('implement')
+        reservations = Reservation.objects.filter(start_date__week=timezone.now().isocalendar()[1]).select_related('implement')
 
         serializer = ReservationSerializer(reservations, many=True)
         

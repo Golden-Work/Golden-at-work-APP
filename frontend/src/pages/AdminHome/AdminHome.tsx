@@ -21,7 +21,7 @@ import classes from "./Admin.module.css"
 import { Logout, Search } from "@mui/icons-material"
 import FilterButtons from "@/components/FilterButtons"
 
-import getImplements from "@/api/getImplements"
+import getReservations from "@/api/getReservations"
 
 function AdminHome() {
   const navigate = useNavigate()
@@ -54,9 +54,9 @@ function AdminHome() {
 */
   const handleHistory = async () => {
     try {
-      const implementsData = await getImplements();
+      const implementsData = await getReservations();
       if (implementsData) {
-        const takedImplement = implementsData.filter(Implement => Implement.name === "Implement 1");
+        const takedImplement = implementsData;
         console.log(takedImplement);
       } else {
         console.error("Error fetching implements data");
