@@ -5,7 +5,15 @@ import { useParams } from "react-router-dom"
 import { useMemo, useState } from "react"
 import { DateCalendar } from "@mui/x-date-pickers"
 import dayjs from "dayjs"
-import { Box, BoxProps, Button, Grid, Typography, styled } from "@mui/material"
+import {
+  Box,
+  BoxProps,
+  Button,
+  CircularProgress,
+  Grid,
+  Typography,
+  styled,
+} from "@mui/material"
 import { AccessTime, Event } from "@mui/icons-material"
 import reserve from "@/api/reserve"
 import { LoadingButton } from "@mui/lab"
@@ -27,12 +35,13 @@ const StyledHourItem = styled(Box)<StyledHourItemProps>`
 const Reserve = () => {
   const queryClient = useQueryClient()
 
-  const { data: reservations = [] } = useQuery({
-    queryKey: ["reservations"],
-    queryFn: getReservations,
-  })
+  const { data: reservations = [], isFetching: isFetchingReservations } =
+    useQuery({
+      queryKey: ["reservations"],
+      queryFn: getReservations,
+    })
 
-  const { data: items = [] } = useQuery({
+  const { data: items = [], isFetching: isFetchingImplements } = useQuery({
     queryKey: ["implements"],
     queryFn: getImplements,
   })
@@ -95,6 +104,21 @@ const Reserve = () => {
   })
 
   const [selectedReservation, setSelectedReservation] = useState(-1)
+
+  if (isFetchingReservations || isFetchingImplements) {
+    return (
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <CircularProgress size={100} />
+      </Box>
+    )
+  }
 
   return (
     <Box pt={5}>

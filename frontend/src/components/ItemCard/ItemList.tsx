@@ -4,9 +4,10 @@ import { useQuery } from "@tanstack/react-query"
 import getReservations from "@/api/getReservations"
 import { Implement } from "@/interfaces/implement.interface"
 import Carousel from "react-material-ui-carousel"
+import { Box, CircularProgress } from "@mui/material"
 
 const ItemList = () => {
-  const { data: reservations = [] } = useQuery({
+  const { data: reservations = [], isFetching } = useQuery({
     queryKey: ["reservations"],
     queryFn: getReservations,
   })
@@ -38,6 +39,21 @@ const ItemList = () => {
 
     return groupedBy3
   }, [reservations])
+
+  if (isFetching) {
+    return (
+      <Box
+        sx={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <CircularProgress size={100} />
+      </Box>
+    )
+  }
 
   return (
     <Carousel
