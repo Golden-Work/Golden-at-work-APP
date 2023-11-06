@@ -8,6 +8,7 @@ import dayjs from "dayjs"
 import { Box, BoxProps, Button, Grid, Typography, styled } from "@mui/material"
 import { AccessTime, Event } from "@mui/icons-material"
 import reserve from "@/api/reserve"
+import { LoadingButton } from "@mui/lab"
 
 interface StyledHourItemProps extends BoxProps {
   selected?: boolean
@@ -177,7 +178,8 @@ const Reserve = () => {
       </Grid>
 
       <Box display="flex" justifyContent="center">
-        <Button
+        <LoadingButton
+          loading={mutation.isPending}
           variant="contained"
           size="large"
           onClick={() => {
@@ -185,7 +187,7 @@ const Reserve = () => {
           }}
         >
           Reservar
-        </Button>
+        </LoadingButton>
       </Box>
     </Box>
   )
