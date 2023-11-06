@@ -5,15 +5,15 @@ import * as React from 'react';
 import { toast } from "react-toastify"
 import classes from "./Admin.module.css"
 import useAdd from "@/hooks/useAdd"
+import {Implement} from "@/interfaces/implement.interface"
 
 
 function AdminAdd(){
-    const[implemento,setImplemento]=useState({
-        id:"",
-        nombre:"",
-        descripcion:"",
-        creacion:"",
-        imagen:"",      
+    const[implemento,setImplemento]=useState<Implement>({
+        name:"",
+        description:"",
+        image:"",
+        created_at:"",              
     })
 
     const{addImplemento,isLoading}=useAdd()
@@ -28,19 +28,13 @@ function AdminAdd(){
 
     const handleAdd= async() =>{
         const errors=[]
-        if(!implemento.id){
-            errors.push("Por favor inserte el ID del implemento")
-        }
-        if(implemento.id<0){
-            errors.push("El ID del implemento debe ser positivo")
-        }
-        if(!implemento.nombre){
+        if(!implemento.name){
             errors.push("Por favor ingrese el nombre del implemento")
         }
-        if(!implemento.descripcion){
+        if(!implemento.description){
             errors.push("Por favor ingrese una descripción del implemento")
         }
-        if(!implemento.creacion){
+        if(!implemento.created_at){
             errors.push("Por favor ingrese la fecha de creación del implemento")
         }
         if (errors.length) {
@@ -57,20 +51,10 @@ function AdminAdd(){
                 </Typography>
                 <div>
                     <TextField
-                    label="ID"
-                    type="number"
-                    name="id"
-                    value={implemento.id}
-                    variant="standard"
-                    onChange={handleInputChange}
-                    fullWidth
-                    sx={{ mb: 1 }}
-                    />
-                    <TextField
                     label="Nombre"
                     type="text"
-                    name="nombre"
-                    value={implemento.nombre}
+                    name="name"
+                    value={implemento.name}
                     variant="standard"
                     onChange={handleInputChange}
                     fullWidth
@@ -79,8 +63,8 @@ function AdminAdd(){
                     <TextField
                     label="Descripcion"
                     type="text"
-                    name="descripcion"
-                    value={implemento.descripcion}
+                    name="description"
+                    value={implemento.description}
                     variant="standard"
                     onChange={handleInputChange}
                     fullWidth
@@ -89,8 +73,8 @@ function AdminAdd(){
                     <TextField
                     label="Fecha de creación"
                     type="date"
-                    name="creacion"
-                    value={implemento.creacion}
+                    name="created_at"
+                    value={implemento.created_at}
                     variant="standard"
                     onChange={handleInputChange}
                     fullWidth
