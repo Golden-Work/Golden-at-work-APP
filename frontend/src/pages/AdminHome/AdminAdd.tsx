@@ -8,10 +8,9 @@ import useAdd from "@/hooks/useAdd"
 import { Implement } from "@/interfaces/implement.interface"
 
 function AdminAdd() {
-  const [implemento, setImplemento] = useState<Implement>({
+  const [implemento, setImplemento] = useState<Partial<Implement>>({
     name: "",
     description: "",
-    image: null,
   })
 
   const { addImplemento, isLoading } = useAdd()
@@ -35,7 +34,7 @@ function AdminAdd() {
     if (errors.length) {
       return errors.forEach((error) => toast.error(error))
     }
-    return addImplemento(implemento)
+    return addImplemento(implemento as Implement)
   }
 
   return (

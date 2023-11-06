@@ -1,6 +1,7 @@
 export interface Implement {
+  id: number
   name: string
   description: string
-  image: string | null
+  image: string
   created_at?: string
 }
