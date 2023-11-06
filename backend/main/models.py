@@ -24,7 +24,7 @@ class Implement(models.Model):
 
 class Reservation(models.Model):
     implement = models.ForeignKey(Implement, on_delete=models.CASCADE)
-    borrowed_by_id = models.ForeignKey(
+    borrowed_by = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL)
     start_date = models.DateTimeField(null=True)
     end_date = models.DateTimeField(null=True)
