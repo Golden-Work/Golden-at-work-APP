@@ -1,7 +1,9 @@
 import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png"
 // React and Components
 import React from "react"
+import {useState} from "react"
 import Table, { ElementProps } from "@/components/Table/Table"
+import TableReservation, { ElementPropsReservation } from "@/components/Table/TableReservation"
 import { useNavigate } from "react-router"
 import { styled } from "@mui/material/styles";
 
@@ -22,6 +24,7 @@ import { Logout, Search } from "@mui/icons-material"
 import FilterButtons from "@/components/FilterButtons"
 
 import getReservations from "@/api/getReservations"
+import { Dialog, DialogTitle, DialogContent } from "@mui/material";
 
 function AdminHome() {
   const navigate = useNavigate()
@@ -52,24 +55,42 @@ function AdminHome() {
   }, []);
 
 */
+
+  const [openDialog, setOpenDialog] = useState(false);
+  const [implementsReservations, setimplementsReservations] = useState<ElementPropsReservation[]>([]); 
   const handleHistory = async () => {
     try {
       const implementsData = await getReservations();
-      if (implementsData) {
-        const takedImplement = implementsData;
-        console.log(takedImplement);
+      
+      if (implementsData && Array.isArray(implementsData) && implementsData.length > 0) {
+        const filteredImplements: ElementPropsReservation[] = implementsData.map(a => {
+          if (a.implement && a.status) {
+            return {
+              
+              return_state_description: a.return_state_description,
+              name: a.implement.name,
+              start_date: a.start_date,
+              return_label: a.return_label,
+
+            };
+          } else {
+            console.error("El objeto de implemento no tiene las propiedades esperadas:", a);
+            return null;
+          }
+        }).filter(item => item !== null) as ElementPropsReservation[];
+        setimplementsReservations(filteredImplements); 
+        
       } else {
-        console.error("Error fetching implements data");
+        console.error("No se encontraron datos de implementos");
       }
+      setOpenDialog(true);      
     } catch (error) {
-      console.error(error);
+      console.error("Error al obtener datos:", error);
     }
   };
-  
-  
-    
-    
-        
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };        
 
   const handleAdd= () => {
     navigate("/adminAdd")
@@ -175,7 +196,17 @@ function AdminHome() {
           <CustomButton onClick={handleHistory}>Historial</CustomButton>
           <CustomButton onClick={handleAdd}>Añadir</CustomButton>
           <CustomButton onClick={handleEliminate}>Eliminar</CustomButton>
-         
+          <Box>
+            <CustomButton onClick={handleHistory}>
+              Prestamos
+            </CustomButton>
+          </Box>
+          <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <DialogTitle>Implementos prestados</DialogTitle>
+              <DialogContent>
+                <TableReservation data ={implementsReservations} />
+                </DialogContent>
+          </Dialog>
 
           <Box sx={{ position: "absolute", right: 0 }}>
             <Tooltip title="Configuración de sesión">
@@ -222,26 +253,12 @@ function AdminHome() {
       </header>
 
       <main>
-        
-        <div className={classes.contenedorDeParteBaja}>
-
-      
-          <div className={classes.contenedorTabla}>
-            <Table data={data} />
-            <Box sx={{position: "absolute",   top: 0,  left: 0, }}>
-                
-                <CustomButton sx ={{position: "flex"}} onClick={handleHistory}>Prestamos</CustomButton>
-
-             
-            </Box>
-          </div>          
-          
-              
-          
-          
-          
-          
+          <div className={classes.contenedorDeParteBaja}>
+            <div className={classes.contenedorTabla} >
+              <Table data={data}></Table>          
+          </div>            
         </div>
+
       </main>
     </>
   )
