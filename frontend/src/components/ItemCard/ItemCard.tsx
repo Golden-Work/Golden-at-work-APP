@@ -40,8 +40,13 @@ function ItemCard({ img, description, quantity, name, id }: ItemCardProps) {
           <Typography gutterBottom variant="h5" component="div">
             {name}
           </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Some description about the item{description}
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            height={170}
+            pb={0}
+          >
+            {description}
           </Typography>
           <Box display="flex" justifyContent="flex-end">
             <Chip
