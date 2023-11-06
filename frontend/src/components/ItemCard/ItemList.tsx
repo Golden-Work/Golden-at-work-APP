@@ -13,16 +13,18 @@ const ItemList = () => {
 
   const items = useMemo(() => {
     // We want to group by item id and sum the quantity
-    const grouped = reservations.reduce((acc, reservation) => {
-      const { implement } = reservation
-      const existing = acc.find((r) => r.id === implement.id)
-      if (existing) {
-        existing.quantity += 1
-      } else {
-        acc.push({ ...implement, quantity: 1 })
-      }
-      return acc
-    }, [] as (Implement & { quantity: number })[])
+    const grouped = reservations
+      .filter((r) => r.status === "AVAILABLE")
+      .reduce((acc, reservation) => {
+        const { implement } = reservation
+        const existing = acc.find((r) => r.id === implement.id)
+        if (existing) {
+          existing.quantity += 1
+        } else {
+          acc.push({ ...implement, quantity: 1 })
+        }
+        return acc
+      }, [] as (Implement & { quantity: number })[])
 
     // Group by 3
     const groupedBy3 = grouped.reduce((acc, item, index) => {

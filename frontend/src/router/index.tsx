@@ -3,7 +3,6 @@ import Home from "@/pages/Home/Home"
 import Login from "@/pages/Login/Login"
 import Register from "@/pages/Register/Register"
 import ResetPassword from "@/pages/ResetPassword/ResetPassword"
-import Reservas from "@/pages/Reservas/Reservas"
 import { createBrowserRouter } from "react-router-dom"
 import Authmiddleware from "./AuthMiddleware"
 import AdminHome from "@/pages/AdminHome/AdminHome"
@@ -28,10 +27,6 @@ const authRoutes = [
     path: "/reservation/:id/cancel",
     component: CancelReservation,
   },
-  {
-    path: "/reserve/:id",
-    component: Reserve,
-  },
 ]
 
 const routes = [
@@ -44,8 +39,8 @@ const routes = [
     component: EdicionDeDatos,
   },
   {
-    path: "/reservas",
-    component: Reservas,
+    path: "/reserve/:id",
+    component: Reserve,
   },
 ]
 

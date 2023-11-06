@@ -1,20 +1,31 @@
 import getReservations from "@/api/getReservations"
 import getImplements from "@/api/getImplements"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useParams } from "react-router-dom"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
+import { DateCalendar } from "@mui/x-date-pickers"
+import dayjs from "dayjs"
+import { Box, BoxProps, Button, Grid, Typography, styled } from "@mui/material"
+import { AccessTime, Event } from "@mui/icons-material"
+import reserve from "@/api/reserve"
 
-// export interface Reservation {
-//   id: number
-//   start_date: string
-//   end_date: string
-//   implement: Implement
-//   status: string
-//   return_label: string
-//   return_state_description: string
-// }
+interface StyledHourItemProps extends BoxProps {
+  selected?: boolean
+}
+
+const StyledHourItem = styled(Box)<StyledHourItemProps>`
+  background-color: ${({ selected }) =>
+    selected ? "rgba(151, 6, 255, 0.1)" : "#fff"};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid rgba(151, 6, 255, 0.1);
+`
 
 const Reserve = () => {
+  const queryClient = useQueryClient()
+
   const { data: reservations = [] } = useQuery({
     queryKey: ["reservations"],
     queryFn: getReservations,
@@ -43,13 +54,141 @@ const Reserve = () => {
       return []
     }
     return reservations.filter(
-      (reservation) => reservation.implement.id === selectedItem.id
+      (reservation) =>
+        reservation.implement.id === selectedItem.id &&
+        reservation.status === "AVAILABLE"
     )
   }, [selectedItem, reservations])
 
-  console.log(reservationsOfSelectedItem)
+  const minDate = reservationsOfSelectedItem.reduce((acc, reservation) => {
+    const startDate = dayjs(reservation.start_date)
+    if (startDate.isBefore(acc)) {
+      return startDate
+    }
+    return acc
+  }, dayjs())
 
-  return <div></div>
+  const maxDate = reservationsOfSelectedItem.reduce((acc, reservation) => {
+    const endDate = dayjs(reservation.end_date)
+    if (endDate.isAfter(acc)) {
+      return endDate
+    }
+    return acc
+  }, dayjs())
+
+  const [selectedDate, setSelectedDate] = useState(dayjs())
+
+  const reservationsOfSelectedDate = useMemo(() => {
+    // Filter reservations by selected date (same day, not necessarily same hour)
+    return reservationsOfSelectedItem.filter((reservation) => {
+      const startDate = dayjs(reservation.start_date)
+      return startDate.isSame(selectedDate, "day")
+    })
+  }, [selectedDate, reservationsOfSelectedItem])
+
+  const mutation = useMutation({
+    mutationFn: reserve,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["reservations"] })
+    },
+  })
+
+  const [selectedReservation, setSelectedReservation] = useState(-1)
+
+  return (
+    <Box pt={5}>
+      <Typography
+        variant="h4"
+        sx={{ mb: 2 }}
+        textAlign="center"
+        fontWeight={600}
+      >
+        Reservar {selectedItem?.name}
+      </Typography>
+      <Box
+        sx={{
+          margin: "auto",
+          display: "flex",
+          justifyContent: "center",
+          maxWidth: 300,
+        }}
+      >
+        <img
+          src={selectedItem?.image}
+          alt={selectedItem?.name}
+          style={{ width: "100%" }}
+        />
+      </Box>
+      <Grid container px={10}>
+        <Grid item xs={12} md={6}>
+          <Box>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              gap={1}
+            >
+              <Event />
+              <Typography variant="h5" fontWeight={600} textAlign="center">
+                FECHA
+              </Typography>
+            </Box>
+            <DateCalendar
+              minDate={minDate}
+              maxDate={maxDate}
+              value={selectedDate}
+              onChange={(date) => setSelectedDate(date as dayjs.Dayjs)}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            gap={1}
+          >
+            <AccessTime />
+            <Typography variant="h5" fontWeight={600} textAlign="center">
+              HORA
+            </Typography>
+          </Box>
+
+          <Grid container spacing={1} mt={2}>
+            {reservationsOfSelectedDate.map((reservation) => (
+              <Grid item xs={4}>
+                <StyledHourItem
+                  selected={selectedReservation === reservation.id}
+                >
+                  <Button
+                    sx={{ width: "100%", p: 1.5 }}
+                    onClick={() => setSelectedReservation(reservation.id)}
+                  >
+                    <Typography key={reservation.id} pb={0} textAlign="center">
+                      {dayjs(reservation.start_date).format("HH:mm")} -{" "}
+                      {dayjs(reservation.end_date).format("HH:mm")}
+                    </Typography>
+                  </Button>
+                </StyledHourItem>
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Box display="flex" justifyContent="center">
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => {
+            mutation.mutate(selectedReservation)
+          }}
+        >
+          Reservar
+        </Button>
+      </Box>
+    </Box>
+  )
 }
 
 export default Reserve

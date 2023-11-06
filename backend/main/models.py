@@ -1,6 +1,8 @@
 from back_auth.models import User
 from django.db import models
 from uuid import uuid4
+from storages.backends.gcloud import GoogleCloudStorage
+from django.conf import settings
 # Create your models here.
 
 
