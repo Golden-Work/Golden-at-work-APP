@@ -28,6 +28,10 @@ import { Dialog, DialogTitle, DialogContent } from "@mui/material"
 
 import { useQuery } from "@tanstack/react-query"
 
+//Export module
+import ExcelJS from 'exceljs';
+
+
 
 function AdminHome() {
   const navigate = useNavigate()
@@ -144,7 +148,28 @@ function AdminHome() {
       cursor: 'pointer',
   },
   });
+  
 
+  const exportToExcel = async (data: ElementProps[], fileName: string) => {
+  
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('MainImplement');
+  
+    // Definir las columnas de la hoja de trabajo
+    worksheet.columns = [
+      { header: 'Id', key: 'id', width: 10 },
+      { header: 'Name', key: 'name', width: 32 },
+      { header: 'Description', key: 'description', width: 30 },
+      
+    ];
+  
+    data.forEach(item => {
+      worksheet.addRow(item);
+    });
+  
+    const buffer = await workbook.xlsx.writeBuffer();
+    saveAs(new Blob([buffer]), `${fileName}.xlsx`);
+  };
   
 
   return (
@@ -202,7 +227,8 @@ function AdminHome() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            
+           
+
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Logout fontSize="small" />
