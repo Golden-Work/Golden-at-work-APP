@@ -6,6 +6,7 @@ import Table, { ElementProps } from "@/components/Table/Table"
 import TableReservation, { ElementPropsReservation } from "@/components/Table/TableReservation"
 import { useNavigate } from "react-router"
 import { styled } from "@mui/material/styles";
+import api from "@/api"
 
 
 // Material-UI Components
@@ -57,8 +58,20 @@ function AdminHome() {
 */
 
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDialog1, setOpenDialog1] = useState(false);
   const [implementsReservations, setimplementsReservations] = useState<ElementPropsReservation[]>([]); 
-  const handleHistory = async () => {
+  const handleHistory = async () => {    
+    try {
+      const response = await api.get(`history`);
+      const historyData = response.data; // Debería mostrar estos datos en una tabla organizada similiar a handlePrestamo
+      setOpenDialog1(true)
+    } catch (error) {
+      console.error('Error al obtener el historial:', error);
+    }
+    
+  };
+
+  const handlePrestamo= async() =>{
     try {
       const implementsData = await getReservations();
       
@@ -87,9 +100,11 @@ function AdminHome() {
     } catch (error) {
       console.error("Error al obtener datos:", error);
     }
-  };
+  }
+
   const handleCloseDialog = () => {
     setOpenDialog(false);
+    setOpenDialog1(false);
   };        
 
   const handleAdd= () => {
@@ -194,10 +209,15 @@ function AdminHome() {
           </div>
 
           <CustomButton onClick={handleHistory}>Historial</CustomButton>
+          <Dialog open={openDialog1} onClose={handleCloseDialog}>
+            <DialogTitle>Historial de inventario</DialogTitle>
+              <DialogContent>
+                </DialogContent>
+          </Dialog>
           <CustomButton onClick={handleAdd}>Añadir</CustomButton>
           <CustomButton onClick={handleEliminate}>Eliminar</CustomButton>
           <Box>
-            <CustomButton onClick={handleHistory}>
+            <CustomButton onClick={handlePrestamo}>
               Prestamos
             </CustomButton>
           </Box>
