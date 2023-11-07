@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Major, Implement, Reservation
+from .models import Major, Implement, ImplementHistory, Reservation
 from django.utils import timezone
 from datetime import timedelta
 
@@ -38,6 +38,11 @@ class ImplementSerializer(serializers.ModelSerializer):
 
 
         return implement
+
+class ImplementHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model=ImplementHistory
+        fields = '__all__'
 
 class ReservationSerializer(serializers.ModelSerializer):
     implement = ImplementSerializer()
