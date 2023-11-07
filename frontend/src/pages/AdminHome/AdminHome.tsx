@@ -24,7 +24,10 @@ import { Logout, Search } from "@mui/icons-material"
 import FilterButtons from "@/components/FilterButtons"
 
 import getReservations from "@/api/getReservations"
-import { Dialog, DialogTitle, DialogContent } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent } from "@mui/material"
+
+import { useQuery } from "@tanstack/react-query"
+
 
 function AdminHome() {
   const navigate = useNavigate()
@@ -56,6 +59,25 @@ function AdminHome() {
 
 */
 
+
+
+  const { data: dataReservations = [] } = useQuery({
+    queryKey: ["reservations"],
+    queryFn: getReservations,
+  });
+  console.log(dataReservations)
+  const dataTable: ElementProps[] = dataReservations
+    .filter(a => a.implement && a.status)
+    .map(a => {
+      return {
+        id: a.implement?.id,
+        name: a.implement?.name,
+        status: a.status as "free" | "not-available" | "reserved",
+        image: a.implement?.image,
+        description: a.implement?.description,
+      };
+    });
+
   const [openDialog, setOpenDialog] = useState(false);
   const [implementsReservations, setimplementsReservations] = useState<ElementPropsReservation[]>([]); 
   const handleHistory = async () => {
@@ -63,26 +85,19 @@ function AdminHome() {
       const implementsData = await getReservations();
       
       if (implementsData && Array.isArray(implementsData) && implementsData.length > 0) {
-        const filteredImplements: ElementPropsReservation[] = implementsData.map(a => {
-          if (a.implement && a.status) {
-            return {
-              
-              return_state_description: a.return_state_description,
-              name: a.implement.name,
-              start_date: a.start_date,
-              return_label: a.return_label,
+        const filteredImplements: ElementPropsReservation[] = implementsData
+        .filter(a => a.implement && (a.status === "RESERVED" || a.status === "BORROWED"))
+        .map(a => {
+          return {
+            return_state_description: a.return_state_description,
+            name: a.implement.name,
+            start_date: a.start_date,
+            return_label: a.return_label,
+          };
+        });
 
-            };
-          } else {
-            console.error("El objeto de implemento no tiene las propiedades esperadas:", a);
-            return null;
-          }
-        }).filter(item => item !== null) as ElementPropsReservation[];
-        setimplementsReservations(filteredImplements); 
-        
-      } else {
-        console.error("No se encontraron datos de implementos");
-      }
+      setimplementsReservations(filteredImplements);
+      } 
       setOpenDialog(true);      
     } catch (error) {
       console.error("Error al obtener datos:", error);
@@ -129,57 +144,6 @@ function AdminHome() {
       cursor: 'pointer',
   },
   });
-
-  const data: ElementProps[] = [
-    {
-      id: 1,
-      name: "Pelota",
-      status: "reserved",
-      image: img1,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 2,
-      name: "Freesbie",
-      status: "free",
-      image: img1,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 3,
-      name: "Pelota 2",
-      image: img1,
-      status: "reserved",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 4,
-      name: "Ajedrez",
-      image: img1,
-      status: "reserved",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 5,
-      name: "UNO",
-      image: img1,
-      status: "free",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-    {
-      id: 6,
-      name: "Parques",
-      image: img1,
-      status: "free",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-    },
-  ]
 
   
 
@@ -255,7 +219,7 @@ function AdminHome() {
       <main>
           <div className={classes.contenedorDeParteBaja}>
             <div className={classes.contenedorTabla} >
-              <Table data={data}></Table>          
+              <Table data={dataTable}></Table>          
           </div>            
         </div>
 

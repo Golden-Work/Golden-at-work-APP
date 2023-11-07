@@ -2,13 +2,12 @@ import classes from "./Table.module.css"
 import classNames from "classnames"
 
 export interface ElementProps {
-  id: number
-  name: string
-  status: "free" | "not-available" | "reserved"
-  image: string
-  description: string
+  id?: number | undefined;
+  name?: string | undefined;
+  status?: "free" | "not-available" | "reserved" | undefined;
+  image?: string | undefined;
+  description?: string | undefined;
 }
-
 function TableElement({ id, name, status, description }: ElementProps) {
   const statusClass = classNames({
     [classes.status]: true,
