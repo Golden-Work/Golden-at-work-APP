@@ -3,7 +3,6 @@ from django.db import models
 from uuid import uuid4
 from storages.backends.gcloud import GoogleCloudStorage
 from django.conf import settings
-from datetime import datetime
 # Create your models here.
 
 
@@ -21,15 +20,6 @@ class Implement(models.Model):
     image = models.ImageField(upload_to='implements/', blank=True)
     def __str__(self):
         return self.name
-    
-class ImplementHistory(models.Model):
-    implement = models.ForeignKey(Implement, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    action = models.CharField(max_length=255)  # No se como hacer para que se configure y que sea "Añadir", "Eliminar" y "Editar" y que se muestre cuando se haga el respectivo cambio
-    timestamp = models.DateTimeField(default=datetime.now)
-
-    def __str__(self):
-        return f"{self.user.email} - {self.action} - {self.timestamp}"
 
 
 class Reservation(models.Model):

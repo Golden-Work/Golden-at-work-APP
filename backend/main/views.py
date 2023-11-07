@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Major, Implement, ImplementHistory, Reservation
-from .serializers import MajorSerializer, ImplementSerializer, ImplementHistorySerializer, ReservationSerializer
+from .models import Major, Implement, Reservation
+from .serializers import MajorSerializer, ImplementSerializer, ReservationSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser, BasePermission, SAFE_METHODS
@@ -39,20 +39,6 @@ class ImplementAPIView(generics.ListCreateAPIView):
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
     
-class ImplementHistoryAPIView(generics.ListAPIView):
-    queryset = ImplementHistory.objects.all()
-    serializer_class = ImplementHistorySerializer
-    permission_classes = [AllowAny]
-
-    def get_permissions(self):
-        """
-        Instantiates and returns the list of permissions that this view requires.
-        """
-        if self.request.method == 'GET':
-            permission_classes = [AllowAny]
-        else:
-            permission_classes = [IsAdminUser]
-        return [permission() for permission in permission_classes]
 
 class ReservationsAPIView(APIView):
     permission_classes = [IsAdminUser|ReadOnly]
