@@ -9,6 +9,7 @@ import AdminHome from "@/pages/AdminHome/AdminHome"
 import AdminAdd from "@/pages/AdminHome/AdminAdd"
 import CancelReservation from "@/pages/CancelReservation"
 import Reserve from "@/pages/Reserve"
+import editReserve from "@/pages/editReserve"
 
 const authRoutes = [
   {
@@ -41,6 +42,10 @@ const routes = [
   {
     path: "/reserve/:id",
     component: Reserve,
+  },
+  {
+    path: "/editReserve/:id",
+    component: editReserve,
   },
 ]
 

@@ -1,4 +1,3 @@
-import img1 from "@/assets/Imagenes/Scroll/Scroll-1.png"
 // React and Components
 import React from "react"
 import {useState} from "react"
@@ -6,7 +5,7 @@ import Table, { ElementProps } from "@/components/Table/Table"
 import TableReservation, { ElementPropsReservation } from "@/components/Table/TableReservation"
 import { useNavigate } from "react-router"
 import { styled } from "@mui/material/styles";
-
+import ItemListAdmin from "../../components/ItemCard/ItemListAdmin"
 
 // Material-UI Components
 import Box from "@mui/material/Box"
@@ -25,7 +24,6 @@ import FilterButtons from "@/components/FilterButtons"
 
 import getReservations from "@/api/getReservations"
 import { Dialog, DialogTitle, DialogContent } from "@mui/material"
-
 import { useQuery } from "@tanstack/react-query"
 
 //Export module
@@ -69,7 +67,7 @@ function AdminHome() {
     queryKey: ["reservations"],
     queryFn: getReservations,
   });
-  console.log(dataReservations)
+
   const dataTable: ElementProps[] = dataReservations
     .filter(a => a.implement && a.status)
     .map(a => {
@@ -84,7 +82,7 @@ function AdminHome() {
 
   const [openDialog, setOpenDialog] = useState(false);
   const [implementsReservations, setimplementsReservations] = useState<ElementPropsReservation[]>([]); 
-  const handleHistory = async () => {
+  const handleLends = async () => {
     try {
       const implementsData = await getReservations();
       
@@ -182,11 +180,11 @@ function AdminHome() {
             <input className={classes.input} type="text" placeholder="Buscar" />
           </div>
 
-          <CustomButton onClick={handleHistory}>Historial</CustomButton>
+          <CustomButton onClick={handleAdd}>Historial</CustomButton>
           <CustomButton onClick={handleAdd}>Añadir</CustomButton>
           <CustomButton onClick={handleEliminate}>Eliminar</CustomButton>
           <Box>
-            <CustomButton onClick={handleHistory}>
+            <CustomButton onClick={handleLends}>
               Prestamos
             </CustomButton>
           </Box>
@@ -241,15 +239,18 @@ function AdminHome() {
           <FilterButtons />
         </div>
       </header>
-
       <main>
-          <div className={classes.contenedorDeParteBaja}>
-            <div className={classes.contenedorTabla} >
-              <Table data={dataTable}></Table>          
-          </div>            
+        <div className={classes.contenedorDeParteBaja} style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ margin: 50, minWidth: '100%' }}>
+          <ItemListAdmin />
         </div>
 
+          <div className={classes.contenedorTabla}>
+            <Table data={dataTable} />
+          </div>
+        </div>
       </main>
+
     </>
   )
 }
