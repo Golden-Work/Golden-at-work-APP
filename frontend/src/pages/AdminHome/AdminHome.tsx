@@ -91,7 +91,7 @@ function AdminHome() {
         .filter(a => a.implement && (a.status === "RESERVED" || a.status === "BORROWED"))
         .map(a => {
           return {
-            return_state_description: a.return_state_description,
+            description: a.implement.description,
             name: a.implement.name,
             start_date: a.start_date,
             return_label: a.return_label,

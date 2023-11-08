@@ -1,16 +1,16 @@
 import classes from "./Table.module.css"
 
 export interface ElementPropsReservation {
-  return_state_description: string
+  description: string
   name: string
   start_date: string 
   return_label: string
 }
 
-function TableElement({ return_state_description, name, start_date, return_label }: ElementPropsReservation) {
+function TableElement({ description, name, start_date, return_label }: ElementPropsReservation) {
    return (
     <tr>
-      <td>{return_state_description}  </td>
+      <td>{description}  </td>
       <td>{name}             </td>
       <td>{start_date}      </td>
       <td>{return_label}    </td>
