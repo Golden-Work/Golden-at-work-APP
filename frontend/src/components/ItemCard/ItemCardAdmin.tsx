@@ -31,10 +31,16 @@ function ItemCard({ img, description, quantity, name, id }: ItemCardProps) {
       <CardActionArea onClick={() => navigate(`/editReserve/${id}`)}>
         <CardMedia
           component="img"
-          height="300"
-          width="500"
+          height="200"  
+          width="100%"  
+          style={{ objectFit: 'contain' }}  
           image={img}
           alt={description}
+          sx={{
+            maxWidth: '100%', 
+            maxHeight: 250,   
+            
+          }}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

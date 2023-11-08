@@ -57,12 +57,19 @@ const ItemListAdmin = () => {
 
   return (
     <Carousel
-      autoPlay={false}
-      swipe
-      animation="slide"
-      cycleNavigation
-      duration={700}
-    >
+    autoPlay={false}
+    swipe
+    animation="slide"
+    cycleNavigation
+    duration={700}
+    sx={{
+      width: "80%",
+      margin: "0 auto",
+      "& .Carousel-previousButton, & .Carousel-nextButton": {
+        zIndex: 1,
+      },
+    }}
+  >
       {items.map((grouped, index) => (
         <div style={{ display: "flex", justifyContent: "center" }} key={index}>
           {grouped.map((item) => (

@@ -166,7 +166,7 @@ function AdminHome() {
     });
   
     const buffer = await workbook.xlsx.writeBuffer();
-    saveAs(new Blob([buffer]), `${fileName}.xlsx`);
+   // saveAs(new Blob([buffer]), `${fileName}.xlsx`);
   };
   
 

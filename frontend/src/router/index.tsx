@@ -43,10 +43,7 @@ const routes = [
     path: "/reserve/:id",
     component: Reserve,
   },
-  {
-    path: "/editReserve/:id",
-    component: editReserve,
-  },
+
 ]
 
 const adminRoutes = [
@@ -57,6 +54,10 @@ const adminRoutes = [
   {
     path: "/adminAdd",
     component: AdminAdd,
+  },
+  {
+    path: "/editReserve/:id",
+    component: editReserve,
   },
 ]
 
