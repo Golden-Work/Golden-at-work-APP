@@ -186,7 +186,7 @@ function AdminHome() {
 
           <CustomButton onClick={handleEliminate}>Historial</CustomButton>
           <CustomButton onClick={handleAdd}>Añadir</CustomButton>
-
+    
           <Box >
             <CustomButton onClick={handleLends}>
               Prestamos

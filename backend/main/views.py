@@ -38,6 +38,13 @@ class ImplementAPIView(generics.ListCreateAPIView):
         else:
             permission_classes = [IsAdminUser]
         return [permission() for permission in permission_classes]
+
+
+class DeleteImplement(generics.DestroyAPIView):
+    queryset = Implement.objects.all()
+    serializer_class = ImplementSerializer
+    permission_classes = [IsAdminUser]
+    lookup_url_kwarg = 'id'
     
 
 class ReservationsAPIView(APIView):
