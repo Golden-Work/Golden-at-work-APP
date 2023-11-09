@@ -16,6 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
 import Button from '@mui/material/Button';
+import IosShareIcon from '@mui/icons-material/IosShare';
 
 // CSS Module
 import classes from "./Admin.module.css"
@@ -234,7 +235,7 @@ function AdminHome() {
            
             <MenuItem onClick={() => exportToExcel(dataTable, 'Implementos')}>
              <ListItemIcon>
-             < Logout fontSize="small" />
+             <IosShareIcon fontSize="small" />
              </ListItemIcon>
               Exportar a Excel
             </MenuItem>
