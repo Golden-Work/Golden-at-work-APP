@@ -3,7 +3,14 @@ import api from "@/api"
 import { useNavigate } from "react-router"
 import { useState } from "react"
 import { toast } from "react-toastify"
-import { Implement } from "@/interfaces/implement.interface"
+
+interface Implement {
+  id: number
+  name: string
+  description: string
+  image: File | null
+  created_at?: string
+}
 
 const useAdd = () => {
   const navigate = useNavigate()
