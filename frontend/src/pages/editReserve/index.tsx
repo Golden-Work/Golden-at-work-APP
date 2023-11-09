@@ -4,9 +4,13 @@ import  { useState, useEffect, ChangeEvent  } from "react";
 import getImplements from "@/api/getImplements";
 import { useQuery} from "@tanstack/react-query"
 import editImplement from "@/api/editImplement"
+import deleteImplement from "@/api/deleteImplement"
 import { Implement } from "@/interfaces/implement.interface"
 
+
+
 function EditReserve() {
+  const [isHovered, setIsHovered] = useState(false);
   const { id } = useParams();
   const itemId = Number(id);
   const { data: items = [], isFetching } = useQuery({
@@ -35,6 +39,7 @@ function EditReserve() {
         image: selectedItem.image || "",
       });
     }
+    
 
     setIsLoading(false);
   }, [itemId, items, isFetching]);
@@ -78,60 +83,96 @@ function EditReserve() {
     );
   }
 
-  if (!formData.name) {
-    return <Typography variant="h4">Implemento no encontrado</Typography>;
+  const deleteImplementButtton = async () =>{
+    try {
+      const implementToDelete = await deleteImplement(itemId);
+        console.log(implementToDelete)
+    }catch (error){
+      console.log('ERROR DELETE', error);
+    }
   }
-
+  
+  
   return (
-    <Box pt={5}>
-      <Typography variant="h4" sx={{ mb: 2 }} textAlign="center" fontWeight={600}>
-        Editar Reserva: {formData.name}
-      </Typography>
-      <Box
-        sx={{
-          margin: "auto",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          maxWidth: 500,
-        }}
-      >
-        <img src={formData.image} alt={formData.name} style={{ width: "60%" }} />
+      <Box sx={{  pt: 20 }}>
+        <Typography variant="h4" sx={{ mb: 2 }} textAlign="center" fontWeight={600}>
+          Editar Reserva: {formData.name}
+        </Typography>
+        <Box
+          sx={{
+            margin: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            maxWidth: 500,
+          }}
+        >
+          <img src={formData.image} alt={formData.name} style={{ width: "60%" }} />
 
-        <TextField
-          label="Nombre"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          multiline
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-        />
-        <TextField
-          label="Descripción"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          multiline
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
-        />
-        <TextField
-          label="Imagen"
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          multiline
-          name="image"
-          value={formData.image}
-          onChange={handleInputChange}
-        />
-        <Button variant="contained" color="primary" sx={{ mt: 2 }} onClick={saveChanges}>
-          Guardar Cambios
-        </Button>
-      </Box>
+          <TextField
+            label="Nombre"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            multiline
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+          <TextField
+            label="Descripción"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            multiline
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+          />
+          <TextField
+            label="Imagen"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            multiline
+            name="image"
+            value={formData.image}
+            onChange={handleInputChange}
+          />
+          <Box
+          sx={{
+            margin: "auto",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            maxWidth: "100%",
+            "& > :not(:last-child)": {
+              marginRight: 10, 
+              
+            },
+            
+          }}
+        >
+          <Button variant="contained" color="primary"  sx={{ mt: 2, background: "#bb86fc,", width: "auto" , height: "auto", padding: 2}} onClick={saveChanges}>
+            Guardar Cambios
+          </Button>
+          <Button variant="contained" color="primary"
+            sx={{
+              mt: 2,
+              height: "auto",
+              padding: 2,
+              background: isHovered ? "red" : "#5856d6",
+              "&:hover": {
+                background: "#240046",
+              },
+            }}            onClick={deleteImplementButtton} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}
+          >
+            Eliminar implemento
+          </Button>
+
+          </Box>
+          
+        </Box>  
     </Box>
   );
 }

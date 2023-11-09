@@ -24,6 +24,7 @@ import FilterButtons from "@/components/FilterButtons"
 
 import getReservations from "@/api/getReservations"
 import { Dialog, DialogTitle, DialogContent } from "@mui/material"
+import { DialogProps } from '@mui/material/Dialog';
 import { useQuery } from "@tanstack/react-query"
 
 //Export module
@@ -82,6 +83,8 @@ function AdminHome() {
 
   const [openDialog, setOpenDialog] = useState(false);
   const [implementsReservations, setimplementsReservations] = useState<ElementPropsReservation[]>([]); 
+  const [maxWidth] = React.useState<DialogProps['maxWidth']>('lg');
+
   const handleLends = async () => {
     try {
       const implementsData = await getReservations();
@@ -180,20 +183,22 @@ function AdminHome() {
             <input className={classes.input} type="text" placeholder="Buscar" />
           </div>
 
-          <CustomButton onClick={handleAdd}>Historial</CustomButton>
+          <CustomButton onClick={handleEliminate}>Historial</CustomButton>
           <CustomButton onClick={handleAdd}>Añadir</CustomButton>
-          <CustomButton onClick={handleEliminate}>Eliminar</CustomButton>
-          <Box>
+
+          <Box >
             <CustomButton onClick={handleLends}>
               Prestamos
             </CustomButton>
           </Box>
-          <Dialog open={openDialog} onClose={handleCloseDialog}>
+
+          <Dialog maxWidth={maxWidth} open={openDialog} onClose={handleCloseDialog}>
             <DialogTitle>Implementos prestados</DialogTitle>
-              <DialogContent>
-                <TableReservation data ={implementsReservations} />
-                </DialogContent>
+            <DialogContent>
+              <TableReservation data={implementsReservations} />
+            </DialogContent>
           </Dialog>
+
 
           <Box sx={{ position: "absolute", right: 0 }}>
             <Tooltip title="Configuración de sesión">
@@ -240,7 +245,7 @@ function AdminHome() {
         </div>
       </header>
       <main>
-        <div className={classes.contenedorDeParteBaja} style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className={classes.contenedorDeParteBaja}>
         <div style={{ margin: 50, minWidth: '100%' }}>
           <ItemListAdmin />
         </div>
