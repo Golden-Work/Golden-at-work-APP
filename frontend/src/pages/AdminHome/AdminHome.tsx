@@ -29,6 +29,7 @@ import { useQuery } from "@tanstack/react-query"
 
 //Export module
 import ExcelJS from 'exceljs';
+import saveAs  from 'file-saver';
 
 
 
@@ -169,7 +170,7 @@ function AdminHome() {
     });
   
     const buffer = await workbook.xlsx.writeBuffer();
-   // saveAs(new Blob([buffer]), `${fileName}.xlsx`);
+    saveAs(new Blob([buffer]), `${fileName}.xlsx`);
   };
   
 
@@ -231,7 +232,12 @@ function AdminHome() {
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
            
-
+            <MenuItem onClick={() => exportToExcel(dataTable, 'Implementos')}>
+             <ListItemIcon>
+             < Logout fontSize="small" />
+             </ListItemIcon>
+              Exportar a Excel
+            </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Logout fontSize="small" />
