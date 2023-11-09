@@ -6,7 +6,7 @@ import { useQuery} from "@tanstack/react-query"
 import editImplement from "@/api/editImplement"
 import deleteImplement from "@/api/deleteImplement"
 import { Implement } from "@/interfaces/implement.interface"
-import { useNavigate } from "react-router-dom"
+//import { useNavigate } from "react-router-dom"
 
 
 
@@ -14,7 +14,7 @@ function EditReserve() {
   const [isHovered, setIsHovered] = useState(false);
   const { id } = useParams();
   const itemId = Number(id);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { data: items = [], isFetching } = useQuery({
     queryKey: ["implements"],
     queryFn: getImplements,
@@ -89,7 +89,7 @@ function EditReserve() {
     try {
       const implementToDelete = await deleteImplement(itemId);
         console.log(implementToDelete)
-        navigate("/adminHome")
+        //navigate("/adminHome")
     }catch (error){
       console.log('ERROR DELETE', error);
     }
