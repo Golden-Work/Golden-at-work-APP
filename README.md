@@ -60,9 +60,12 @@ Necesidad de cuenta para la edición de elementos en la base de datos (etc).
   - [Tecnologías utilizadas](./README.md#tecnologías-utilizadas)
   - [Instalación](./README.md#instalación)
   - [Uso](./README.md#uso)
-  - Contribución
-  - Créditos
-  - Licencia
+  - [Contribución](./README.md#contribución  )
+  - [Créditos](./README.md#créditos)
+  - [Licencia](./README.md#licencia)
+  - [Objetivos](./README.md#objetivo)
+  - [Plenteamientos](./README.md#propuesta-planteamientos-iniciales)
+  - [Seguridad](./README.md#seguridad)
 
 ---
 
