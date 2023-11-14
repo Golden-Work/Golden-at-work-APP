@@ -14,6 +14,7 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config
+    console.log(originalRequest)
     if (
       error.response.status === 401 &&
       !originalRequest._retry &&
@@ -30,8 +31,8 @@ api.interceptors.response.use(
         )
         if (response.status === 200) {
           localStorage.setItem("access", response.data.access)
-          localStorage.setItem("refresh", response.data.refresh)
           api.defaults.headers.common.Authorization = `Bearer ${response.data.access}`
+          originalRequest.headers.Authorization = `Bearer ${response.data.access}`
           return api(originalRequest)
         }
       } catch (e: any) {
