@@ -20,7 +20,9 @@ const useAdd = () => {
     const formData = new FormData()
     formData.append("name", implemento.name)
     formData.append("description", implemento.description)
-    formData.append("image", implemento.image)
+    if (implemento.image) {
+      formData.append("image", implemento.image)
+    }
 
     console.log(implemento)
 
