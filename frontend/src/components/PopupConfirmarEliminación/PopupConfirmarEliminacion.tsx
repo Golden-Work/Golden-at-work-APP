@@ -1,37 +1,33 @@
-import classes from "./PopupConfirmarEliminacion.module.css"
-import useDeleteUser from "@/hooks/useDeleteUser"
-import * as React from "react"
+import React from "react";
+import { Dialog, DialogTitle, DialogActions, Button } from "@mui/material";
+import useDeleteUser from "@/hooks/useDeleteUser";
 
-interface propsProps {
-  visible: boolean
-  onClose: () => void
+interface MyModalProps {
+  visible: boolean;
+  onClose: () => void;
 }
 
-function MyModal({ visible, onClose }: propsProps) {
-  const [_, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const { deleteUser } = useDeleteUser()
-  const cancelarOnclose = () => {
-    setAnchorEl(null)
-  }
+const PopupConfirmarEliminacion: React.FC<MyModalProps> = ({ visible, onClose }) => {
+  const { deleteUser } = useDeleteUser();
 
-  if (!visible) return null
+  const handleDeleteUser = () => {
+    deleteUser();
+    onClose();
+  };
+
   return (
-    <div onClick={onClose} className={classes.popup}>
-      <div className={classes.ventana}>
-        <div className={classes.formventana}>
-          <p>{"¿Está seguro que desea eliminar su cuenta?"}</p>
-          <div className={classes.botones}>
-            <button className={classes.confirmar} onClick={deleteUser}>
-              Confirmar
-            </button>
-            <button className={classes.cancelar} onClick={cancelarOnclose}>
-              Cancelar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+    <Dialog open={visible} onClose={onClose} sx={{ textAlign: "center" }}>
+      <DialogTitle>{"¿Está seguro que desea eliminar su cuenta?"}</DialogTitle>
+      <DialogActions sx={{ padding: 3 }}>
+        <Button onClick={onClose} variant="outlined" sx={{  marginInlineEnd: 2 }}>
+          Cancelar
+        </Button>
+        <Button onClick={handleDeleteUser} color="primary" variant="contained">
+          Confirmar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
-export default MyModal
+export default PopupConfirmarEliminacion;
