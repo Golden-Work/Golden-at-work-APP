@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import ItemList from "../../components/ItemCard/ItemList"
 import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
+import { useNavigate } from "react-router"
 
 // Material-UI Components
 import Box from "@mui/material/Box"
@@ -15,6 +16,7 @@ import Tooltip from "@mui/material/Tooltip"
 
 // Material-UI Icons
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove"
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 
 // CSS Module
 import classes from "./Home.module.css"
@@ -27,6 +29,8 @@ function Home() {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
+
+  const navigate = useNavigate();
 
   const closeMenu = () => {
     setAnchorEl(null)
@@ -92,6 +96,13 @@ function Home() {
                 <PersonRemoveIcon fontSize="small" />
               </ListItemIcon>
               Eliminar cuenta
+            </MenuItem>
+            <MenuItem onClick={() => navigate('/edit')}>
+              <ListItemIcon>
+                {/* Puedes reemplazar este icono con el que prefieras */}
+                <AccountCircleIcon fontSize="small" />
+              </ListItemIcon>
+              Mi cuenta
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>

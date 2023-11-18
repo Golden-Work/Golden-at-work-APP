@@ -17,6 +17,7 @@ import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
 import Button from '@mui/material/Button';
 import IosShareIcon from '@mui/icons-material/IosShare';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 
 // CSS Module
 import classes from "./Admin.module.css"
@@ -238,6 +239,12 @@ function AdminHome() {
              <IosShareIcon fontSize="small" />
              </ListItemIcon>
               Exportar a Excel
+            </MenuItem>
+            <MenuItem onClick={() => navigate('/edit')}>
+              <ListItemIcon>
+                <AccountCircleIcon fontSize="small" />
+              </ListItemIcon>
+              Mi cuenta
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
