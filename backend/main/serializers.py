@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Major, Implement, Reservation
+from back_auth.models import User
 from django.utils import timezone
 from datetime import timedelta
 
@@ -38,9 +39,15 @@ class ImplementSerializer(serializers.ModelSerializer):
 
 
         return implement
+    
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [ 'email', 'first_name', 'last_name', 'major']
 
 class ReservationSerializer(serializers.ModelSerializer):
     implement = ImplementSerializer()
+    borrowed_by = UserSerializer()
     class Meta:
         model = Reservation
-        fields = ['id', 'start_date', 'end_date', 'implement', 'status', 'return_label', 'return_state_description']
+        fields = ['id', 'start_date', 'end_date', 'implement', 'status', 'return_label', 'return_state_description', 'borrowed_by']

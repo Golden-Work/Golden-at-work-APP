@@ -57,7 +57,7 @@ class ReservationsAPIView(APIView):
         """
         # filter reservations by the current week or if it is friday, get current week and next week reservations
         if timezone.now().isoweekday() >= 5:
-            reservations = Reservation.objects.filter(start_date__week__in=[timezone.now().isocalendar()[1], timezone.now().isocalendar()[1]+1]).select_related('implement')
+            reservations = Reservation.objects.filter(start_date__week__in=[timezone.now().isocalendar()[1], timezone.now().isocalendar()[1]+1]).select_related('implement', 'borrowed_by')
         else:
             reservations = Reservation.objects.filter(start_date__week=timezone.now().isocalendar()[1]).select_related('implement')
 
@@ -73,7 +73,7 @@ class ReservationsAPIView(APIView):
         in time slots from 8:00 to 18:00 with 1 hour intervals.
 
         This endpoint is only accessible by admins and it is called
-        every friday at 6:00 pm (UTC-5) by a cron job.
+        every friday or saturday or sunday at 6:00 pm (UTC-5) by a cron job.
         """
         implements = Implement.objects.all()
         reservations = []
@@ -99,6 +99,15 @@ class ReservationsAPIView(APIView):
                     reservations.append(reservation)
         Reservation.objects.bulk_create(reservations)
         return Response(status=status.HTTP_201_CREATED)
+    
+class UpdateDestroyReservation(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Reservation.objects.all()
+    serializer_class = ReservationSerializer
+    permission_classes = [IsAdminUser]
+
+    # allow partial updates
+    def put(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
     
 
 @api_view(['PUT'])
