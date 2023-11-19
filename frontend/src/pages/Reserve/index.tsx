@@ -70,13 +70,7 @@ const Reserve = () => {
     )
   }, [selectedItem, reservations])
 
-  const minDate = reservationsOfSelectedItem.reduce((acc, reservation) => {
-    const startDate = dayjs(reservation.start_date)
-    if (startDate.isBefore(acc)) {
-      return startDate
-    }
-    return acc
-  }, dayjs())
+  const minDate = dayjs()
 
   const maxDate = reservationsOfSelectedItem.reduce((acc, reservation) => {
     const endDate = dayjs(reservation.end_date)

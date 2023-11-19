@@ -3,14 +3,14 @@ import { Box, Paper, TextField, Typography } from "@mui/material"
 import LoadingButton from "@mui/lab/LoadingButton"
 import * as React from "react"
 import { toast } from "react-toastify"
-import classes from "./Admin.module.css"
+import classes from "./AdminAdd.module.css"
 import useAdd from "@/hooks/useAdd"
 
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from "@mui/material/styles"
+import Button from "@mui/material/Button"
+import CloudUploadIcon from "@mui/icons-material/CloudUpload"
 
- interface Implement {
+interface Implement {
   id: number
   name: string
   description: string
@@ -23,9 +23,7 @@ function AdminAdd() {
     name: "",
     description: "",
     image: null,
-  });
-
-
+  })
 
   const { addImplemento, isLoading } = useAdd()
 
@@ -36,17 +34,18 @@ function AdminAdd() {
       [name]: value,
     }))
   }
-  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
+  const handleFileInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const selectedFile = event.target.files?.[0]
     if (selectedFile) {
       setImplemento((prevState) => ({
         ...prevState,
         image: selectedFile,
-      }));
+      }))
     }
-  };
-  
-  
+  }
+
   const handleAdd = async () => {
     const errors = []
     if (!implemento.name) {
@@ -56,26 +55,26 @@ function AdminAdd() {
       errors.push("Por favor ingrese una descripción del implemento")
     }
     if (implemento.image === null) {
-      errors.push("Por favor ingrese una imagen del implemento");
+      errors.push("Por favor ingrese una imagen del implemento")
     }
-    
+
     if (errors.length) {
       return errors.forEach((error) => toast.error(error))
     }
     return addImplemento(implemento as Implement)
   }
 
-  const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  })
   return (
     <div className={classes.container}>
       <Paper sx={{ p: 6 }}>
@@ -105,10 +104,19 @@ function AdminAdd() {
             fullWidth
             sx={{ mb: 1 }}
           />
-          <Box sx={{ '& > button': { m: 3 } }}>
-            <Button component="label"variant="outlined" sx={{position: "sticky"}} startIcon={<CloudUploadIcon />}>
+          <Box sx={{ "& > button": { m: 3 } }}>
+            <Button
+              component="label"
+              variant="outlined"
+              sx={{ position: "sticky" }}
+              startIcon={<CloudUploadIcon />}
+            >
               Subir imagen
-              <VisuallyHiddenInput type="file" accept="image/*" onChange={handleFileInputChange} />
+              <VisuallyHiddenInput
+                type="file"
+                accept="image/*"
+                onChange={handleFileInputChange}
+              />
             </Button>
             {implemento.image && (
               <div>
@@ -116,20 +124,22 @@ function AdminAdd() {
                   src={URL.createObjectURL(implemento.image)}
                   alt="Vista previa"
                   className="preview-image"
-                  style={{ maxWidth: '220px', maxHeight: '280px', marginBlockStart: '10px', }}
+                  style={{
+                    maxWidth: "220px",
+                    maxHeight: "280px",
+                    marginBlockStart: "10px",
+                  }}
                 />
               </div>
             )}
-                <LoadingButton
-                  
-                  onClick={handleAdd}
-                  variant="contained"
-                  
-                  loading={isLoading}
-                >
-                  Añadir
-                </LoadingButton>
-            </Box>
+            <LoadingButton
+              onClick={handleAdd}
+              variant="contained"
+              loading={isLoading}
+            >
+              Añadir
+            </LoadingButton>
+          </Box>
         </div>
       </Paper>
     </div>

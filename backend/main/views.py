@@ -55,8 +55,11 @@ class ReservationsAPIView(APIView):
         """
         Get week reservations (monday to friday)
         """
-        # filter reservations by the current week (having in mind that this endpoint is called any day of the week) and with a status of AVAILABLE
-        reservations = Reservation.objects.filter(start_date__week=timezone.now().isocalendar()[1]).select_related('implement')
+        # filter reservations by the current week or if it is friday, get current week and next week reservations
+        if timezone.now().isoweekday() >= 5:
+            reservations = Reservation.objects.filter(start_date__week__in=[timezone.now().isocalendar()[1], timezone.now().isocalendar()[1]+1]).select_related('implement')
+        else:
+            reservations = Reservation.objects.filter(start_date__week=timezone.now().isocalendar()[1]).select_related('implement')
 
         serializer = ReservationSerializer(reservations, many=True)
         
@@ -70,11 +73,13 @@ class ReservationsAPIView(APIView):
         in time slots from 8:00 to 18:00 with 1 hour intervals.
 
         This endpoint is only accessible by admins and it is called
-        every monday at 2:00 am by a cloud function.
+        every friday at 6:00 pm (UTC-5) by a cron job.
         """
         implements = Implement.objects.all()
         reservations = []
-        monday = timezone.now()
+        today = timezone.now()
+        # get next monday
+        monday = today + datetime.timedelta(days=-today.weekday(), weeks=1)
         # use UTC-5 timezone
         # set the initial time to monday 8:00 am (UTC-5)
         monday = monday.replace(hour=13, minute=0, second=0, microsecond=0)
