@@ -8,8 +8,15 @@ import { SignupBody } from "@/interfaces"
 import { toast } from "react-toastify"
 import LoadingButton from "@mui/lab/LoadingButton"
 import * as React from 'react';
+import axios from "axios"
 import Switch from '@mui/material/Switch';
+import { useSearchParams } from "react-router-dom"
+
+
 function Register() {
+  const [searchParams, _] = useSearchParams()
+  const token = searchParams.get("token")
+  
   const [formData, setFormData] = useState<SignupBody>({
     email: "",
     password: "",
@@ -19,7 +26,22 @@ function Register() {
     document: "",
     major: "",
   })
+  /*const [eemail, setEmail] = useState(
+    localStorage.getItem("resetPasswordEmail") || ""
 
+  );
+  console.log(eemail)*/
+  const handleWelcomeEmail = async () => {
+    const eemail = formData.email;
+    try {
+      await axios.post(`${import.meta.env.VITE_APP_BASE_URL}auth/welcome_email`, { eemail });
+    } catch (error) {
+      console.error("Error al enviar el correo de bienvenida", error);
+      throw error;
+    }
+  };
+  
+  
   const { signup, isLoading } = useSignup()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,12 +84,15 @@ function Register() {
       return errors.forEach((error) => toast.error(error))
     }
 
-    if (!verifyPassword(formData.password, formData.confirm_password)) return
-    signup(formData)
-  }
+    if (verifyPassword(formData.password, formData.confirm_password)) {
+      signup(formData);
+      await handleWelcomeEmail();
+    }
+  } 
   const label = { inputProps: { 'aria-label': 'Size switch demo' } };
 
   return (
+    
     <section className={classes.container}>
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
@@ -149,15 +174,15 @@ function Register() {
           }
         />
         <Box mt={3}>
-          
-            <div style={{ fontWeight: 300, textAlign: "left", padding: "5px 0 ", fontSize: 16 }}>
-            Al crear su cuenta, autoriza el uso y la recopilación<br/> de sus datos personales para esta aplicación.
-            <Switch
-                {...label}
-                checked={isSwitchChecked}
-                onChange={(event) => setIsSwitchChecked(event.target.checked)}
-              />
-            </div>
+
+          <Typography sx={{  padding: "10px 0"}}>
+            Al crear su cuenta, autoriza el uso y la recopilación<br />de sus datos personales para esta aplicación.
+          <Switch
+              {...label}
+              checked={isSwitchChecked}
+              onChange={(event) => setIsSwitchChecked(event.target.checked)}
+            />
+          </Typography>
           <LoadingButton
             onClick={handleRegister}
             fullWidth

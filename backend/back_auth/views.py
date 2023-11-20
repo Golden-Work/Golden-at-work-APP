@@ -5,10 +5,10 @@ from .serializers import UserSerializer, MyTokenObtainPairSerializer
 from .models import User
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
-from django.core.mail import send_mail
-from django.conf import settings
 from rest_framework_simplejwt.views import TokenObtainPairView
-
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.conf import settings
 
 @api_view(['POST'])
 def signup(request):
@@ -111,7 +111,7 @@ def password_reset_confirm(request, token):
     data = request.data
     email = data['email']
     password = data['password']
-    user = User.objects.get(email=email)
+    user = User.objects.get(email=email)    
 
     if user.recovery_token != token:
         return Response({'message': 'Token inválido'}, status=status.HTTP_400_BAD_REQUEST)
@@ -121,7 +121,35 @@ def password_reset_confirm(request, token):
     user.save()
 
     return Response(status=status.HTTP_200_OK)
-    
+
+@api_view(['POST'])
+def welcome_email(request):
+    data = request.data
+    email = data['eemail']
+
+    subject = '¡Bienvenido a Golden-App!'
+    message = ''
+    html_message = f"""
+        <html>
+            <body>
+                <img src="https://static.wikia.nocookie.net/logopedia/images/7/78/Universidad_Nacional_de_Colombia_Coat_of_Arms_Redesign_Color_%282016%29.png/revision/latest/scale-to-width-down/250?cb=20210520153054&path-prefix=es" alt="UN Logo">
+                <p>Hola,</p>
+                <p>Bienvenido a Golden-App! Estamos construyendo una comunidad comprometida para planificar, desarrollar y desplegar una plataforma de administración que simplifique y mejore el proceso de préstamo de los artículos del edificio 401.</p>
+                <p>Recuerda que puedes continuar en: <a href="{settings.FRONTEND_URL}/login">{settings.FRONTEND_URL}/login</a></p>
+            </body>
+        </html>
+    """
+    from_email = settings.EMAIL_HOST_USER
+    to_email = [email]
+
+    try:
+        send_mail(subject, message, from_email, to_email, fail_silently=False, html_message=html_message)
+        return Response({'message': 'Correo de bienvenida enviado'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': 'Error al enviar el correo de bienvenida'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
 class MyTokenObtainPairView(TokenObtainPairView):
     """
     Makes JWT deliver the custom attributes

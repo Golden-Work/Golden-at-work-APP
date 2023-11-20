@@ -7,7 +7,7 @@ import { toast } from "react-toastify"
 function useResetPassword(token: string | null) {
   const [email, setEmail] = useState(
     localStorage.getItem("resetPasswordEmail") || ""
-  )
+  ) 
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
