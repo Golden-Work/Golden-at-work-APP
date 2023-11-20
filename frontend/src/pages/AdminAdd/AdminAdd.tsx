@@ -18,6 +18,18 @@ interface Implement {
   created_at?: string
 }
 
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+})
+
 function AdminAdd() {
   const [implemento, setImplemento] = useState<Partial<Implement>>({
     name: "",
@@ -64,17 +76,6 @@ function AdminAdd() {
     return addImplemento(implemento as Implement)
   }
 
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  })
   return (
     <div className={classes.container}>
       <Paper sx={{ p: 6 }}>

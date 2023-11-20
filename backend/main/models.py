@@ -63,3 +63,14 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f"{self.implement.name} - {self.borrowed_by.get_username if self.borrowed_by else 'N/A'}"
+
+class LogInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    method = models.CharField(max_length=10)
+    endpoint = models.CharField(max_length=255)
+    data_sent = models.TextField()
+    response = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.method} - {self.endpoint}'
