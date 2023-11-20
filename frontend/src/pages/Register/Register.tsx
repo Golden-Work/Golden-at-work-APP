@@ -10,13 +10,11 @@ import LoadingButton from "@mui/lab/LoadingButton"
 import * as React from 'react';
 import axios from "axios"
 import Switch from '@mui/material/Switch';
-import { useSearchParams } from "react-router-dom"
+
 
 
 function Register() {
-  const [searchParams, _] = useSearchParams()
-  const token = searchParams.get("token")
-  
+
   const [formData, setFormData] = useState<SignupBody>({
     email: "",
     password: "",
@@ -26,11 +24,7 @@ function Register() {
     document: "",
     major: "",
   })
-  /*const [eemail, setEmail] = useState(
-    localStorage.getItem("resetPasswordEmail") || ""
 
-  );
-  console.log(eemail)*/
   const handleWelcomeEmail = async () => {
     const eemail = formData.email;
     try {
@@ -86,7 +80,7 @@ function Register() {
 
     if (verifyPassword(formData.password, formData.confirm_password)) {
       signup(formData);
-      await handleWelcomeEmail();
+      handleWelcomeEmail();
     }
   } 
   const label = { inputProps: { 'aria-label': 'Size switch demo' } };
