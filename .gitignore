@@ -33,11 +33,9 @@ previo/
 
 .env
 
+*/backend/implements/*
 */media
-<<<<<<< Updated upstream
-=======
 backend/back excel.ts
->>>>>>> Stashed changes
 Codigo_Edith_borr/accccqascimpl.js
 Codigo_Edith_borr/back excel.ts
 Codigo_Edith_borr/eacfac.ts
