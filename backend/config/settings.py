@@ -167,6 +167,9 @@ if ENVIRONMENT != 'local':
                 "querystring_auth": False,
             },
         },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
     }
     MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(STORAGE_BUCKET_NAME)
 else:
