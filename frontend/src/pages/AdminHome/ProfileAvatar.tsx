@@ -17,7 +17,7 @@ import saveAs from "file-saver"
 import { ElementProps } from "@/components/Table/Table"
 import { useQuery } from "@tanstack/react-query"
 import getReservations from "@/api/getReservations"
-
+import DarkModeSwitch from "../../components/Switch/DarkModeSwitch";
 const ProfileAvatar = () => {
   const { data: dataReservations = [] } = useQuery({
     queryKey: ["reservations"],
@@ -72,7 +72,7 @@ const ProfileAvatar = () => {
   }
   return (
     <>
-      <Box sx={{ position: "absolute", right: 0 }}>
+      <Box sx={{ position: "absolute", right: "10%" }}>
         <Tooltip title="Configuración de sesión">
           <IconButton
             onClick={handleClick}
@@ -93,6 +93,7 @@ const ProfileAvatar = () => {
             </Avatar>
           </IconButton>
         </Tooltip>
+        <DarkModeSwitch />
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -120,6 +121,9 @@ const ProfileAvatar = () => {
           </ListItemIcon>
           Cerrar sesión
         </MenuItem>
+      <MenuItem>
+
+      </MenuItem>
       </Menu>
     </>
   )

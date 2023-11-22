@@ -1,14 +1,14 @@
 // React and Components
 import { useNavigate } from "react-router"
-import { styled } from "@mui/material/styles"
 
 // Material-UI Components
 import Button from "@mui/material/Button"
+import AppBar from "@mui/material/AppBar";
+
 
 import getReservations from "@/api/getReservations"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import ProfileAvatar from "./ProfileAvatar"
-import classes from "./AdminHome.module.css"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
 import { Box, Tooltip } from "@mui/material"
 import dayjs from "dayjs"
@@ -16,27 +16,7 @@ import updateReservation from "@/api/updateReservation"
 import { LoadingButton } from "@mui/lab"
 import { User } from "@/interfaces/user.interface"
 
-const CustomButton = styled(Button)({
-  height: "45px",
-  borderRadius: "10px",
-  fontSize: "15px",
-  border: "none",
-  outline: "none",
-  cursor: "pointer",
-  padding: "0 17px",
-  textAlign: "center",
-  backgroundColor: "#bb86fc",
-  color: "white",
-  marginRight: "10px",
-  marginLeft: "10px",
-  transition: "background-color 0.3s, box-shadow 0.3s, color 0.3s",
-  "&:hover": {
-    backgroundColor: "#da44ff",
-    boxShadow: "0 0 5px rgba(148, 0, 255, 0.5)",
-    color: "#240046",
-    cursor: "pointer",
-  },
-})
+
 
 function AdminHome() {
   const navigate = useNavigate()
@@ -158,15 +138,23 @@ function AdminHome() {
 
   return (
     <>
-      <header className={classes.header}>
-        <div className={classes.encabezadoSuperior}>
-          <CustomButton onClick={handleEliminate}>Historial</CustomButton>
-          <CustomButton onClick={handleAdd}>Añadir implemento</CustomButton>
-          <ProfileAvatar />
-        </div>
-      </header>
+      <AppBar position="static" sx={{padding: 4, color: "primary"}}>
+        <Box sx={{
+          display: "flex",
+          justifyContent: "left",
+          paddingInline: 5,
+        }}>  
+            <Button color="inherit" size="large" onClick={handleEliminate} sx={{ marginRight: 15 }}>
+              Historial
+            </Button>
+            <Button color="inherit"  size="large" onClick={handleAdd} sx={{ marginRight : 15 }}>
+              Añadir implemento
+            </Button>
+            <ProfileAvatar />
+        </Box>
+      </AppBar>
       <main>
-        <Box maxWidth={1000} margin="auto">
+        <Box maxWidth={1000} margin="auto" sx={{paddingTop: 5  }}>
           <DataGrid
             rows={dataTable}
             columns={columns}

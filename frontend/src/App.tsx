@@ -1,11 +1,12 @@
-import "react-toastify/dist/ReactToastify.css"
-import { ToastContainer } from "react-toastify"
-import ThemeContextProvider from "./contexts/MUIContext"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { RouterProvider } from "react-router-dom"
-import router from "./router"
-import { LocalizationProvider } from "@mui/x-date-pickers"
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+// App.tsx
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import ThemeContextProvider from "./contexts/MUIContext"; 
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,19 +14,20 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
     },
   },
-})
+});
 
 function App() {
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeContextProvider>
+    <ThemeContextProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <QueryClientProvider client={queryClient}>
+          
           <ToastContainer />
           <RouterProvider router={router} />
-        </ThemeContextProvider>
-      </QueryClientProvider>
-    </LocalizationProvider>
-  )
+        </QueryClientProvider>
+      </LocalizationProvider>
+    </ThemeContextProvider>
+  );
 }
 
-export default App
+export default App;
