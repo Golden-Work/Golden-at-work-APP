@@ -13,6 +13,8 @@ import MenuItem from "@mui/material/MenuItem"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
+import TextField from "@mui/material/TextField";
+
 
 // Material-UI Icons
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove"
@@ -22,6 +24,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 import classes from "./Home.module.css"
 import { Logout, Search } from "@mui/icons-material"
 import FilterButtons from "@/components/FilterButtons"
+import DarkModeSwitch from "@/components/Switch/DarkModeSwitch"
 
 function Home() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -54,14 +57,58 @@ function Home() {
         onClose={handleOnClose}
         visible={showMyModal}
       />
-      <header className={classes.header}>
-        <div className={classes.encabezadoSuperior}>
-          <div className={classes.inputContainer}>
-            <Search fontSize="small" sx={{ color: "#c4c4ce" }} />
-            <input className={classes.input} type="text" placeholder="Buscar" />
-          </div>
+      <Box 
+        sx={{
+          gap: "10px",
+          width: "100%",
+         
+          padding: "20px",
+        }}
+        >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "auto",
+          position: "relative",
+        }}
+        >
+          <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            borderRadius: "20px",
+            padding: "0 20px",
+       
+            maxWidth: "500px",
+          }}
+          >
+          <Search fontSize="small" sx={{ color: "#c4c4ce" }} />
+          <TextField
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  border: "none",
+                  borderBottom: "1px", 
+                },
+              },
+              
+              width: "100%",
+              height: "100%",
+              fontSize: "17px",
+              
+            }}
+            variant="outlined"
+            placeholder="Buscar..."
+            size="small"
+            fullWidth
+          />
+          </Box>
 
-          <Box sx={{ position: "absolute", right: 0 }}>
+
+          <Box sx={{ position: "absolute", right: "10%" }}>
             <Tooltip title="Configuración de sesión">
               <IconButton
                 onClick={handleClick}
@@ -82,6 +129,7 @@ function Home() {
                 </Avatar>
               </IconButton>
             </Tooltip>
+            <DarkModeSwitch />
           </Box>
           <Menu
             anchorEl={anchorEl}
@@ -111,16 +159,16 @@ function Home() {
               Cerrar sesión
             </MenuItem>
           </Menu>
-        </div>
+        </Box>
         <div className={classes.encabezadoInferior}>
           <FilterButtons />
         </div>
-      </header>
+      </Box>
 
       <main>
-        <div style={{ margin: 50 }}>
+        <Box >
           <ItemList />
-        </div>
+        </Box>
       </main>
     </>
   )

@@ -24,7 +24,7 @@ function ItemCard({ img, description, quantity, name, id }: ItemCardProps) {
     <Card
       sx={{
         width: 400,
-        bgcolor: "#f4f4f4",
+        color: "inherit",
         boxShadow: "none",
       }}
     >

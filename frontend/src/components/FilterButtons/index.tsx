@@ -51,6 +51,9 @@ export default function FilterButtons() {
         return (
           <ListItem key={data.key}>
             <Chip
+              color="primary" 
+              variant="outlined"
+              size="medium" 
               icon={icon}
               label={data.label}
               onDelete={handleDelete(data)}

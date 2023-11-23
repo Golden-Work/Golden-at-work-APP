@@ -1,4 +1,3 @@
-// ThemeContextProvider.tsx
 import {
   ThemeOptions,
   ThemeProvider,
@@ -6,10 +5,15 @@ import {
   responsiveFontSizes,
 } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import React from "react";
+import React, {  useEffect } from "react";
+import { useMediaQuery } from "@mui/material";
 
-export const ColorModeContext = React.createContext({
+export const ColorModeContext = React.createContext<{
+  toggleColorMode: () => void;
+  mode: "light" | "dark";
+}>({
   toggleColorMode: () => {},
+  mode: "light",
 });
 
 const getDesignTokens = (mode: "light" | "dark") => {
@@ -34,20 +38,28 @@ interface ThemeContextProviderProps {
 export default function ThemeContextProvider({
   children,
 }: ThemeContextProviderProps) {
-  const [mode, setMode] = React.useState<"light" | "dark">("light");
-
+  const savedMode = localStorage.getItem("colorMode");
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const initialMode: string | null = savedMode || (prefersDarkMode ? "dark" : "light");
+  const [mode, setMode] = React.useState<"light" | "dark" | null>(initialMode === "light" || initialMode === "dark" ? initialMode : null);
   const toggleColorMode = () => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
+  useEffect(() => {
+    if (initialMode !== null) {
+      localStorage.setItem("colorMode", initialMode);
+    }
+  }, [initialMode]);
+
   const theme = React.useMemo(() => {
-    let tempTheme = createTheme(getDesignTokens(mode));
+    let tempTheme = createTheme(getDesignTokens(mode || "light"));
     tempTheme = responsiveFontSizes(tempTheme);
     return tempTheme;
   }, [mode]);
 
   return (
-    <ColorModeContext.Provider value={{ toggleColorMode }}>
+    <ColorModeContext.Provider value={{ toggleColorMode, mode: mode || "light" }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}
