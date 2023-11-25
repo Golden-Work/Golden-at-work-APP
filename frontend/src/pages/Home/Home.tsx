@@ -28,6 +28,7 @@ import DarkModeSwitch from "@/components/Switch/DarkModeSwitch"
 
 function Home() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [filtros, setFiltros] = useState<string[]>([])
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -47,6 +48,16 @@ function Home() {
     setShowMyModal(true)
     closeMenu()
   }
+
+  const handleFilterAdd = (filtro: string) => {
+    setFiltros((prevFiltros) => [...prevFiltros, filtro]);
+    // Puedes agregar lógica adicional aquí para filtrar la lista de implementos según los nuevos filtros
+  };
+
+  const handleFilterRemove = (filtro: string) => {
+    setFiltros((prevFiltros) => prevFiltros.filter((f) => f !== filtro));
+    // Puedes agregar lógica adicional aquí para actualizar la lista de implementos después de eliminar el filtro
+  };
 
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)
@@ -161,7 +172,10 @@ function Home() {
           </Menu>
         </Box>
         <div className={classes.encabezadoInferior}>
-          <FilterButtons />
+          <FilterButtons
+          onFilterAdd={handleFilterAdd}
+          onFilterRemove={handleFilterRemove}
+          />
         </div>
       </Box>
 
