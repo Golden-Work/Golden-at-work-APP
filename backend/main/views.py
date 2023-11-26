@@ -153,6 +153,12 @@ def cancel(request, pk):
     serializer = ReservationSerializer(reservation)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def implements_favorites(request, pk):
+    implement = Implement.objects.get(pk = pk)
+    request.user.favorits.add(implement)
+    return Response(status=status.HTTP_200_OK)
 
 
     
