@@ -134,6 +134,9 @@ function AdminHome() {
   const handleAdd = () => {
     navigate("/add")
   }
+  const handleDelete = () => {
+    navigate("/editReserve")
+  }
   const handleEliminate = () => {}
 
   return (
@@ -149,6 +152,9 @@ function AdminHome() {
             </Button>
             <Button color="inherit"  size="large" onClick={handleAdd} sx={{ marginRight : 15 }}>
               Añadir implemento
+            </Button>
+            <Button color="inherit"  size="large" onClick={handleDelete} sx={{ marginRight : 15 }}>
+              Eliminar implemento
             </Button>
             <ProfileAvatar />
         </Box>

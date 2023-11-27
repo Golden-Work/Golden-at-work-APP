@@ -55,7 +55,7 @@ const adminRoutes = [
     component: AdminAdd,
   },
   {
-    path: "/editReserve/:id",
+    path: "/editReserve",
     component: editReserve,
   },
 ]
