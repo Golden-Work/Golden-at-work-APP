@@ -4,6 +4,8 @@ import React, { useState } from "react"
 import ItemList from "../../components/ItemCard/ItemList"
 import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
 import { useNavigate } from "react-router"
+import { useQuery } from "@tanstack/react-query";
+import getReservations from "@/api/getReservations";
 
 // Material-UI Components
 import Box from "@mui/material/Box"
@@ -28,7 +30,11 @@ import DarkModeSwitch from "@/components/Switch/DarkModeSwitch"
 
 function Home() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const [filtros, setFiltros] = useState<string[]>([])
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const { data: reservations = [], isFetching } = useQuery({
+    queryKey: ["reservations"],
+    queryFn: getReservations,
+  });
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -49,15 +55,17 @@ function Home() {
     closeMenu()
   }
 
-  const handleFilterAdd = (filtro: string) => {
-    setFiltros((prevFiltros) => [...prevFiltros, filtro]);
-    // Puedes agregar lógica adicional aquí para filtrar la lista de implementos según los nuevos filtros
+  const handleFilterChange = (filters: string[]) => {
+    setSelectedFilters(filters);
   };
 
-  const handleFilterRemove = (filtro: string) => {
-    setFiltros((prevFiltros) => prevFiltros.filter((f) => f !== filtro));
-    // Puedes agregar lógica adicional aquí para actualizar la lista de implementos después de eliminar el filtro
-  };
+  const filteredItems = reservations.filter((reservation) => {
+    if (selectedFilters.includes("Disponible")) {
+      return reservation.status === "AVAILABLE";
+    }
+    // Agrega lógica para otros filtros si es necesario
+    return true;
+  });
 
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)
@@ -172,16 +180,13 @@ function Home() {
           </Menu>
         </Box>
         <div className={classes.encabezadoInferior}>
-          <FilterButtons
-          onFilterAdd={handleFilterAdd}
-          onFilterRemove={handleFilterRemove}
-          />
+          <FilterButtons onFilterChange={handleFilterChange} />
         </div>
       </Box>
 
       <main>
         <Box >
-          <ItemList />
+          <ItemList items={filteredItems} isLoading={isFetching}/>
         </Box>
       </main>
     </>
