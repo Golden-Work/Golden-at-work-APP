@@ -21,11 +21,13 @@ import { useQuery } from "@tanstack/react-query";
 import getImplements from "@/api/getImplements";
 import { useState } from "react";
 import { Implement } from "@/interfaces/implement.interface";
-import editImplement from "@/api/editImplement"
-import React, { ChangeEvent } from "react"; 
+// import editImplement from "@/api/editImplement"
+// import { ChangeEvent } from "react"; 
+// import { useQueryClient } from '@tanstack/react-query';
+import React from "react"; 
 import deleteImplement from "@/api/deleteImplement"
 import { useNavigate } from "react-router-dom"
-import { useQueryClient } from '@tanstack/react-query';
+
 
 function EditReserve() {
   const { data: items = [], isFetching } = useQuery({
@@ -60,7 +62,7 @@ function EditReserve() {
   };
 
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  /*const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     
     if (selectedItem) {
@@ -78,9 +80,9 @@ function EditReserve() {
           break;
       }
     }
-  };
+  };*/
   
-  const queryClient = useQueryClient(); 
+  /*const queryClient = useQueryClient(); 
   const saveChanges = async () => {
     try {
       if (selectedItem) {
@@ -99,7 +101,7 @@ function EditReserve() {
     } catch (error) {
       console.error("Error al obtener datos:", error);
     }
-  };
+  };*/
   
   
 
@@ -125,7 +127,7 @@ function EditReserve() {
   return (
     <Box sx={{ pt: 10 }}>
       <Typography variant="h5" sx={{ mb: 1 }} textAlign="center" fontWeight={600}>
-        Editar Items
+        Eliminar Items
       </Typography>
       {isFetching ? (
         <Box
@@ -197,7 +199,7 @@ function EditReserve() {
                   multiline
                   name="name"
                   value={selectedItem && selectedItem.name}
-                  onChange={handleInputChange}
+                  //onChange={handleInputChange}
                 />
                 <TextField
                   label="Descripción"
@@ -207,7 +209,7 @@ function EditReserve() {
                   multiline
                   name="description"
                   value={selectedItem && selectedItem.description}
-                  onChange={handleInputChange}
+                  //onChange={handleInputChange}
                 />
                 <TextField
                   label="Imagen"
@@ -217,15 +219,15 @@ function EditReserve() {
                   multiline
                   name="image"
                   value={selectedItem && selectedItem.image}
-                  onChange={handleInputChange}
+                  //onChange={handleInputChange}
                 />
               </Box>
             </DialogContent>
             <DialogActions sx={{paddingInline: 2}}>
-              <Button onClick={deleteItemSelected}>Elminar item</Button >
-              <Button variant="contained" color="primary"  onClick={saveChanges}>
+              <Button variant="contained"  onClick={deleteItemSelected}>Eliminar item</Button>
+               {/*<Button variant="contained" color="primary"  onClick={saveChanges}>
                 Guardar Cambios
-              </Button>
+              </Button>*/}
             </DialogActions>
           </Dialog>
         </Box>
