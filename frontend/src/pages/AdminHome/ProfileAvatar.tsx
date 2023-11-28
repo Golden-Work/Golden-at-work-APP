@@ -109,21 +109,12 @@ const ProfileAvatar = () => {
           </ListItemIcon>
           Exportar a Excel
         </MenuItem>
-        <MenuItem onClick={() => navigate("/edit")}>
-          <ListItemIcon>
-            <AccountCircle fontSize="small" />
-          </ListItemIcon>
-          Mi cuenta
-        </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Cerrar sesión
         </MenuItem>
-      <MenuItem>
-
-      </MenuItem>
       </Menu>
     </>
   )
