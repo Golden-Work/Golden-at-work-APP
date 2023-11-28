@@ -7,15 +7,13 @@ import useSignup from "@/hooks/useSignup"
 import { SignupBody } from "@/interfaces"
 import { toast } from "react-toastify"
 import LoadingButton from "@mui/lab/LoadingButton"
-import * as React from 'react';
+import * as React from "react"
 import axios from "axios"
-import Switch from '@mui/material/Switch';
-import { useTranslation } from 'react-i18next';
-
-
+import Switch from "@mui/material/Switch"
+import { useTranslation } from "react-i18next"
 
 function Register() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation()
   const [formData, setFormData] = useState<SignupBody>({
     email: "",
     password: "",
@@ -27,16 +25,18 @@ function Register() {
   })
 
   const handleWelcomeEmail = async () => {
-    const eemail = formData.email;
+    const eemail = formData.email
     try {
-      await axios.post(`${import.meta.env.VITE_APP_BASE_URL}auth/welcome_email`, { eemail });
+      await axios.post(
+        `${import.meta.env.VITE_APP_BASE_URL}auth/welcome_email`,
+        { eemail }
+      )
     } catch (error) {
-      console.error("Error al enviar el correo de bienvenida", error);
-      throw error;
+      console.error("Error al enviar el correo de bienvenida", error)
+      throw error
     }
-  };
-  
-  
+  }
+
   const { signup, isLoading } = useSignup()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ function Register() {
       [name]: value,
     }))
   }
-  const [isSwitchChecked, setIsSwitchChecked] = useState(false);
+  const [isSwitchChecked, setIsSwitchChecked] = useState(false)
 
   const handleRegister = async () => {
     const errors = []
@@ -65,29 +65,30 @@ function Register() {
     if (!formData.email) {
       errors.push("Por favor ingrese su correo electrónico")
     }
-    if (formData.password != formData.confirm_password ) {
+    if (formData.password != formData.confirm_password) {
       errors.push("Las contraseñas no coinciden.")
     }
-    
+
     if (!formData.email.endsWith("@unal.edu.co")) {
       errors.push("Por favor ingrese un correo electrónico de la UNAL")
     }
     if (!isSwitchChecked) {
-      errors.push("Debe autorizar el uso y la recopilación de datos para continuar.");
+      errors.push(
+        "Debe autorizar el uso y la recopilación de datos para continuar."
+      )
     }
     if (errors.length) {
       return errors.forEach((error) => toast.error(error))
     }
 
     if (verifyPassword(formData.password, formData.confirm_password)) {
-      signup(formData);
-      handleWelcomeEmail();
+      signup(formData)
+      handleWelcomeEmail()
     }
-  } 
-  const label = { inputProps: { 'aria-label': 'Size switch demo' } };
+  }
+  const label = { inputProps: { "aria-label": "Size switch demo" } }
 
   return (
-    
     <section className={classes.container}>
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
@@ -158,7 +159,7 @@ function Register() {
             />
           </div>
         </div>
-        
+
         <GwMajorSelect
           value={formData.major}
           onChange={(e) =>
@@ -169,10 +170,11 @@ function Register() {
           }
         />
         <Box mt={3}>
-
-          <Typography sx={{  padding: "10px 0"}}>
-            {t("Al crear su cuenta, autoriza el uso y la recopilación de sus datos personales para esta aplicación.")}
-          <Switch
+          <Typography sx={{ padding: "10px 0" }}>
+            {t(
+              "Al crear su cuenta, autoriza el uso y la recopilación de sus datos personales para esta aplicación."
+            )}
+            <Switch
               {...label}
               checked={isSwitchChecked}
               onChange={(event) => setIsSwitchChecked(event.target.checked)}
@@ -187,7 +189,6 @@ function Register() {
             {t("Registrarse")}
           </LoadingButton>
         </Box>
-        
       </Paper>
     </section>
   )

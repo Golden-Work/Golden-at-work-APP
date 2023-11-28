@@ -3,7 +3,7 @@ import { Box, Paper, TextField, Typography } from "@mui/material"
 import { useSearchParams } from "react-router-dom"
 import useResetPassword from "@/hooks/useResetPassword"
 import LoadingButton from "@mui/lab/LoadingButton"
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next"
 function ResetPassword() {
   const [searchParams, _] = useSearchParams()
   const token = searchParams.get("token")
@@ -18,16 +18,16 @@ function ResetPassword() {
     handleResetPassword,
     isLoading,
   } = useResetPassword(token)
-  const{t, i18n}=useTranslation();
+  const { t } = useTranslation()
   return (
     <section className={classes.container}>
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
-          {t('Recuperar contraseña')}
+          {t("Recuperar contraseña")}
         </Typography>
         {!token && (
           <Typography variant="body1" textAlign="center" mb={2}>
-            {t('Ingrese su correo electrónico para recuperar su contraseña')}
+            {t("Ingrese su correo electrónico para recuperar su contraseña")}
           </Typography>
         )}
 

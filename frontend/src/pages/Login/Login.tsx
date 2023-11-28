@@ -5,10 +5,10 @@ import TextField from "@mui/material/TextField"
 import { Paper, Typography } from "@mui/material"
 import LoadingButton from "@mui/lab/LoadingButton"
 import useLogin from "@/hooks/useLogin"
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next"
 
 function Login() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation()
   const {
     handleLogin,
     handleOnClose,
@@ -24,7 +24,7 @@ function Login() {
       <PopupErrorLogin onClose={handleOnClose} visible={showMyModal} />
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
-        {t("Login")}
+          {t("Login")}
         </Typography>
         <TextField
           label={t("Email")}
@@ -53,11 +53,12 @@ function Login() {
           loading={isLoading}
           variant="contained"
         >
-          {t('Ingresar')}
+          {t("Ingresar")}
         </LoadingButton>
         <div className={classes.register}>
           <p>
-            {t("¿No tienes una cuenta?")} <Link to="/signup">{t("Regístrate")}</Link>
+            {t("¿No tienes una cuenta?")}{" "}
+            <Link to="/signup">{t("Regístrate")}</Link>
           </p>
         </div>
       </Paper>

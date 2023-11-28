@@ -1,4 +1,4 @@
-import { AccountCircle, IosShare, Logout } from "@mui/icons-material"
+import { IosShare, Logout } from "@mui/icons-material"
 import {
   Avatar,
   Box,
@@ -9,7 +9,6 @@ import {
   Tooltip,
 } from "@mui/material"
 import React from "react"
-import { useNavigate } from "react-router-dom"
 
 //Export module
 import ExcelJS from "exceljs"
@@ -17,11 +16,11 @@ import saveAs from "file-saver"
 import { ElementProps } from "@/components/Table/Table"
 import { useQuery } from "@tanstack/react-query"
 import getReservations from "@/api/getReservations"
-import DarkModeSwitch from "../../components/Switch/DarkModeSwitch";
-import { useTranslation } from 'react-i18next';
+import DarkModeSwitch from "../../components/Switch/DarkModeSwitch"
+import { useTranslation } from "react-i18next"
 
 const ProfileAvatar = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation()
   const { data: dataReservations = [] } = useQuery({
     queryKey: ["reservations"],
     queryFn: getReservations,
@@ -38,7 +37,6 @@ const ProfileAvatar = () => {
         description: a.implement?.description,
       }
     })
-  const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

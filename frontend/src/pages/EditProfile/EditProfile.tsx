@@ -1,21 +1,16 @@
 import { useState } from "react"
 import classes from "./EditProfile.module.css"
-import { Avatar, Box, Button, Paper, SelectProps, TextField, Typography } from "@mui/material"
+import { Avatar, Box, Paper, TextField, Typography } from "@mui/material"
 import GwMajorSelect from "@/components/GwMajorSelect/GwMajorSelect"
-import verifyPassword from "@/utils/verifyPassword"
 import useSignup from "@/hooks/useSignup"
 import { SignupBody } from "@/interfaces"
 import { toast } from "react-toastify"
 import LoadingButton from "@mui/lab/LoadingButton"
-import * as React from 'react';
+import * as React from "react"
 // import axios from "axios"
-import getUsers from "@/api/getUsers"
 import { useNavigate } from "react-router-dom"
 
-
 function EditProfile() {
-  const { user } = getUsers()
-
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState<SignupBody>({
@@ -28,9 +23,6 @@ function EditProfile() {
     major: "",
   })
 
-
-
-
   const { signup, isLoading } = useSignup()
   console.log(signup)
 
@@ -41,7 +33,6 @@ function EditProfile() {
       [name]: value,
     }))
   }
-  const [isSwitchChecked, setIsSwitchChecked] = useState(false);
 
   const handleRegister = async () => {
     const errors = []
@@ -71,10 +62,8 @@ function EditProfile() {
       return errors.forEach((error) => toast.error(error))
     }
   }
-  const label = { inputProps: { 'aria-label': 'Size switch demo' } };
 
   return (
-
     <section className={classes.columnContainer}>
       <div className={classes.column}>
         <Paper sx={{ p: 6 }}>
@@ -86,7 +75,7 @@ function EditProfile() {
               width: 120,
               height: 120,
               bgcolor: "#b1a4ed",
-              margin: "auto"
+              margin: "auto",
             }}
           >
             M
@@ -94,24 +83,21 @@ function EditProfile() {
           <Typography sx={{ padding: "10px 0" }}>
             La imagen debe ser JPG o PNG no más grande de 5 MB
           </Typography>
-          <LoadingButton
-            fullWidth
-            loading={isLoading}
-            variant="contained"
-          >
+          <LoadingButton fullWidth loading={isLoading} variant="contained">
             Subir imagen
           </LoadingButton>
         </Paper>
       </div>
 
-
       <div className={classes.column}>
-
         <Paper sx={{ p: 6 }}>
           <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
             Edicion de datos
           </Typography>
-          <div className={classes.columnContainer} style={{ padding: "0 10px 10px 10px" }}>
+          <div
+            className={classes.columnContainer}
+            style={{ padding: "0 10px 10px 10px" }}
+          >
             <div className={classes.column}>
               <TextField
                 label="Nombre"
@@ -186,8 +172,12 @@ function EditProfile() {
               }))
             }
           />
-          <Box mt={3} sx={{ display: 'flex', justifyContent: "space-around" }}>
-            <LoadingButton variant="outlined" color="error" onClick={() => navigate('/')}>
+          <Box mt={3} sx={{ display: "flex", justifyContent: "space-around" }}>
+            <LoadingButton
+              variant="outlined"
+              color="error"
+              onClick={() => navigate("/")}
+            >
               Cancelar
             </LoadingButton>
             <LoadingButton
@@ -198,10 +188,8 @@ function EditProfile() {
               Actualizar
             </LoadingButton>
           </Box>
-
         </Paper>
       </div>
-
     </section>
   )
 }
