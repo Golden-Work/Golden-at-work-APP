@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next"
 import classes from "./Login.module.css";
 
 function Login() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const {
     handleLogin,
     handleOnClose,
