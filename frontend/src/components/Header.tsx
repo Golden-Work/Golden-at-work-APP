@@ -1,17 +1,23 @@
 import { Link } from "react-router-dom"
+import { useTranslation } from 'react-i18next';
 import { useState, useRef, useEffect } from "react"
 
 function Header() {
+  const { i18n } = useTranslation();
   const [mostrarMenu, setMostrarMenu] = useState(false)
   const contenedorRef = useRef<HTMLDivElement>(null)
 
-  const consoleLog = () => {
+  /*const consoleLog = () => {
     console.log("Adiós")
   }
-
+  */
   const toggleMenu = () => {
     setMostrarMenu(!mostrarMenu)
   }
+  const changeLanguage = (language: string, event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    i18n.changeLanguage(language); // Cambia el idioma
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -50,16 +56,16 @@ function Header() {
             {mostrarMenu && (
               <ul className="menu">
                 <li>
-                  <a onClick={consoleLog}>Ingles</a>
+                  <a href="/" onClick={(e) => changeLanguage('en',e)}>Inglés</a>
                 </li>
                 <li>
-                  <a href="#">Frances</a>
+                  <a href="/" onClick={(e) => changeLanguage('fr',e)}>Francés</a>
                 </li>
                 <li>
-                  <a href="#">Español</a>
+                  <a href="/" onClick={(e) => changeLanguage('es',e)}>Español</a>
                 </li>
                 <li>
-                  <a href="#">Portugues</a>
+                  <a href="/" onClick={(e) => changeLanguage('pt',e)}>Portugués</a>
                 </li>
               </ul>
             )}
