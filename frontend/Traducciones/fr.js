@@ -34,7 +34,7 @@ const frtraslation={
           "¿Olvidaste tú contraseña?": "Mot de passe oublié?",
           "Ingresar": "Entrer",
           "¿No tienes una cuenta?": "Pas de compte? ",
-          " Regístrate":"Inscrivez-vous",
+          "Regístrate": "Inscrivez-vous",
         "Exportar a Excel": "Exporter vers Excel",
         "Registro": "Inscription",
         "Apellido": "Nom de famille",
