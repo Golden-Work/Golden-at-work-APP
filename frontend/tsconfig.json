@@ -24,6 +24,6 @@
       "@/*": ["*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "Traducciones/TradResetPAss.js", "Traducciones/TradRegister.js", "Traducciones/TradLogin.js", "Traducciones/TradHome.js", "Traducciones/TradProfileAvatar.js", "Traducciones/TradAdminHome.js", "Traducciones/TradAdminAdd.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

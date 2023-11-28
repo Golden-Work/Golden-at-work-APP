@@ -10,11 +10,12 @@ import LoadingButton from "@mui/lab/LoadingButton"
 import * as React from 'react';
 import axios from "axios"
 import Switch from '@mui/material/Switch';
+import { useTranslation } from 'react-i18next';
 
 
 
 function Register() {
-
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState<SignupBody>({
     email: "",
     password: "",
@@ -90,12 +91,12 @@ function Register() {
     <section className={classes.container}>
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
-          Registro
+          {t("Registro")}
         </Typography>
         <div className={classes.columnContainer}>
           <div className={classes.column}>
             <TextField
-              label="Nombre"
+              label={t("Nombre")}
               type="text"
               name="first_name"
               value={formData.first_name}
@@ -105,7 +106,7 @@ function Register() {
               sx={{ mb: 1 }}
             />
             <TextField
-              label="Email"
+              label={t("Email")}
               placeholder="johndoe@unal.edu.co"
               type="email"
               variant="standard"
@@ -116,7 +117,7 @@ function Register() {
               sx={{ mb: 1 }}
             />
             <TextField
-              label="Contraseña"
+              label={t("Contraseña")}
               type="password"
               name="password"
               variant="standard"
@@ -127,7 +128,7 @@ function Register() {
           </div>
           <div className={classes.column}>
             <TextField
-              label="Apellido"
+              label={t("Apellido")}
               type="text"
               name="last_name"
               value={formData.last_name}
@@ -137,7 +138,7 @@ function Register() {
               sx={{ mb: 1 }}
             />
             <TextField
-              label="Documento"
+              label={t("Documento")}
               type="text"
               name="document"
               value={formData.document}
@@ -147,7 +148,7 @@ function Register() {
               sx={{ mb: 1 }}
             />
             <TextField
-              label="Confirmar contraseña"
+              label={t("Confirmar contraseña")}
               type="password"
               name="confirm_password"
               variant="standard"
@@ -170,7 +171,7 @@ function Register() {
         <Box mt={3}>
 
           <Typography sx={{  padding: "10px 0"}}>
-            Al crear su cuenta, autoriza el uso y la recopilación<br />de sus datos personales para esta aplicación.
+            {t("Al crear su cuenta, autoriza el uso y la recopilación de sus datos personales para esta aplicación.")}
           <Switch
               {...label}
               checked={isSwitchChecked}
@@ -183,7 +184,7 @@ function Register() {
             loading={isLoading}
             variant="contained"
           >
-            Registrarse
+            {t("Registrarse")}
           </LoadingButton>
         </Box>
         

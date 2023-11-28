@@ -1,43 +1,21 @@
-import * as React from "react"
-import { styled } from "@mui/material/styles"
-import Chip from "@mui/material/Chip"
-import { Box } from "@mui/material"
+import * as React from "react";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { Box } from "@mui/material";
 
-interface ChipData {
-  key: number
-  label: string
+import { useTranslation } from 'react-i18next';
+interface FilterButtonProps {
+  onFilterChange: (labels: string[]) => void;
 }
 
-interface FilterButtonsProps {
-  onFilterAdd: (label: string) => void
-  onFilterRemove: (label: string) => void
-}
-
-const ListItem = styled("li")(({ theme }) => ({
-  margin: theme.spacing(0.5),
-}))
-
-const FilterButtons: React.FC<FilterButtonProps>=({onFilterAdd,onFilterRemove})=> {
-  const [chipData, setChipData] = React.useState<readonly ChipData[]>([
-    { key: 0, label: "State" },
-    { key: 1, label: "jQuery" },
-    { key: 2, label: "Polymer" },
-    { key: 3, label: "React" },
-    { key: 4, label: "Vue.js" },
-  ])
-
-  const handleDelete = (chipToDelete: ChipData) => () => {
-    setChipData((chips) =>
-      chips.filter((chip) => chip.key !== chipToDelete.key)
-    );
-    onFilterRemove(chipToDelete.label);
-  }
-
-  const handleFilter = (chipToFilter: ChipData) => () => {
-    const filteredItem = chipData.find((item) => item.key === chipToFilter.key)
-    onFilterAdd(filteredItem?.label || '');
-  }
-
+const FilterButtons: React.FC<FilterButtonProps> = ({ onFilterChange }) => {
+  const [selectedFilters, setSelectedFilters] = React.useState<string[]>([]);
+  const { t } = useTranslation();
+  const handleFilterChange = (event: React.MouseEvent<HTMLElement>, newFilters: string[]) => {
+    setSelectedFilters(newFilters);
+    onFilterChange(newFilters);
+  };
+  
   return (
     <Box
       sx={{
@@ -51,25 +29,26 @@ const FilterButtons: React.FC<FilterButtonProps>=({onFilterAdd,onFilterRemove})=
       }}
       component="ul"
     >
-      {chipData.map((data) => {
-        let icon
-
-        return (
-          <ListItem key={data.key}>
-            <Chip
-              color="primary" 
-              variant="outlined"
-              size="medium" 
-              icon={icon}
-              label={data.label}
-              onDelete={handleDelete(data)}
-              onClick={handleFilter(data)}
-            />
-          </ListItem>
-        )
-      })}
+      <ToggleButtonGroup
+        value={selectedFilters}
+        onChange={handleFilterChange}
+        sx={{ border: "1px solid #ced4da", borderRadius: "5px" }}
+      >
+        {["Disponible","Varios Carnets","Pequeño","Mediano","Grande"].map((label, index) => (
+          <ToggleButton
+            key={index}
+            value={label}
+            sx={{
+              color: selectedFilters.includes(label) ? "#fff" : "#495057",
+              backgroundColor: selectedFilters.includes(label) ? "#007bff" : "#fff",
+            }}
+          >
+            {t(label)}
+          </ToggleButton>
+        ))}
+      </ToggleButtonGroup>
     </Box>
-  )
-}
+  );
+};
 
-export default FilterButtons
+export default FilterButtons;

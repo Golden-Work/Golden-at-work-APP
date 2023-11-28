@@ -41,6 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     major = models.ForeignKey(
         'main.Major', on_delete=models.CASCADE, null=True)
     document = models.CharField(max_length=50)
+    favorits = models.ManyToManyField("main.Implement")
 
     USERNAME_FIELD = 'email'
 

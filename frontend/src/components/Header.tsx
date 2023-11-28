@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom"
+import { useTranslation } from 'react-i18next';
 import { useState, useRef, useEffect } from "react"
 
 function Header() {
+  const { t, i18n } = useTranslation();
   const [mostrarMenu, setMostrarMenu] = useState(false)
   const contenedorRef = useRef<HTMLDivElement>(null)
 
-  const consoleLog = () => {
-    console.log("Adiós")
-  }
 
+  
   const toggleMenu = () => {
     setMostrarMenu(!mostrarMenu)
   }
+  const changeLanguage = (language: string, event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    i18n.changeLanguage(language); // Cambia el idioma
+    localStorage.setItem('language', language);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -45,21 +50,21 @@ function Header() {
             ref={contenedorRef}
           >
             <button id="idiom-button" onClick={toggleMenu}>
-              Idioma
+              {t("Idioma")}
             </button>
             {mostrarMenu && (
               <ul className="menu">
                 <li>
-                  <a onClick={consoleLog}>Ingles</a>
+                  <a href="/" onClick={(e) => changeLanguage('en',e)}>{t("Inglés")}</a>
                 </li>
                 <li>
-                  <a href="#">Frances</a>
+                  <a href="/" onClick={(e) => changeLanguage('fr',e)}>{t("Francés")}</a>
                 </li>
                 <li>
-                  <a href="#">Español</a>
+                  <a href="/" onClick={(e) => changeLanguage('es',e)}>{t("Español")}</a>
                 </li>
                 <li>
-                  <a href="#">Portugues</a>
+                  <a href="/" onClick={(e) => changeLanguage('pt',e)}>{t("Portugués")}</a>
                 </li>
               </ul>
             )}

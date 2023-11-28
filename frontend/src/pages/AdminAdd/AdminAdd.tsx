@@ -9,6 +9,7 @@ import useAdd from "@/hooks/useAdd"
 import { styled } from "@mui/material/styles"
 import Button from "@mui/material/Button"
 import CloudUploadIcon from "@mui/icons-material/CloudUpload"
+import { useTranslation } from 'react-i18next';
 
 interface Implement {
   id: number
@@ -31,6 +32,7 @@ const VisuallyHiddenInput = styled("input")({
 })
 
 function AdminAdd() {
+  const { t } = useTranslation();
   const [implemento, setImplemento] = useState<Partial<Implement>>({
     name: "",
     description: "",
@@ -80,11 +82,11 @@ function AdminAdd() {
     <div className={classes.container}>
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
-          Añadir implemento
+          {t("Añadir implemento")}
         </Typography>
         <div>
           <TextField
-            label="Nombre"
+            label={t("Nombre")}
             type="text"
             name="name"
             multiline
@@ -95,7 +97,7 @@ function AdminAdd() {
             sx={{ mb: 1 }}
           />
           <TextField
-            label="Descripcion"
+            label={t("Descripcion")}
             type="text"
             name="description"
             multiline
@@ -112,7 +114,7 @@ function AdminAdd() {
               sx={{ position: "sticky" }}
               startIcon={<CloudUploadIcon />}
             >
-              Subir imagen
+              {t("Subir imagen")}
               <VisuallyHiddenInput
                 type="file"
                 accept="image/*"
@@ -138,7 +140,7 @@ function AdminAdd() {
               variant="contained"
               loading={isLoading}
             >
-              Añadir
+              {t("Añadir")}
             </LoadingButton>
           </Box>
         </div>

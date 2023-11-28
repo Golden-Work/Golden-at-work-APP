@@ -14,10 +14,17 @@ class Major(models.Model):
 
 
 class Implement(models.Model):
+    SIZE_CHOICES = (
+        ('SMALL', 'Pequeño'),
+        ('MEDIUM', 'Mediano'),
+        ('BIG', 'Grande'),
+    )
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='implements/', blank=True)
+    multipleCarnets= models.BooleanField(default=False)
+    size = models.CharField(max_length=10, choices=SIZE_CHOICES, default='Pequeño')
     def __str__(self):
         return self.name
 

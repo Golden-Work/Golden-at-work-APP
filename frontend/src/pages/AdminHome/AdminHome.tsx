@@ -15,11 +15,13 @@ import dayjs from "dayjs"
 import updateReservation from "@/api/updateReservation"
 import { LoadingButton } from "@mui/lab"
 import { User } from "@/interfaces/user.interface"
+import { useTranslation } from 'react-i18next';
 
 
 
 function AdminHome() {
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation(); 
 
   const { data: dataReservations = [], isFetching } = useQuery({
     queryKey: ["reservations"],
@@ -50,15 +52,15 @@ function AdminHome() {
   }
 
   const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 100 },
-    { field: "name", headerName: "Implemento", width: 150 },
-    { field: "date", headerName: "Día", width: 100 },
-    { field: "start_hour", headerName: "Hora de inicio", width: 100 },
-    { field: "end_hour", headerName: "Hora de fin", width: 100 },
-    { field: "user", headerName: "Usuario", width: 250 },
+    { field: "id", headerName: t("ID"), width: 100 },
+    { field: "name", headerName: t("Implemento"), width: 150 },
+    { field: "date", headerName: t("Día"), width: 100 },
+    { field: "start_hour", headerName: t("Hora de inicio"), width: 100 },
+    { field: "end_hour", headerName: t("Hora de fin"), width: 100 },
+    { field: "user", headerName: t("Usuario"), width: 250 },
     {
       field: "actions",
-      headerName: "Acciones",
+      headerName: t("Acciones"),
       width: 130,
       sortable: false,
       filterable: false,
@@ -134,6 +136,9 @@ function AdminHome() {
   const handleAdd = () => {
     navigate("/add")
   }
+  const handleDelete = () => {
+    navigate("/editReserve")
+  }
   const handleEliminate = () => {}
 
   return (
@@ -145,10 +150,13 @@ function AdminHome() {
           paddingInline: 5,
         }}>  
             <Button color="inherit" size="large" onClick={handleEliminate} sx={{ marginRight: 15 }}>
-              Historial
+              {t("Historial")}
             </Button>
             <Button color="inherit"  size="large" onClick={handleAdd} sx={{ marginRight : 15 }}>
-              Añadir implemento
+              {t("Añadir implemento")}
+            </Button>
+            <Button color="inherit"  size="large" onClick={handleDelete} sx={{ marginRight : 15 }}>
+              {t("Eliminar implemento")}
             </Button>
             <ProfileAvatar />
         </Box>
