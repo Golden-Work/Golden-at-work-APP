@@ -62,35 +62,28 @@ function AdminHome() {
       sortable: false,
       filterable: false,
       renderCell: (row) => {
-        const isButtonDisabled =
-          row.row.status === "RETURNED" ||
-          // allow only 15 minutes before the start date to borrow
-          // or 10 minutes after the start date to borrow
-          !(
-            dayjs(row.row.completeDate).isBefore(
-              dayjs().subtract(15, "minute")
-            ) && row.row.status === "RESERVED"
-          ) ||
-          !(
-            dayjs(row.row.completeDate).isBefore(dayjs().add(10, "minute")) &&
-            row.row.status === "RESERVED"
-          )
+        // const isButtonDisabled =
+        //   row.row.status === "RETURNED" ||
+        //   // allow only 15 minutes before the start date to borrow
+        //   // or 10 minutes after the start date to borrow
+        //   !(
+        //     dayjs(row.row.completeDate).isBefore(
+        //       dayjs().subtract(15, "minute")
+        //     ) && row.row.status === "RESERVED"
+        //   ) ||
+        //   !(
+        //     dayjs(row.row.completeDate).isBefore(dayjs().add(10, "minute")) &&
+        //     row.row.status === "RESERVED"
+        //   )
         return (
           <>
-            <Tooltip
-              placement="left"
-              title={
-                isButtonDisabled && row.row.status === "RESERVED"
-                  ? "Solo se puede prestar 15 minutos antes de la hora de inicio y 10 minutos después de la hora de inicio"
-                  : ""
-              }
-            >
+            <Tooltip placement="left" title={""}>
               <span>
                 <LoadingButton
                   size="small"
                   variant="contained"
                   color="primary"
-                  disabled={isButtonDisabled || mutation.isPending}
+                  disabled={mutation.isPending}
                   onClick={() =>
                     handleClickOnAction(row.row.status, row.row.id)
                   }
