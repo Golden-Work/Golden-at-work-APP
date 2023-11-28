@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin";
-import TextField from "@mui/material/TextField";
-import { Paper, Typography, Button, Menu, MenuItem } from "@mui/material";
-import LoadingButton from "@mui/lab/LoadingButton";
-import useLogin from "@/hooks/useLogin";
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin"
+import TextField from "@mui/material/TextField"
+import { Paper, Typography, Button, Menu, MenuItem } from "@mui/material"
+import LoadingButton from "@mui/lab/LoadingButton"
+import useLogin from "@/hooks/useLogin"
 import { useTranslation } from "react-i18next"
-import classes from "./Login.module.css";
+import classes from "./Login.module.css"
 
 function Login() {
   const { t, i18n } = useTranslation()
@@ -19,24 +19,24 @@ function Login() {
     password,
     setPassword,
     isLoading,
-  } = useLogin();
+  } = useLogin()
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null)
 
-  const toggleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const toggleMenu = (event: any) => {
+    setAnchorEl(event.currentTarget)
+  }
 
   const closeMenu = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
-  const changeLanguage = (language, event) => {
-    event.preventDefault();
-    i18n.changeLanguage(language);
-    localStorage.setItem('language', language);
-    closeMenu();
-  };
+  const changeLanguage = (language: any, event: any) => {
+    event.preventDefault()
+    i18n.changeLanguage(language)
+    localStorage.setItem("language", language)
+    closeMenu()
+  }
 
   return (
     <section className={classes.container}>
@@ -44,15 +44,23 @@ function Login() {
       <Button
         id="idiom-button"
         onClick={toggleMenu}
-        sx={{ position: 'absolute', top: 16, left: 16 }}
+        sx={{ position: "absolute", top: 16, left: 16 }}
       >
         {t("Idioma")}
       </Button>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={closeMenu}>
-        <MenuItem onClick={(e) => changeLanguage('en', e)}>{t("Inglés")}</MenuItem>
-        <MenuItem onClick={(e) => changeLanguage('fr', e)}>{t("Francés")}</MenuItem>
-        <MenuItem onClick={(e) => changeLanguage('es', e)}>{t("Español")}</MenuItem>
-        <MenuItem onClick={(e) => changeLanguage('pt', e)}>{t("Portugués")}</MenuItem>
+        <MenuItem onClick={(e) => changeLanguage("en", e)}>
+          {t("Inglés")}
+        </MenuItem>
+        <MenuItem onClick={(e) => changeLanguage("fr", e)}>
+          {t("Francés")}
+        </MenuItem>
+        <MenuItem onClick={(e) => changeLanguage("es", e)}>
+          {t("Español")}
+        </MenuItem>
+        <MenuItem onClick={(e) => changeLanguage("pt", e)}>
+          {t("Portugués")}
+        </MenuItem>
       </Menu>
 
       <PopupErrorLogin onClose={handleOnClose} visible={showMyModal} />
@@ -97,8 +105,7 @@ function Login() {
         </div>
       </Paper>
     </section>
-  );
+  )
 }
 
-export default Login;
-
+export default Login
