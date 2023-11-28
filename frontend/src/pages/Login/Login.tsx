@@ -1,11 +1,12 @@
-import classes from "./Login.module.css"
-import { Link } from "react-router-dom"
-import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin"
-import TextField from "@mui/material/TextField"
-import { Paper, Typography } from "@mui/material"
-import LoadingButton from "@mui/lab/LoadingButton"
-import useLogin from "@/hooks/useLogin"
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import PopupErrorLogin from "@/components/PopupErrorLogin/PopupErrorLogin";
+import TextField from "@mui/material/TextField";
+import { Paper, Typography, Button, Menu, MenuItem } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
+import useLogin from "@/hooks/useLogin";
 import { useTranslation } from 'react-i18next';
+import classes from "./Login.module.css";
 
 function Login() {
   const { t, i18n } = useTranslation();
@@ -18,13 +19,46 @@ function Login() {
     password,
     setPassword,
     isLoading,
-  } = useLogin()
+  } = useLogin();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const toggleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const closeMenu = () => {
+    setAnchorEl(null);
+  };
+
+  const changeLanguage = (language, event) => {
+    event.preventDefault();
+    i18n.changeLanguage(language);
+    localStorage.setItem('language', language);
+    closeMenu();
+  };
+
   return (
     <section className={classes.container}>
+      {/* Botón y Menú para cambiar el idioma */}
+      <Button
+        id="idiom-button"
+        onClick={toggleMenu}
+        sx={{ position: 'absolute', top: 16, left: 16 }}
+      >
+        {t("Idioma")}
+      </Button>
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={closeMenu}>
+        <MenuItem onClick={(e) => changeLanguage('en', e)}>{t("Inglés")}</MenuItem>
+        <MenuItem onClick={(e) => changeLanguage('fr', e)}>{t("Francés")}</MenuItem>
+        <MenuItem onClick={(e) => changeLanguage('es', e)}>{t("Español")}</MenuItem>
+        <MenuItem onClick={(e) => changeLanguage('pt', e)}>{t("Portugués")}</MenuItem>
+      </Menu>
+
       <PopupErrorLogin onClose={handleOnClose} visible={showMyModal} />
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
-        {t("Login")}
+          {t("Login")}
         </Typography>
         <TextField
           label={t("Email")}
@@ -62,7 +96,8 @@ function Login() {
         </div>
       </Paper>
     </section>
-  )
+  );
 }
 
-export default Login
+export default Login;
+
