@@ -5,8 +5,10 @@ import TextField from "@mui/material/TextField"
 import { Paper, Typography } from "@mui/material"
 import LoadingButton from "@mui/lab/LoadingButton"
 import useLogin from "@/hooks/useLogin"
+import { useTranslation } from 'react-i18next';
 
 function Login() {
+  const { t } = useTranslation();
   const {
     handleLogin,
     handleOnClose,
@@ -22,10 +24,10 @@ function Login() {
       <PopupErrorLogin onClose={handleOnClose} visible={showMyModal} />
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
-          Login
+        {t("Login")}
         </Typography>
         <TextField
-          label="Email"
+          label={t("Email")}
           placeholder="johndoe@unal.edu.co"
           type="email"
           variant="standard"
@@ -35,7 +37,7 @@ function Login() {
           sx={{ mb: 1 }}
         />
         <TextField
-          label="Contraseña"
+          label={t("Contraseña")}
           type="password"
           variant="standard"
           fullWidth
@@ -43,7 +45,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className={classes.forget}>
-          <Link to="/reset-password">¿Olvidaste tú contraseña?</Link>
+          <Link to="/reset-password">{t("¿Olvidaste tú contraseña?")}</Link>
         </div>
         <LoadingButton
           onClick={handleLogin}
@@ -51,11 +53,11 @@ function Login() {
           loading={isLoading}
           variant="contained"
         >
-          Ingresar
+          {t('Ingresar')}
         </LoadingButton>
         <div className={classes.register}>
           <p>
-            ¿No tienes una cuenta? <Link to="/signup">Regístrate</Link>
+            {t("¿No tienes una cuenta?")} <Link to="/signup">{t("Regístrate")}</Link>
           </p>
         </div>
       </Paper>

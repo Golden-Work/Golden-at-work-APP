@@ -7,6 +7,7 @@ import router from "./router";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ThemeContextProvider from "./contexts/MUIContext"; 
+import './i18n';
 
 const queryClient = new QueryClient({
   defaultOptions: {

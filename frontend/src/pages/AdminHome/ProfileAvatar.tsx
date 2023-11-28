@@ -18,7 +18,10 @@ import { ElementProps } from "@/components/Table/Table"
 import { useQuery } from "@tanstack/react-query"
 import getReservations from "@/api/getReservations"
 import DarkModeSwitch from "../../components/Switch/DarkModeSwitch";
+import { useTranslation } from 'react-i18next';
+
 const ProfileAvatar = () => {
+  const { t } = useTranslation();
   const { data: dataReservations = [] } = useQuery({
     queryKey: ["reservations"],
     queryFn: getReservations,
@@ -73,7 +76,7 @@ const ProfileAvatar = () => {
   return (
     <>
       <Box sx={{ position: "absolute", right: "10%" }}>
-        <Tooltip title="Configuración de sesión">
+        <Tooltip title={t("Configuración de sesión")}>
           <IconButton
             onClick={handleClick}
             size="small"
@@ -107,13 +110,13 @@ const ProfileAvatar = () => {
           <ListItemIcon>
             <IosShare fontSize="small" />
           </ListItemIcon>
-          Exportar a Excel
+          {t("Exportar a Excel")}
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Cerrar sesión
+          {t("Cerrar sesión")}
         </MenuItem>
       </Menu>
     </>

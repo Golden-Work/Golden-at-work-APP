@@ -3,7 +3,7 @@ import { Box, Paper, TextField, Typography } from "@mui/material"
 import { useSearchParams } from "react-router-dom"
 import useResetPassword from "@/hooks/useResetPassword"
 import LoadingButton from "@mui/lab/LoadingButton"
-
+import { useTranslation } from 'react-i18next';
 function ResetPassword() {
   const [searchParams, _] = useSearchParams()
   const token = searchParams.get("token")
@@ -18,20 +18,21 @@ function ResetPassword() {
     handleResetPassword,
     isLoading,
   } = useResetPassword(token)
+  const{t}=useTranslation();
   return (
     <section className={classes.container}>
       <Paper sx={{ p: 6 }}>
         <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
-          Recuperar contraseña
+          {t('Recuperar contraseña')}
         </Typography>
         {!token && (
           <Typography variant="body1" textAlign="center" mb={2}>
-            Ingrese su correo electrónico para recuperar su contraseña
+            {t('Ingrese su correo electrónico para recuperar su contraseña')}
           </Typography>
         )}
 
         <TextField
-          label="Email"
+          label={t("Email")}
           placeholder="johndoe@unal.edu.co"
           type="email"
           variant="standard"
@@ -42,7 +43,7 @@ function ResetPassword() {
         {token && (
           <>
             <TextField
-              label="Nueva contraseña"
+              label={t("Nueva contraseña")}
               type="password"
               variant="standard"
               value={password}
@@ -51,7 +52,7 @@ function ResetPassword() {
               sx={{ mt: 2 }}
             />
             <TextField
-              label="Confirmar contraseña"
+              label={t("Confirmar contraseña")}
               type="password"
               variant="standard"
               value={confirmPassword}
@@ -68,7 +69,7 @@ function ResetPassword() {
             loading={isLoading}
             variant="contained"
           >
-            Enviar
+            {t("Enviar")}
           </LoadingButton>
         </Box>
       </Paper>

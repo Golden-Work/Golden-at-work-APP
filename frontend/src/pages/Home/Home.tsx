@@ -28,7 +28,11 @@ import { Logout, Search } from "@mui/icons-material"
 import FilterButtons from "@/components/FilterButtons"
 import DarkModeSwitch from "@/components/Switch/DarkModeSwitch"
 
+import { useTranslation } from 'react-i18next';
+
+
 function Home() {
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const { data: reservations = [], isFetching } = useQuery({
@@ -131,7 +135,7 @@ function Home() {
               
             }}
             variant="outlined"
-            placeholder="Buscar..."
+            placeholder={t("Buscar...")}
             size="small"
             fullWidth
           />
@@ -139,7 +143,7 @@ function Home() {
 
 
           <Box sx={{ position: "absolute", right: "10%" }}>
-            <Tooltip title="Configuración de sesión">
+            <Tooltip title={t("Configuración de sesión")}>
               <IconButton
                 onClick={handleClick}
                 size="small"
@@ -173,20 +177,20 @@ function Home() {
               <ListItemIcon>
                 <PersonRemoveIcon fontSize="small" />
               </ListItemIcon>
-              Eliminar cuenta
+              {t("Eliminar cuenta")}
             </MenuItem>
             <MenuItem onClick={() => navigate('/edit')}>
               <ListItemIcon>
                 {/* Puedes reemplazar este icono con el que prefieras */}
                 <AccountCircleIcon fontSize="small" />
               </ListItemIcon>
-              Mi cuenta
+              {t("Mi cuenta")}
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
-              Cerrar sesión
+              {t("Cerrar sesión")}
             </MenuItem>
           </Menu>
         </Box>
