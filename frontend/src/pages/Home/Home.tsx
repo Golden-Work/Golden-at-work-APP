@@ -4,8 +4,6 @@ import React, { useState } from "react"
 import ItemList from "../../components/ItemCard/ItemList"
 import PopupConfirmarEliminacion from "@/components/PopupConfirmarEliminación/PopupConfirmarEliminacion"
 import { useNavigate } from "react-router"
-import { useQuery } from "@tanstack/react-query";
-import getReservations from "@/api/getReservations";
 
 // Material-UI Components
 import Box from "@mui/material/Box"
@@ -15,8 +13,7 @@ import MenuItem from "@mui/material/MenuItem"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"
-import TextField from "@mui/material/TextField";
-
+import TextField from "@mui/material/TextField"
 
 // Material-UI Icons
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove"
@@ -28,23 +25,19 @@ import { Logout, Search } from "@mui/icons-material"
 import FilterButtons from "@/components/FilterButtons"
 import DarkModeSwitch from "@/components/Switch/DarkModeSwitch"
 
-import { useTranslation } from 'react-i18next';
-
+import { useTranslation } from "react-i18next"
 
 function Home() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
-  const { data: reservations = [], isFetching } = useQuery({
-    queryKey: ["reservations"],
-    queryFn: getReservations,
-  });
+  const [_, setSelectedFilters] = useState<string[]>([])
+
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const closeMenu = () => {
     setAnchorEl(null)
@@ -60,27 +53,8 @@ function Home() {
   }
 
   const handleFilterChange = (filters: string[]) => {
-    setSelectedFilters(filters);
-  };
-
-  const filteredItems = reservations.filter((reservation) => {
-    if (selectedFilters.includes("Disponible")) {
-      return reservation.status === "AVAILABLE";
-    }
-    if(selectedFilters.includes("Varios Carnets")){
-      return reservation.implement.multipleCarnets;
-    }
-    if (selectedFilters.includes("Pequeño")) {
-      return reservation.implement.size === "SMALL";
-    }
-    if (selectedFilters.includes("Mediano")) {
-      return reservation.implement.size === "MEDIUM";
-    }
-    if (selectedFilters.includes("Grande")) {
-      return reservation.implement.size === "BIG";
-    }
-    return true;
-  });
+    setSelectedFilters(filters)
+  }
 
   const [showMyModal, setShowMyModal] = useState(false)
   const handleOnClose = () => setShowMyModal(false)
@@ -91,56 +65,54 @@ function Home() {
         onClose={handleOnClose}
         visible={showMyModal}
       />
-      <Box 
+      <Box
         sx={{
           gap: "10px",
           width: "100%",
-         
+
           padding: "20px",
         }}
-        >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "auto",
-          position: "relative",
-        }}
-        >
-          <Box
+      >
+        <Box
           sx={{
             display: "flex",
+            justifyContent: "center",
             alignItems: "center",
-            width: "100%",
-            borderRadius: "20px",
-            padding: "0 20px",
-       
-            maxWidth: "500px",
+            height: "auto",
+            position: "relative",
           }}
-          >
-          <Search fontSize="small" sx={{ color: "#c4c4ce" }} />
-          <TextField
+        >
+          <Box
             sx={{
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  border: "none",
-                  borderBottom: "1px", 
-                },
-              },
-              
+              display: "flex",
+              alignItems: "center",
               width: "100%",
-              height: "100%",
-              fontSize: "17px",
-              
-            }}
-            variant="outlined"
-            placeholder={t("Buscar...")}
-            size="small"
-            fullWidth
-          />
-          </Box>
+              borderRadius: "20px",
+              padding: "0 20px",
 
+              maxWidth: "500px",
+            }}
+          >
+            <Search fontSize="small" sx={{ color: "#c4c4ce" }} />
+            <TextField
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    border: "none",
+                    borderBottom: "1px",
+                  },
+                },
+
+                width: "100%",
+                height: "100%",
+                fontSize: "17px",
+              }}
+              variant="outlined"
+              placeholder={t("Buscar...")}
+              size="small"
+              fullWidth
+            />
+          </Box>
 
           <Box sx={{ position: "absolute", right: "10%" }}>
             <Tooltip title={t("Configuración de sesión")}>
@@ -179,7 +151,7 @@ function Home() {
               </ListItemIcon>
               {t("Eliminar cuenta")}
             </MenuItem>
-            <MenuItem onClick={() => navigate('/edit')}>
+            <MenuItem onClick={() => navigate("/edit")}>
               <ListItemIcon>
                 {/* Puedes reemplazar este icono con el que prefieras */}
                 <AccountCircleIcon fontSize="small" />
@@ -200,8 +172,8 @@ function Home() {
       </Box>
 
       <main>
-        <Box >
-          <ItemList items={filteredItems} isLoading={isFetching}/>
+        <Box>
+          <ItemList />
         </Box>
       </main>
     </>

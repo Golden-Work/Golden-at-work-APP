@@ -3,8 +3,7 @@ import { useNavigate } from "react-router"
 
 // Material-UI Components
 import Button from "@mui/material/Button"
-import AppBar from "@mui/material/AppBar";
-
+import AppBar from "@mui/material/AppBar"
 
 import getReservations from "@/api/getReservations"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
@@ -15,13 +14,11 @@ import dayjs from "dayjs"
 import updateReservation from "@/api/updateReservation"
 import { LoadingButton } from "@mui/lab"
 import { User } from "@/interfaces/user.interface"
-import { useTranslation } from 'react-i18next';
-
-
+import { useTranslation } from "react-i18next"
 
 function AdminHome() {
   const navigate = useNavigate()
-  const { t, i18n } = useTranslation(); 
+  const { t } = useTranslation()
 
   const { data: dataReservations = [], isFetching } = useQuery({
     queryKey: ["reservations"],
@@ -65,35 +62,28 @@ function AdminHome() {
       sortable: false,
       filterable: false,
       renderCell: (row) => {
-        const isButtonDisabled =
-          row.row.status === "RETURNED" ||
-          // allow only 15 minutes before the start date to borrow
-          // or 10 minutes after the start date to borrow
-          !(
-            dayjs(row.row.completeDate).isBefore(
-              dayjs().subtract(15, "minute")
-            ) && row.row.status === "RESERVED"
-          ) ||
-          !(
-            dayjs(row.row.completeDate).isBefore(dayjs().add(10, "minute")) &&
-            row.row.status === "RESERVED"
-          )
+        // const isButtonDisabled =
+        //   row.row.status === "RETURNED" ||
+        //   // allow only 15 minutes before the start date to borrow
+        //   // or 10 minutes after the start date to borrow
+        //   !(
+        //     dayjs(row.row.completeDate).isBefore(
+        //       dayjs().subtract(15, "minute")
+        //     ) && row.row.status === "RESERVED"
+        //   ) ||
+        //   !(
+        //     dayjs(row.row.completeDate).isBefore(dayjs().add(10, "minute")) &&
+        //     row.row.status === "RESERVED"
+        //   )
         return (
           <>
-            <Tooltip
-              placement="left"
-              title={
-                isButtonDisabled && row.row.status === "RESERVED"
-                  ? "Solo se puede prestar 15 minutos antes de la hora de inicio y 10 minutos después de la hora de inicio"
-                  : ""
-              }
-            >
+            <Tooltip placement="left" title={""}>
               <span>
                 <LoadingButton
                   size="small"
                   variant="contained"
                   color="primary"
-                  disabled={isButtonDisabled || mutation.isPending}
+                  disabled={mutation.isPending}
                   onClick={() =>
                     handleClickOnAction(row.row.status, row.row.id)
                   }
@@ -112,7 +102,6 @@ function AdminHome() {
       },
     },
   ]
-
   const dataTable = dataReservations
     .filter(
       (a) =>
@@ -129,7 +118,7 @@ function AdminHome() {
         completeDate: a.start_date,
         start_hour: dayjs(a.start_date).format("HH:mm"),
         end_hour: dayjs(a.end_date).format("HH:mm"),
-        user: (a.borrowed_by as User).email,
+        user: (a.borrowed_by as User)?.email,
       }
     })
 
@@ -143,26 +132,43 @@ function AdminHome() {
 
   return (
     <>
-      <AppBar position="static" sx={{padding: 4, color: "primary"}}>
-        <Box sx={{
-          display: "flex",
-          justifyContent: "left",
-          paddingInline: 5,
-        }}>  
-            <Button color="inherit" size="large" onClick={handleEliminate} sx={{ marginRight: 15 }}>
-              {t("Historial")}
-            </Button>
-            <Button color="inherit"  size="large" onClick={handleAdd} sx={{ marginRight : 15 }}>
-              {t("Añadir implemento")}
-            </Button>
-            <Button color="inherit"  size="large" onClick={handleDelete} sx={{ marginRight : 15 }}>
-              {t("Eliminar implemento")}
-            </Button>
-            <ProfileAvatar />
+      <AppBar position="static" sx={{ padding: 4, color: "primary" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "left",
+            paddingInline: 5,
+          }}
+        >
+          <Button
+            color="inherit"
+            size="large"
+            onClick={handleEliminate}
+            sx={{ marginRight: 15 }}
+          >
+            {t("Historial")}
+          </Button>
+          <Button
+            color="inherit"
+            size="large"
+            onClick={handleAdd}
+            sx={{ marginRight: 15 }}
+          >
+            {t("Añadir implemento")}
+          </Button>
+          <Button
+            color="inherit"
+            size="large"
+            onClick={handleDelete}
+            sx={{ marginRight: 15 }}
+          >
+            {t("Eliminar implemento")}
+          </Button>
+          <ProfileAvatar />
         </Box>
       </AppBar>
       <main>
-        <Box maxWidth={1000} margin="auto" sx={{paddingTop: 5  }}>
+        <Box maxWidth={1000} margin="auto" sx={{ paddingTop: 5 }}>
           <DataGrid
             rows={dataTable}
             columns={columns}
