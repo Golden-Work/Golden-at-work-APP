@@ -6,7 +6,6 @@ function Header() {
   const { t, i18n } = useTranslation();
   const [mostrarMenu, setMostrarMenu] = useState(false)
   const contenedorRef = useRef<HTMLDivElement>(null)
-  co
 
 
   
