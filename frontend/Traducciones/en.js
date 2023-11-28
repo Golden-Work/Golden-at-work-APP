@@ -53,6 +53,11 @@ const entraslation={
     "Recuperar contraseña": "Reset Password",
     "Ingrese su correo electrónico para recuperar su contraseña": "Enter your email to reset your password",
     "Nueva contraseña": "New Password",
-    "Enviar": "Send"
+    "Enviar": "Send",
+    "Inglés": "English",
+    "Francés": "French",
+    "Español": "Spanish",
+    "Portugués": "Portuguese",
+    "Idioma": "Language"
 };
 export default entraslation

@@ -52,6 +52,11 @@ const estraslation={
     "Recuperar contraseña": "Recuperar contraseña",
     "Ingrese su correo electrónico para recuperar su contraseña": "Ingrese su correo electrónico para recuperar su contraseña",
     "Nueva contraseña": "Nueva contraseña",
-    "Enviar": "Enviar"
+    "Enviar": "Enviar",
+    "Inglés": "Inglés",
+    "Francés": "Francés",
+    "Español": "Español",
+    "Portugués": "Portugués",
+    "Idioma": "Idioma"
 };
 export default estraslation

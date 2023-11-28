@@ -8,7 +8,7 @@ import useLogin from "@/hooks/useLogin"
 import { useTranslation } from 'react-i18next';
 
 function Login() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     handleLogin,
     handleOnClose,

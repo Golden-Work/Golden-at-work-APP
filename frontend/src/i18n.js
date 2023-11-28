@@ -1,12 +1,9 @@
-
-
-
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import estraslation from './../Traducciones/es';
-import entraslation from './../Traducciones/es';
-import frtraslation from './../Traducciones/es';
-import pttraslation from './../Traducciones/es';
+import entraslation from './../Traducciones/en';
+import frtraslation from './../Traducciones/fr';
+import pttraslation from './../Traducciones/pt';
 
 
 const resources = {
@@ -21,8 +18,8 @@ i18n
   .use(initReactI18next) 
   .init({
     resources,
-    lng: 'en', 
-    fallbackLng: 'en', 
+    lng: localStorage.getItem('language') || 'es', 
+    fallbackLng: 'es', 
     interpolation: {
       escapeValue: false, 
     },

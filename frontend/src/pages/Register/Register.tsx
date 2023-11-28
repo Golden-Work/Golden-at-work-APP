@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 
 
 function Register() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState<SignupBody>({
     email: "",
     password: "",

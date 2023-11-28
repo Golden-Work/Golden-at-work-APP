@@ -52,6 +52,11 @@ const frtraslation={
         "Recuperar contraseña": "Réinitialiser le mot de passe",
         "Ingrese su correo electrónico para recuperar su contraseña": "Entrez votre e-mail pour réinitialiser votre mot de passe",
         "Nueva contraseña": "Nouveau mot de passe",
-        "Enviar": "Envoyer"
+        "Enviar": "Envoyer",
+        "Inglés": "Anglais",
+        "Francés": "Français",
+        "Español": "Espagnol",
+        "Portugués": "Portugais",
+        "Idioma": "Langue"
 };
 export default frtraslation

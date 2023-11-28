@@ -32,7 +32,7 @@ import { useTranslation } from 'react-i18next';
 
 
 function Home() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const { data: reservations = [], isFetching } = useQuery({

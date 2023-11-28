@@ -3,18 +3,19 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Box } from "@mui/material";
 
+import { useTranslation } from 'react-i18next';
 interface FilterButtonProps {
   onFilterChange: (labels: string[]) => void;
 }
 
 const FilterButtons: React.FC<FilterButtonProps> = ({ onFilterChange }) => {
   const [selectedFilters, setSelectedFilters] = React.useState<string[]>([]);
-
+  const { t } = useTranslation();
   const handleFilterChange = (event: React.MouseEvent<HTMLElement>, newFilters: string[]) => {
     setSelectedFilters(newFilters);
     onFilterChange(newFilters);
   };
-
+  
   return (
     <Box
       sx={{
@@ -42,7 +43,7 @@ const FilterButtons: React.FC<FilterButtonProps> = ({ onFilterChange }) => {
               backgroundColor: selectedFilters.includes(label) ? "#007bff" : "#fff",
             }}
           >
-            {label}
+            {t(label)}
           </ToggleButton>
         ))}
       </ToggleButtonGroup>

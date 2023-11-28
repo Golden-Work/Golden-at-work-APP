@@ -21,7 +21,7 @@ import DarkModeSwitch from "../../components/Switch/DarkModeSwitch";
 import { useTranslation } from 'react-i18next';
 
 const ProfileAvatar = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: dataReservations = [] } = useQuery({
     queryKey: ["reservations"],
     queryFn: getReservations,

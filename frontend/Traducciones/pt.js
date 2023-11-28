@@ -52,6 +52,11 @@ const pttraslation={
     "Recuperar contraseña": "Recuperar Senha",
     "Ingrese su correo electrónico para recuperar su contraseña": "Digite seu e-mail para recuperar sua senha",
     "Nueva contraseña": "Nova Senha",
-    "Enviar": "Enviar"
+    "Enviar": "Enviar",
+    "Inglés": "Inglês",
+    "Francés": "Francês",
+    "Español": "Espanhol",
+    "Portugués": "Português",
+    "Idioma": "Língua"
 };
 export default pttraslation

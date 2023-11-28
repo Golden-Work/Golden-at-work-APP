@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 
 function AdminHome() {
   const navigate = useNavigate()
-  const { t } = useTranslation(); 
+  const { t, i18n } = useTranslation(); 
 
   const { data: dataReservations = [], isFetching } = useQuery({
     queryKey: ["reservations"],

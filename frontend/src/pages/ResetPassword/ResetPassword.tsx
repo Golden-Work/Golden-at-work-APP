@@ -18,7 +18,7 @@ function ResetPassword() {
     handleResetPassword,
     isLoading,
   } = useResetPassword(token)
-  const{t}=useTranslation();
+  const{t, i18n}=useTranslation();
   return (
     <section className={classes.container}>
       <Paper sx={{ p: 6 }}>
