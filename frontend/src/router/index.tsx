@@ -1,4 +1,3 @@
-import EdicionDeDatos from "@/pages/EdicionDeDatos"
 import Home from "@/pages/Home/Home"
 import Login from "@/pages/Login/Login"
 import Register from "@/pages/Register/Register"
@@ -10,6 +9,7 @@ import AdminAdd from "@/pages/AdminAdd/AdminAdd"
 import CancelReservation from "@/pages/CancelReservation"
 import Reserve from "@/pages/Reserve"
 import editReserve from "@/pages/editReserve"
+import EditProfile from "@/pages/EditProfile/EditProfile"
 
 const authRoutes = [
   {
@@ -37,7 +37,7 @@ const routes = [
   },
   {
     path: "/edit",
-    component: EdicionDeDatos,
+    component: EditProfile,
   },
   {
     path: "/reserve/:id",
