@@ -33,7 +33,7 @@ const FilterButtons: React.FC<FilterButtonProps> = ({ onFilterChange }) => {
         onChange={handleFilterChange}
         sx={{ border: "1px solid #ced4da", borderRadius: "5px" }}
       >
-        {["Disponible","Varios Carnets"].map((label, index) => (
+        {["Disponible","Varios Carnets","Pequeño","Mediano","Grande"].map((label, index) => (
           <ToggleButton
             key={index}
             value={label}

@@ -63,7 +63,18 @@ function Home() {
     if (selectedFilters.includes("Disponible")) {
       return reservation.status === "AVAILABLE";
     }
-    // Agrega lógica para otros filtros si es necesario
+    if(selectedFilters.includes("Varios Carnets")){
+      return reservation.implement.multipleCarnets;
+    }
+    if (selectedFilters.includes("Pequeño")) {
+      return reservation.implement.size === "SMALL";
+    }
+    if (selectedFilters.includes("Mediano")) {
+      return reservation.implement.size === "MEDIUM";
+    }
+    if (selectedFilters.includes("Grande")) {
+      return reservation.implement.size === "BIG";
+    }
     return true;
   });
 
