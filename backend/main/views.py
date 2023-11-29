@@ -124,7 +124,6 @@ def reserve(request):
     reservation.status = 'RESERVED'
     reservation.generate_cancel_token()
     reservation.save()
-    serializer = ReservationSerializer(reservation)
     subject = 'Tu implemento ha sido reservado'
     cancel_url = f'{settings.FRONTEND_URL}/reservation/{reservation_id}/cancel/?token={reservation.cancel_token}'
     html_message = render_to_string('reservation-email.html', {'reservation': reservation, 'user': user, 'cancel_url': cancel_url})
@@ -135,7 +134,7 @@ def reserve(request):
     # send email to user
     send_mail(subject, plain_message, from_email, to_email, html_message=html_message)
 
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_200_OK)
 
 @api_view(['PUT'])
 def cancel(request, pk):
