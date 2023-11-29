@@ -1,6 +1,6 @@
 import { useState } from "react"
 import classes from "./EditProfile.module.css"
-import { Avatar, Box, Paper, TextField, Typography } from "@mui/material"
+import { Avatar, Box, Button, Menu, MenuItem, Paper, TextField, Typography } from "@mui/material"
 import GwMajorSelect from "@/components/GwMajorSelect/GwMajorSelect"
 import useSignup from "@/hooks/useSignup"
 import { SignupBody } from "@/interfaces"
@@ -9,9 +9,28 @@ import LoadingButton from "@mui/lab/LoadingButton"
 import * as React from "react"
 // import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 function EditProfile() {
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
+
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const toggleMenu = (event: any) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const closeMenu = () => {
+    setAnchorEl(null)
+  }
+
+  const changeLanguage = (language: any, event: any) => {
+    event.preventDefault()
+    i18n.changeLanguage(language)
+    localStorage.setItem("language", language)
+    closeMenu()
+  }
 
   const [formData, setFormData] = useState<SignupBody>({
     first_name: "",
@@ -65,6 +84,27 @@ function EditProfile() {
 
   return (
     <section className={classes.columnContainer}>
+      <Button
+        id="idiom-button"
+        onClick={toggleMenu}
+        sx={{ position: "absolute", top: 16, left: 16 }}
+      >
+        {t("Idioma")}
+      </Button>
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={closeMenu}>
+        <MenuItem onClick={(e) => changeLanguage("en", e)}>
+          {t("Inglés")}
+        </MenuItem>
+        <MenuItem onClick={(e) => changeLanguage("fr", e)}>
+          {t("Francés")}
+        </MenuItem>
+        <MenuItem onClick={(e) => changeLanguage("es", e)}>
+          {t("Español")}
+        </MenuItem>
+        <MenuItem onClick={(e) => changeLanguage("pt", e)}>
+          {t("Portugués")}
+        </MenuItem>
+      </Menu>
       <div className={classes.column}>
         <Paper sx={{ p: 6 }}>
           <Typography variant="h4" fontWeight={600} textAlign="center" mb={2}>
